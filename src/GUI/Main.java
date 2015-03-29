@@ -27,6 +27,8 @@ import javax.swing.JFileChooser;
 public class Main extends javax.swing.JFrame {
     String filePath = null;
     boolean run;
+    int lineOfInstructions;
+    int currentLineOfInstructions;
     //
     ID_EXE idexe;
     IF_ID ifid;
@@ -52,6 +54,7 @@ public class Main extends javax.swing.JFrame {
         runButton.setVisible(false);
         nextIns.setVisible(false);
         execAll.setVisible(false);
+        this.currentLineOfInstructions = 0;
     }
 
     /**
@@ -274,12 +277,14 @@ public class Main extends javax.swing.JFrame {
         if (!filePath.isEmpty() && filePath != null) {
             binaryText.setText("");
             HashMap<Integer, Instruction> assembled = new HashMap<Integer, Instruction>(Assembler.assembleFile(filePath));
+            this.lineOfInstructions = assembled.size();
             binaryText.setVisible(true);
             binaryText.setText("Address       Instruction\n\n");
             for (int i = 0; i < assembled.size(); i++) {
                 binaryText.setText(binaryText.getText().toString()+assembled.get(i).getAddress()+" : "+assembled.get(i).getInstruction()+"\n");
             }
             runButton.setVisible(true);
+            nextIns.setVisible(false);
         }
     }//GEN-LAST:event_assembleButtonActionPerformed
 
@@ -298,6 +303,7 @@ public class Main extends javax.swing.JFrame {
 
     private void runButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runButtonActionPerformed
         if (run) {
+            currentLineOfInstructions = 0;
             idexe = new ID_EXE();
             ifid = new IF_ID();
             exemem = new EXE_MEM();
@@ -310,19 +316,39 @@ public class Main extends javax.swing.JFrame {
             stage_wb = new WB(stage_id, memwb);
             run = false;
             runButton.setVisible(false);
+            nextIns.setVisible(true);
+            execAll.setVisible(true);
         }
     }//GEN-LAST:event_runButtonActionPerformed
 
     private void nextInsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextInsActionPerformed
-       	stage_if.action();
-        stage_id.action();
-        stage_exe.action();
-        stage_mem.action();
-        stage_wb.action();
+       	if(currentLineOfInstructions<lineOfInstructions){
+            stage_if.action();
+            stage_id.action();
+            stage_exe.action();
+            stage_mem.action();
+            stage_wb.action();
+            currentLineOfInstructions++;
+        }else{
+            nextIns.setVisible(false);
+            runButton.setVisible(true);
+            run = true;
+        }
     }//GEN-LAST:event_nextInsActionPerformed
 
     private void execAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_execAllActionPerformed
-        // TODO add your handling code here:
+        while(currentLineOfInstructions<lineOfInstructions){
+            stage_if.action();
+            stage_id.action();
+            stage_exe.action();
+            stage_mem.action();
+            stage_wb.action();
+            currentLineOfInstructions++;
+        }
+        execAll.setVisible(false);
+        runButton.setVisible(true);
+        nextIns.setVisible(false);
+        run = true;
     }//GEN-LAST:event_execAllActionPerformed
 
     /**
