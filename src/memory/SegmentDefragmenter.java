@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Program {
+public class SegmentDefragmenter {
 	private ArrayList<String> Data_seg = new ArrayList<String>();
 	private ArrayList<String> Code_seg = new ArrayList<String>();
 	private String filePath;
@@ -72,10 +72,7 @@ public class Program {
 		Code_seg_start_address = code_seg_start_address;
 	}
 
-	public Program(String filePath) {
-
-		// Data_seg = data_seg;
-		// Code_seg = code_seg;
+	public SegmentDefragmenter(String filePath) {
 		this.filePath = filePath;
 		programParser(new File(filePath));
 	}
@@ -114,11 +111,8 @@ public class Program {
 	public void helper(String line){
 		if(isCode){
 			Code_seg.add(line);
-			System.out.println("Code: "+line);
 		}else if (isData) {
 			Data_seg.add(line);
-			System.out.println("Data: "+line);
-
 		}
 	}
 }
