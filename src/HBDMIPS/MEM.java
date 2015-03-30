@@ -14,7 +14,7 @@ public class MEM {
 		this.exemem = exemem;
 		this.memwb = memwb;
 		this.stage_if = stage_If;
-		data_mem = new ArrayList<>(FileHandler.FileIO.FiletoStringArray("dataMem.txt"));
+		data_mem = new ArrayList<>(FileHandler.FileIO.FiletoStringArray("dataCache.txt"));
 	}
 
 	public void action() {
@@ -40,5 +40,14 @@ public class MEM {
 		memwb.setWrite_Register(exemem.getWrite_Register());
 		memwb.setControlBits(exemem.getControlBits());
 
+	}
+        
+        
+        	public String print() {
+                    String print="";
+		for (int i = 0; i < data_mem.size(); i++) {
+                    print+="Cell  [" + i + "] : " + Integer.parseInt(data_mem.get(i)) +"\n";
+		}
+                return print;
 	}
 }

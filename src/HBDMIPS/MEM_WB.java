@@ -37,5 +37,5 @@ public class MEM_WB {
 	public void setControlBits(String controlBits) {
 		this.controlBits = controlBits;
 	}
-
+        
 }
