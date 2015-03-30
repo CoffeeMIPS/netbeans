@@ -9,8 +9,6 @@ import org.apache.commons.io.FileUtils;
 public class FileIO {
 
     private String fileName;
-    private String OwnerName;
-    private String PrjName;
 
     public String getFileName() {
         return fileName;
@@ -20,28 +18,6 @@ public class FileIO {
         this.fileName = fileName;
     }
 
-    public String getOwnerName() {
-        return OwnerName;
-    }
-
-    public void setOwnerName(String ownerName) {
-        OwnerName = ownerName;
-    }
-
-    public String getPrjName() {
-        return PrjName;
-    }
-
-    public void setPrjName(String prjName) {
-        PrjName = prjName;
-    }
-
-    public FileIO(String fileName, String ownerName, String prjName) {
-        super();
-        this.fileName = fileName;
-        OwnerName = ownerName;
-        PrjName = prjName;
-    }
 
     public static void FCopy(String Source, String Destination) {
         File src = new File(Source);
