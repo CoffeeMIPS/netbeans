@@ -17,6 +17,7 @@ import HBDMIPS.IF_ID;
 import HBDMIPS.MEM;
 import HBDMIPS.MEM_WB;
 import HBDMIPS.WB;
+import java.awt.Font;
 import java.util.HashMap;
 import javax.swing.JFileChooser;
 
@@ -55,7 +56,12 @@ public class Main extends javax.swing.JFrame {
         nextIns.setVisible(false);
         execAll.setVisible(false);
         this.currentLineOfInstructions = 0;
-    }
+        
+        Font font = regMon.getFont();
+        float size = font.getSize() + 3.5f;
+        regMon.setFont( font.deriveFont(size) );
+        
+        }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -73,13 +79,13 @@ public class Main extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         binaryText = new javax.swing.JTextArea();
         assembleButton = new javax.swing.JButton();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        monitors = new javax.swing.JTabbedPane();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTextArea3 = new javax.swing.JTextArea();
+        regMon = new javax.swing.JTextArea();
         jScrollPane6 = new javax.swing.JScrollPane();
         jTextArea4 = new javax.swing.JTextArea();
         jScrollPane7 = new javax.swing.JScrollPane();
@@ -126,37 +132,37 @@ public class Main extends javax.swing.JFrame {
         jTextArea1.setRows(5);
         jScrollPane3.setViewportView(jTextArea1);
 
-        jTabbedPane1.addTab("Monitor", jScrollPane3);
+        monitors.addTab("Monitor", jScrollPane3);
 
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
         jScrollPane4.setViewportView(jTextArea2);
 
-        jTabbedPane1.addTab("Memory", jScrollPane4);
+        monitors.addTab("Memory", jScrollPane4);
 
-        jTextArea3.setColumns(20);
-        jTextArea3.setRows(5);
-        jScrollPane5.setViewportView(jTextArea3);
+        regMon.setColumns(20);
+        regMon.setRows(5);
+        jScrollPane5.setViewportView(regMon);
 
-        jTabbedPane1.addTab("Registers", jScrollPane5);
+        monitors.addTab("Registers", jScrollPane5);
 
         jTextArea4.setColumns(20);
         jTextArea4.setRows(5);
         jScrollPane6.setViewportView(jTextArea4);
 
-        jTabbedPane1.addTab("Previous", jScrollPane6);
+        monitors.addTab("Previous", jScrollPane6);
 
         jTextArea5.setColumns(20);
         jTextArea5.setRows(5);
         jScrollPane7.setViewportView(jTextArea5);
 
-        jTabbedPane1.addTab("Current", jScrollPane7);
+        monitors.addTab("Current", jScrollPane7);
 
         jTextArea6.setColumns(20);
         jTextArea6.setRows(5);
         jScrollPane8.setViewportView(jTextArea6);
 
-        jTabbedPane1.addTab("Next", jScrollPane8);
+        monitors.addTab("Next", jScrollPane8);
 
         jTextArea7.setColumns(20);
         jTextArea7.setRows(5);
@@ -216,14 +222,14 @@ public class Main extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTabbedPane2)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE))
+                    .addComponent(monitors, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(monitors, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(assemblyTab, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -329,6 +335,7 @@ public class Main extends javax.swing.JFrame {
             stage_mem.action();
             stage_wb.action();
             currentLineOfInstructions++;
+            regMon.setText(stage_id.getRegfile().print());
         }else{
             nextIns.setVisible(false);
             runButton.setVisible(true);
@@ -345,6 +352,7 @@ public class Main extends javax.swing.JFrame {
             stage_wb.action();
             currentLineOfInstructions++;
         }
+        regMon.setText(stage_id.getRegfile().print());
         execAll.setVisible(false);
         runButton.setVisible(true);
         nextIns.setVisible(false);
@@ -408,18 +416,18 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextArea jTextArea3;
     private javax.swing.JTextArea jTextArea4;
     private javax.swing.JTextArea jTextArea5;
     private javax.swing.JTextArea jTextArea6;
     private javax.swing.JTextArea jTextArea7;
     private javax.swing.JTextArea jTextArea8;
     private javax.swing.JTextArea jTextArea9;
+    private javax.swing.JTabbedPane monitors;
     private javax.swing.JButton nextIns;
+    private javax.swing.JTextArea regMon;
     private javax.swing.JButton runButton;
     // End of variables declaration//GEN-END:variables
 }
