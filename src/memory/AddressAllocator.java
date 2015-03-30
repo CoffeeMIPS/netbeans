@@ -47,7 +47,6 @@ public class AddressAllocator {
 						physicalAddress++;
 					}
 					sd.setData_seg_end_address(parse8DigitHex(physicalAddress-1));
-					physicalAddress = physicalAddress - 1;
 					pNum++;
 				}
 			}
