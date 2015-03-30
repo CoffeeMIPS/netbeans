@@ -3,9 +3,10 @@ package memory;
 public class Main {
 
 	public static void main(String[] args) {
-		SegmentDefragmenter pr = new SegmentDefragmenter("test.asm");
-		pr.getCode_seg();
-		AddressAllocator aa = new AddressAllocator();
+		Mem2Cache m2c = new Mem2Cache();
+		m2c.nextProgram();
+		m2c.nextProgram();
+		m2c.nextProgram();
+		
 	}
-
 }

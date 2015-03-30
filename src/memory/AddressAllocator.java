@@ -2,8 +2,6 @@ package memory;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -68,12 +66,15 @@ public class AddressAllocator {
 
 	private static String parse8DigitHex(int dec) {
 		String hex = Integer.toHexString(0x00400000 + 4 * dec);
-		int l = hex.length();
-		if (l < 8) {
-			for (int i = 0; i < (8 - l); i++)
-				hex = "0" + hex;
-		}
-
 		return hex;
+	}
+
+
+	public HashMap<Integer, SegmentDefragmenter> getPrograms() {
+		return Programs;
+	}
+
+	public void setPrograms(HashMap<Integer, SegmentDefragmenter> programs) {
+		Programs = programs;
 	}
 }
