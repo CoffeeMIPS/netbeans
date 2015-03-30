@@ -83,7 +83,7 @@ public class Main extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        memMon = new javax.swing.JTextArea();
         jScrollPane5 = new javax.swing.JScrollPane();
         regMon = new javax.swing.JTextArea();
         jScrollPane6 = new javax.swing.JScrollPane();
@@ -94,9 +94,9 @@ public class Main extends javax.swing.JFrame {
         jTextArea6 = new javax.swing.JTextArea();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jScrollPane9 = new javax.swing.JScrollPane();
-        jTextArea7 = new javax.swing.JTextArea();
+        insCacheMon = new javax.swing.JTextArea();
         jScrollPane10 = new javax.swing.JScrollPane();
-        jTextArea8 = new javax.swing.JTextArea();
+        dataCacheMon = new javax.swing.JTextArea();
         jScrollPane11 = new javax.swing.JScrollPane();
         jTextArea9 = new javax.swing.JTextArea();
         runButton = new javax.swing.JButton();
@@ -134,9 +134,9 @@ public class Main extends javax.swing.JFrame {
 
         monitors.addTab("Monitor", jScrollPane3);
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane4.setViewportView(jTextArea2);
+        memMon.setColumns(20);
+        memMon.setRows(5);
+        jScrollPane4.setViewportView(memMon);
 
         monitors.addTab("Memory", jScrollPane4);
 
@@ -164,15 +164,15 @@ public class Main extends javax.swing.JFrame {
 
         monitors.addTab("Next", jScrollPane8);
 
-        jTextArea7.setColumns(20);
-        jTextArea7.setRows(5);
-        jScrollPane9.setViewportView(jTextArea7);
+        insCacheMon.setColumns(20);
+        insCacheMon.setRows(5);
+        jScrollPane9.setViewportView(insCacheMon);
 
         jTabbedPane2.addTab("Instruction Cache", jScrollPane9);
 
-        jTextArea8.setColumns(20);
-        jTextArea8.setRows(5);
-        jScrollPane10.setViewportView(jTextArea8);
+        dataCacheMon.setColumns(20);
+        dataCacheMon.setRows(5);
+        jScrollPane10.setViewportView(dataCacheMon);
 
         jTabbedPane2.addTab("Data Cache", jScrollPane10);
 
@@ -336,6 +336,7 @@ public class Main extends javax.swing.JFrame {
             stage_wb.action();
             currentLineOfInstructions++;
             regMon.setText(stage_id.getRegfile().print());
+            dataCacheMon.setText(stage_mem.print());
         }else{
             nextIns.setVisible(false);
             runButton.setVisible(true);
@@ -353,6 +354,7 @@ public class Main extends javax.swing.JFrame {
             currentLineOfInstructions++;
         }
         regMon.setText(stage_id.getRegfile().print());
+        dataCacheMon.setText(stage_mem.print());
         execAll.setVisible(false);
         runButton.setVisible(true);
         nextIns.setVisible(false);
@@ -399,7 +401,9 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTabbedPane assemblyTab;
     private javax.swing.JTextArea assemblyText;
     private javax.swing.JTextArea binaryText;
+    private javax.swing.JTextArea dataCacheMon;
     private javax.swing.JButton execAll;
+    private javax.swing.JTextArea insCacheMon;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -418,13 +422,11 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextArea jTextArea4;
     private javax.swing.JTextArea jTextArea5;
     private javax.swing.JTextArea jTextArea6;
-    private javax.swing.JTextArea jTextArea7;
-    private javax.swing.JTextArea jTextArea8;
     private javax.swing.JTextArea jTextArea9;
+    private javax.swing.JTextArea memMon;
     private javax.swing.JTabbedPane monitors;
     private javax.swing.JButton nextIns;
     private javax.swing.JTextArea regMon;
