@@ -7,6 +7,7 @@ public class Mem2Cache {
 	private int noLoadedPrograms;
 	private int noCurrentProgram;
 	private AddressAllocator addressAllocator;
+        private boolean mode;
 	
 	public int getNoPrefechedInstructions() {
 		return noPrefechedInstructions;
@@ -31,6 +32,7 @@ public class Mem2Cache {
 		this.addressAllocator = new AddressAllocator();
 		this.noLoadedPrograms = addressAllocator.getPrograms().size();
 		this.noCurrentProgram = 0;
+                this.mode = false;
 	}
 	
 	
