@@ -1,7 +1,7 @@
 package HBDMIPS;
 
 public class ID_EXE {
-	String signExt;
+	private String signExt;
 	String controlBits;
 	int PC;
 	int RS_DATA;

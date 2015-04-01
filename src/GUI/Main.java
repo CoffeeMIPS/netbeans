@@ -332,6 +332,18 @@ public class Main extends javax.swing.JFrame {
             stage_if.action();
             stage_id.action();
             stage_exe.action();
+            if(stage_exe.isbranch()){
+                if(exemem.getALU_result()==0 && !stage_exe.isnot()){
+                    int offset;
+                    offset = Integer.parseInt(stage_exe.getIdexe().getSignExt(),2);
+                    stage_if.setPC(stage_if.getPC()+offset);
+                }
+                if(exemem.getALU_result()!=0 && stage_exe.isnot()){
+                    int offset;
+                    offset = Integer.parseInt(stage_exe.getIdexe().getSignExt(),2);
+                    stage_if.setPC(stage_if.getPC()+offset);
+                }
+            }
             stage_mem.action();
             stage_wb.action();
             currentLineOfInstructions++;
@@ -349,6 +361,18 @@ public class Main extends javax.swing.JFrame {
             stage_if.action();
             stage_id.action();
             stage_exe.action();
+            if(stage_exe.isbranch()){
+                if(exemem.getALU_result()==0 && !stage_exe.isnot()){
+                    int offset;
+                    offset = Integer.parseInt(stage_exe.getIdexe().getSignExt(),2);
+                    stage_if.setPC(stage_if.getPC()+offset);
+                }
+                if(exemem.getALU_result()!=0 && stage_exe.isnot()){
+                    int offset;
+                    offset = Integer.parseInt(stage_exe.getIdexe().getSignExt(),2);
+                    stage_if.setPC(stage_if.getPC()+offset);
+                }
+            }
             stage_mem.action();
             stage_wb.action();
             currentLineOfInstructions++;
@@ -386,6 +410,9 @@ public class Main extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

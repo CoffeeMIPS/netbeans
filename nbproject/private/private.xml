@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/cloud/Documents/NetBeansProjects/HDBMIPSSim/src/memory/Main.java</file>
+            <file>file:/C:/Users/cloud/Documents/NetBeansProjects/HDBMIPSSim/src/HBDMIPS/EXE_MEM.java</file>
+            <file>file:/C:/Users/cloud/Documents/NetBeansProjects/HDBMIPSSim/src/HBDMIPS/WB.java</file>
+            <file>file:/C:/Users/cloud/Documents/NetBeansProjects/HDBMIPSSim/src/HBDMIPS/IF.java</file>
+            <file>file:/C:/Users/cloud/Documents/NetBeansProjects/HDBMIPSSim/src/FileHandler/FolderManager.java</file>
+            <file>file:/C:/Users/cloud/Documents/NetBeansProjects/HDBMIPSSim/test.asm</file>
+            <file>file:/C:/Users/cloud/Documents/NetBeansProjects/HDBMIPSSim/src/HBDMIPS/ID.java</file>
+            <file>file:/C:/Users/cloud/Documents/NetBeansProjects/HDBMIPSSim/src/Assembler/Assembler.java</file>
+            <file>file:/C:/Users/cloud/Documents/NetBeansProjects/HDBMIPSSim/src/HBDMIPS/ID_EXE.java</file>
+            <file>file:/C:/Users/cloud/Documents/NetBeansProjects/HDBMIPSSim/src/GUI/Main.java</file>
+            <file>file:/C:/Users/cloud/Documents/NetBeansProjects/HDBMIPSSim/src/memory/SegmentDefragmenter.java</file>
+            <file>file:/C:/Users/cloud/Documents/NetBeansProjects/HDBMIPSSim/ProgramA.asm</file>
+            <file>file:/C:/Users/cloud/Documents/NetBeansProjects/HDBMIPSSim/src/HBDMIPS/CU.java</file>
+            <file>file:/C:/Users/cloud/Documents/NetBeansProjects/HDBMIPSSim/src/memory/AddressAllocator.java</file>
+            <file>file:/C:/Users/cloud/Documents/NetBeansProjects/HDBMIPSSim/src/HBDMIPS/Register_file.java</file>
+            <file>file:/C:/Users/cloud/Documents/NetBeansProjects/HDBMIPSSim/src/HBDMIPS/MEM.java</file>
+            <file>file:/C:/Users/cloud/Documents/NetBeansProjects/HDBMIPSSim/src/HBDMIPS/MEM_WB.java</file>
+            <file>file:/C:/Users/cloud/Documents/NetBeansProjects/HDBMIPSSim/src/HBDMIPS/IF_ID.java</file>
+            <file>file:/C:/Users/cloud/Documents/NetBeansProjects/HDBMIPSSim/src/Assembler/Instruction.java</file>
+            <file>file:/C:/Users/cloud/Documents/NetBeansProjects/HDBMIPSSim/src/FileHandler/FileIO.java</file>
+            <file>file:/C:/Users/cloud/Documents/NetBeansProjects/HDBMIPSSim/src/HBDMIPS/EXE.java</file>
+        </group>
+    </open-files>
+</project-private>
