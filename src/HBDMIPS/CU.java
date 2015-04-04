@@ -17,32 +17,37 @@ public class CU {
 	public String decode(int op) { // regwrite aluop alusrc memread
                                        // memwrite branch regdest mem2reg
                                        // notbit(this bit added optionaly not compatible with book)
+                                       // jump
+            
 		switch (op) {
 		case 0:
 			// RType
-			return "1100000100";
+			return "11000001000";
                 case 13:
                         //ORI
-                        return "1111000000";
+                        return "11110000000";
 		case 8:
                         // ADDI
-			return "1001000000";
+			return "10010000000";
 		case 35:
 			// LW
-			return "1001100010";
+			return "10011000100";
 		case 43:
 			// SW
-			return "0001010100";
+			return "00010101000";
 		case 4:
 			// BEQ
-			return "0010001000";
+			return "00100010000";
                 case 5:
 			// BNE
-			return "0010001001";
+			return "00100010010";
 		case 2:
 			// JUMP
-			return "0000000000";
+			return "00000000001";
                         // not implemented yet
+                case 3:
+                        // JUMP AND LINK
+                        return "10000000001";
 		default:
 			return null;
 		}

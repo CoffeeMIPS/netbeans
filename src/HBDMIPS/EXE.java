@@ -8,7 +8,9 @@ public class EXE {
 		this.exemem = exemem;
 		this.idexe = idexe;
 	}
-        
+        public boolean isjump(){
+            return idexe.getControlBits().charAt(10)=='1';
+        }
         public boolean isbranch(){
             return idexe.getControlBits().charAt(6)=='1';
         }
@@ -55,8 +57,8 @@ public class EXE {
 			return data_1 & data_2;
 		case "0001":
 			return data_1 | data_2;
-		case "0111":
-			return data_1 < data_2 ? 0 : 1;
+		case "0111": //SLT If $s is less than $t, $d is set to one. It gets zero otherwise. 
+			return data_1 < data_2 ? 1 : 0;
                 case "1001": // nor function (not compatible with book)
                         return nor32(data_1,data_2);
 		default:
@@ -79,6 +81,8 @@ public class EXE {
 				return "0001";
                         case "100111"://nor
                                 return "1001";
+                        case "001000"://JR
+                                return "0010"; // it's fake not realy do anything
 			case "101010": //SLT If $s is less than $t, $d is set to one. It gets zero otherwise. 
 				return "0111";
 			default:

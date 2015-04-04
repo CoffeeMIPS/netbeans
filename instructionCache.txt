@@ -1,4 +1,4 @@
-ori $t0,$t0,18
+slt $t0,$t1,$t2
 addi $a0,$a0,1
 j label
 label:
