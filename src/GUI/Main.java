@@ -346,7 +346,7 @@ public class Main extends javax.swing.JFrame {
             }
             stage_mem.action();
             stage_wb.action();
-            currentLineOfInstructions++;
+            currentLineOfInstructions=stage_if.getPC();
             regMon.setText(stage_id.getRegfile().print());
             dataCacheMon.setText(stage_mem.print());
         }else{
@@ -375,7 +375,7 @@ public class Main extends javax.swing.JFrame {
             }
             stage_mem.action();
             stage_wb.action();
-            currentLineOfInstructions++;
+            currentLineOfInstructions = stage_if.getPC();
         }
         regMon.setText(stage_id.getRegfile().print());
         dataCacheMon.setText(stage_mem.print());

@@ -1,4 +1,4 @@
-beq $t0,$t0,test
+bne $t0,$t1,test
 addi $t0,$t0,1
 addi $t0,$t0,2
 test:
