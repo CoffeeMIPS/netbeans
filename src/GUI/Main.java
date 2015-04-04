@@ -20,12 +20,14 @@ import HBDMIPS.WB;
 import java.awt.Font;
 import java.util.HashMap;
 import javax.swing.JFileChooser;
+import memory.AddressAllocator;
 
 /**
  *
  * @author Alirez
  */
 public class Main extends javax.swing.JFrame {
+
     String filePath = null;
     boolean run;
     int lineOfInstructions;
@@ -41,6 +43,8 @@ public class Main extends javax.swing.JFrame {
     EXE stage_exe;
     MEM stage_mem;
     WB stage_wb;
+    AddressAllocator aa;
+
     /**
      * Creates new form Main
      */
@@ -56,12 +60,17 @@ public class Main extends javax.swing.JFrame {
         nextIns.setVisible(false);
         execAll.setVisible(false);
         this.currentLineOfInstructions = 0;
-        
+
         Font font = regMon.getFont();
         float size = font.getSize() + 3.5f;
-        regMon.setFont( font.deriveFont(size) );
-        
+        regMon.setFont(font.deriveFont(size));
+        aa = new AddressAllocator();
+        String memory="";
+        for (int i = 0; i < aa.getMemory().size(); i++) {
+            memory += (aa.parse8DigitHex(i) + " : " + aa.getMemory().get(aa.parse8DigitHex(i))+"\n");
         }
+        memMon.setText(memory);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -86,12 +95,8 @@ public class Main extends javax.swing.JFrame {
         memMon = new javax.swing.JTextArea();
         jScrollPane5 = new javax.swing.JScrollPane();
         regMon = new javax.swing.JTextArea();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        jTextArea4 = new javax.swing.JTextArea();
         jScrollPane7 = new javax.swing.JScrollPane();
-        jTextArea5 = new javax.swing.JTextArea();
-        jScrollPane8 = new javax.swing.JScrollPane();
-        jTextArea6 = new javax.swing.JTextArea();
+        currnt_ins = new javax.swing.JTextArea();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jScrollPane9 = new javax.swing.JScrollPane();
         insCacheMon = new javax.swing.JTextArea();
@@ -146,23 +151,11 @@ public class Main extends javax.swing.JFrame {
 
         monitors.addTab("Registers", jScrollPane5);
 
-        jTextArea4.setColumns(20);
-        jTextArea4.setRows(5);
-        jScrollPane6.setViewportView(jTextArea4);
-
-        monitors.addTab("Previous", jScrollPane6);
-
-        jTextArea5.setColumns(20);
-        jTextArea5.setRows(5);
-        jScrollPane7.setViewportView(jTextArea5);
+        currnt_ins.setColumns(20);
+        currnt_ins.setRows(5);
+        jScrollPane7.setViewportView(currnt_ins);
 
         monitors.addTab("Current", jScrollPane7);
-
-        jTextArea6.setColumns(20);
-        jTextArea6.setRows(5);
-        jScrollPane8.setViewportView(jTextArea6);
-
-        monitors.addTab("Next", jScrollPane8);
 
         insCacheMon.setColumns(20);
         insCacheMon.setRows(5);
@@ -287,7 +280,7 @@ public class Main extends javax.swing.JFrame {
             binaryText.setVisible(true);
             binaryText.setText("Address       Instruction\n\n");
             for (int i = 0; i < assembled.size(); i++) {
-                binaryText.setText(binaryText.getText().toString()+assembled.get(i).getAddress()+" : "+assembled.get(i).getInstruction()+"\n");
+                binaryText.setText(binaryText.getText().toString() + assembled.get(i).getAddress() + " : " + assembled.get(i).getInstruction() + "\n");
             }
             runButton.setVisible(true);
             nextIns.setVisible(false);
@@ -315,8 +308,8 @@ public class Main extends javax.swing.JFrame {
             exemem = new EXE_MEM();
             memwb = new MEM_WB();
 
-            stage_if = new IF(ifid,filePath);
-            stage_id = new ID(ifid, idexe,stage_if);
+            stage_if = new IF(ifid, filePath);
+            stage_id = new ID(ifid, idexe, stage_if);
             stage_exe = new EXE(idexe, exemem);
             stage_mem = new MEM(exemem, memwb, stage_if);
             stage_wb = new WB(stage_id, memwb);
@@ -328,28 +321,31 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_runButtonActionPerformed
 
     private void nextInsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextInsActionPerformed
-       	if(currentLineOfInstructions<lineOfInstructions){
+        if (currentLineOfInstructions < lineOfInstructions) {
             stage_if.action();
+            currnt_ins.setText(stage_if.getInstruction());
             stage_id.action();
             stage_exe.action();
-            if(stage_exe.isbranch()){
-                if(exemem.getALU_result()==0 && !stage_exe.isnot()){
+            if (stage_exe.isbranch()) {
+                if (exemem.getALU_result() == 0 && !stage_exe.isnot()) {
                     int offset;
-                    offset = Integer.parseInt(stage_exe.getIdexe().getSignExt(),2);
-                    stage_if.setPC(stage_if.getPC()+offset);
+                    offset = Integer.parseInt(stage_exe.getIdexe().getSignExt(), 2);
+                    stage_if.setPC(stage_if.getPC() + offset);
+
                 }
-                if(exemem.getALU_result()!=0 && stage_exe.isnot()){
+                if (exemem.getALU_result() != 0 && stage_exe.isnot()) {
                     int offset;
-                    offset = Integer.parseInt(stage_exe.getIdexe().getSignExt(),2);
-                    stage_if.setPC(stage_if.getPC()+offset);
+                    offset = Integer.parseInt(stage_exe.getIdexe().getSignExt(), 2);
+                    stage_if.setPC(stage_if.getPC() + offset);
+
                 }
             }
             stage_mem.action();
             stage_wb.action();
-            currentLineOfInstructions=stage_if.getPC();
+            currentLineOfInstructions = stage_if.getPC();
             regMon.setText(stage_id.getRegfile().print());
             dataCacheMon.setText(stage_mem.print());
-        }else{
+        } else {
             nextIns.setVisible(false);
             runButton.setVisible(true);
             run = true;
@@ -357,20 +353,20 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_nextInsActionPerformed
 
     private void execAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_execAllActionPerformed
-        while(currentLineOfInstructions<lineOfInstructions){
+        while (currentLineOfInstructions < lineOfInstructions) {
             stage_if.action();
             stage_id.action();
             stage_exe.action();
-            if(stage_exe.isbranch()){
-                if(exemem.getALU_result()==0 && !stage_exe.isnot()){
+            if (stage_exe.isbranch()) {
+                if (exemem.getALU_result() == 0 && !stage_exe.isnot()) {
                     int offset;
-                    offset = Integer.parseInt(stage_exe.getIdexe().getSignExt(),2);
-                    stage_if.setPC(stage_if.getPC()+offset);
+                    offset = Integer.parseInt(stage_exe.getIdexe().getSignExt(), 2);
+                    stage_if.setPC(stage_if.getPC() + offset);
                 }
-                if(exemem.getALU_result()!=0 && stage_exe.isnot()){
+                if (exemem.getALU_result() != 0 && stage_exe.isnot()) {
                     int offset;
-                    offset = Integer.parseInt(stage_exe.getIdexe().getSignExt(),2);
-                    stage_if.setPC(stage_if.getPC()+offset);
+                    offset = Integer.parseInt(stage_exe.getIdexe().getSignExt(), 2);
+                    stage_if.setPC(stage_if.getPC() + offset);
                 }
             }
             stage_mem.action();
@@ -418,7 +414,7 @@ public class Main extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Main().setVisible(true);                
+                new Main().setVisible(true);
             }
         });
     }
@@ -428,6 +424,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTabbedPane assemblyTab;
     private javax.swing.JTextArea assemblyText;
     private javax.swing.JTextArea binaryText;
+    private javax.swing.JTextArea currnt_ins;
     private javax.swing.JTextArea dataCacheMon;
     private javax.swing.JButton execAll;
     private javax.swing.JTextArea insCacheMon;
@@ -443,15 +440,10 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea4;
-    private javax.swing.JTextArea jTextArea5;
-    private javax.swing.JTextArea jTextArea6;
     private javax.swing.JTextArea jTextArea9;
     private javax.swing.JTextArea memMon;
     private javax.swing.JTabbedPane monitors;

@@ -64,7 +64,7 @@ public class AddressAllocator {
 		}
 	}
 
-	private static String parse8DigitHex(int dec) {
+	public static String parse8DigitHex(int dec) {
 		String hex = Integer.toHexString(0x00400000 + 4 * dec);
 		return hex;
 	}

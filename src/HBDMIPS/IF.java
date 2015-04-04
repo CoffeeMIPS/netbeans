@@ -44,4 +44,7 @@ public class IF {
 		PC++;
 		ifid.setPC(PC);
 	}
+        public String getInstruction(){
+            return ins_mem.get(this.PC-1).getInstruction();
+        }
 }
