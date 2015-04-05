@@ -1,3 +1,4 @@
+slt $t0,$t1,$t2
 bne $t0,$t1,test
 addi $t0,$t0,1
 addi $t0,$t0,2

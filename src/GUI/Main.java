@@ -326,9 +326,13 @@ public class Main extends javax.swing.JFrame {
             currnt_ins.setText(stage_if.getInstruction());
             stage_id.action();
             stage_exe.action();
+            if (stage_exe.isjump()){ // PC & 0xf0000000
+                int old_pc = stage_if.getPC();
+            }
             if (stage_exe.isbranch()) {
                 if (exemem.getALU_result() == 0 && !stage_exe.isnot()) {
                     int offset;
+                    
                     offset = Integer.parseInt(stage_exe.getIdexe().getSignExt(), 2);
                     stage_if.setPC(stage_if.getPC() + offset);
 

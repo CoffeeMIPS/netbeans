@@ -3,6 +3,7 @@ package HBDMIPS;
 public class EXE {
 	private ID_EXE idexe = new ID_EXE();
 	private EXE_MEM exemem = new EXE_MEM();
+        public String prev_instruction = "";
 
 	public EXE(ID_EXE idexe, EXE_MEM exemem) {
 		this.exemem = exemem;
@@ -18,8 +19,9 @@ public class EXE {
             return idexe.getControlBits().charAt(9)=='1';
         }
 	public void action() {
+                
 		boolean REG_DEST = (getIdexe().getControlBits().charAt(7)) == '0' ? false : true;
-		String ALUOp = getIdexe().getControlBits().substring(1, 3);
+		String ALUOp = getIdexe().getControlBits().substring(1, 3)+getIdexe().getControlBits().substring(11, 13);
 		boolean ALU_Src = (getIdexe().getControlBits().charAt(3)) == '0' ? false
 				: true;
 		String func_bit = getIdexe().getSignExt().substring(26, 32);
@@ -28,7 +30,19 @@ public class EXE {
 		} else if (!REG_DEST) {
 			exemem.Write_Register = getIdexe().RT;
 		}
-		getExemem().setALU_result(alu(getIdexe().getRS_DATA(),ALU_Src?(byte)Long.parseLong(getIdexe().getSignExt(), 2):getIdexe().getRT_DATA(),alu_cu(func_bit,ALUOp)));
+                String alucu_result = alu_cu(func_bit,ALUOp);
+                if(alucu_result == "1110" || alucu_result == "1111"){
+                    int data1 = getIdexe().getRT_DATA();
+                    String Shift_amount = getIdexe().getSignExt().substring(21,26);
+                    int data2 = (byte)Long.parseLong(Shift_amount, 2);
+                    getExemem().setALU_result(alu(data1,data2,alucu_result));
+                }
+                else{
+                    int data1 = getIdexe().getRS_DATA();
+                    int data2 = ALU_Src?(byte)Long.parseLong(getIdexe().getSignExt(), 2):getIdexe().getRT_DATA();
+                    getExemem().setALU_result(alu(data1,data2,alucu_result));
+                }
+		
 		getExemem().setZERO(getExemem().getALU_result()==0?true:false);// 1 means branch occurs! and 0 is not occur!
 		getExemem().setNew_PC(getIdexe().getPC()+(byte)Long.parseLong(getIdexe().getSignExt(), 2));
 		getExemem().setRT_DATA(getIdexe().getRT_DATA());
@@ -57,10 +71,14 @@ public class EXE {
 			return data_1 & data_2;
 		case "0001":
 			return data_1 | data_2;
-		case "0111": //SLT If $s is less than $t, $d is set to one. It gets zero otherwise. 
-			return data_1 < data_2 ? 1 : 0;
+		case "0111":
+			return data_1 < data_2 ? 0 : 1;
                 case "1001": // nor function (not compatible with book)
                         return nor32(data_1,data_2);
+                case "1110": // $d = $t << h
+                        return data_1 << data_2;
+                case "1111": // $d = $t >> h
+                        return data_1 >> data_2;
 		default:
 			break;
 		}
@@ -69,7 +87,7 @@ public class EXE {
 
 	public String alu_cu(String func_bit, String Aluop) {
 		switch (Aluop) {
-		case "10":
+		case "1000":
 			switch (func_bit) {
 			case "100000": //add
 				return "0010";
@@ -81,20 +99,24 @@ public class EXE {
 				return "0001";
                         case "100111"://nor
                                 return "1001";
-                        case "001000"://JR
-                                return "0010"; // it's fake not realy do anything
 			case "101010": //SLT If $s is less than $t, $d is set to one. It gets zero otherwise. 
 				return "0111";
+                        case "000000":
+                                return "1110";
+                        case "000010":
+                                return "1111";
 			default:
 				break;
 			}
 			break;
-		case "00": // add operation used for addi,lw,sw
+		case "0000": // add operation used for addi,lw,sw
 			return "0010";
-		case "01": // sub operation used for beq,bne
+		case "0100": // sub operation used for beq,bne
 			return "0110";
-                case "11": // it's used for ORi
+                case "1100": // it's used for ORi
                         return "0001";
+                case "1110":
+                        return "0000";
 		default:
 			break;
 		}
