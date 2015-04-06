@@ -1,3 +1,6 @@
+addi $a1,$zero,10
+jr $a1
+jal test
 slt $t0,$t1,$t2
 bne $t0,$t1,test
 addi $t0,$t0,1

@@ -6,7 +6,7 @@ public class EXE_MEM {
 	boolean ZERO;
 	int ALU_result;
 	int RT_DATA;
-	int Write_Register;
+	private int Write_Register;
 	public String getControlBits() {
 		return controlBits;
 	}
