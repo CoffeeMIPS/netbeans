@@ -4,18 +4,21 @@ public class EXE {
 	private ID_EXE idexe = new ID_EXE();
 	private EXE_MEM exemem = new EXE_MEM();
         public String prev_instruction = "";
-
+        private String j_pc;
 	public EXE(ID_EXE idexe, EXE_MEM exemem) {
 		this.exemem = exemem;
 		this.idexe = idexe;
 	}
-        public boolean isjump(){
+        public boolean isRegwrite(){
+            return idexe.getControlBits().charAt(0)=='1';
+        }
+        public boolean isJump(){
             return idexe.getControlBits().charAt(10)=='1';
         }
-        public boolean isbranch(){
+        public boolean isBranch(){
             return idexe.getControlBits().charAt(6)=='1';
         }
-        public boolean isnot(){
+        public boolean isNot(){
             return idexe.getControlBits().charAt(9)=='1';
         }
 	public void action() {
@@ -26,21 +29,24 @@ public class EXE {
 				: true;
 		String func_bit = getIdexe().getSignExt().substring(26, 32);
 		if (REG_DEST) {
-			exemem.Write_Register = getIdexe().RD;
+			exemem.setWrite_Register(getIdexe().RD);
 		} else if (!REG_DEST) {
-			exemem.Write_Register = getIdexe().RT;
+			exemem.setWrite_Register(getIdexe().RT);
 		}
-                String alucu_result = alu_cu(func_bit,ALUOp);
-                if(alucu_result == "1110" || alucu_result == "1111"){
+                String alucu_func = alu_cu(func_bit,ALUOp);
+                if(isJump()){
+                    setJ_pc(getIdexe().getSignExt().substring(6,32));
+                }
+                if(alucu_func == "1110" || alucu_func == "1111"){
                     int data1 = getIdexe().getRT_DATA();
                     String Shift_amount = getIdexe().getSignExt().substring(21,26);
                     int data2 = (byte)Long.parseLong(Shift_amount, 2);
-                    getExemem().setALU_result(alu(data1,data2,alucu_result));
+                    getExemem().setALU_result(alu(data1,data2,alucu_func));
                 }
                 else{
                     int data1 = getIdexe().getRS_DATA();
                     int data2 = ALU_Src?(byte)Long.parseLong(getIdexe().getSignExt(), 2):getIdexe().getRT_DATA();
-                    getExemem().setALU_result(alu(data1,data2,alucu_result));
+                    getExemem().setALU_result(alu(data1,data2,alucu_func));
                 }
 		
 		getExemem().setZERO(getExemem().getALU_result()==0?true:false);// 1 means branch occurs! and 0 is not occur!
@@ -150,6 +156,20 @@ public class EXE {
      */
     public void setExemem(EXE_MEM exemem) {
         this.exemem = exemem;
+    }
+
+    /**
+     * @return the j_pc
+     */
+    public String getJ_pc() {
+        return j_pc;
+    }
+
+    /**
+     * @param j_pc the j_pc to set
+     */
+    public void setJ_pc(String j_pc) {
+        this.j_pc = j_pc;
     }
 
 }

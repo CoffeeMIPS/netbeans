@@ -326,18 +326,26 @@ public class Main extends javax.swing.JFrame {
             currnt_ins.setText(stage_if.getInstruction());
             stage_id.action();
             stage_exe.action();
-            if (stage_exe.isjump()){ // PC & 0xf0000000
+            if (stage_exe.isJump()){ // PC & 0xf0000000
                 int old_pc = stage_if.getPC();
+                int pcbits = old_pc/(2^28);
+                // not added pc to sign but it's ready for use then
+                int offset = Integer.parseInt(stage_exe.getJ_pc(), 2);
+                stage_if.setPC(offset);
+                if(stage_exe.isRegwrite()){
+                    stage_exe.getExemem().setALU_result(old_pc);
+                    stage_exe.getExemem().setWrite_Register(31);
+                }
             }
-            if (stage_exe.isbranch()) {
-                if (exemem.getALU_result() == 0 && !stage_exe.isnot()) {
+            if (stage_exe.isBranch()) {
+                if (exemem.getALU_result() == 0 && !stage_exe.isNot()) {
                     int offset;
                     
                     offset = Integer.parseInt(stage_exe.getIdexe().getSignExt(), 2);
                     stage_if.setPC(stage_if.getPC() + offset);
 
                 }
-                if (exemem.getALU_result() != 0 && stage_exe.isnot()) {
+                if (exemem.getALU_result() != 0 && stage_exe.isNot()) {
                     int offset;
                     offset = Integer.parseInt(stage_exe.getIdexe().getSignExt(), 2);
                     stage_if.setPC(stage_if.getPC() + offset);
@@ -361,13 +369,13 @@ public class Main extends javax.swing.JFrame {
             stage_if.action();
             stage_id.action();
             stage_exe.action();
-            if (stage_exe.isbranch()) {
-                if (exemem.getALU_result() == 0 && !stage_exe.isnot()) {
+            if (stage_exe.isBranch()) {
+                if (exemem.getALU_result() == 0 && !stage_exe.isNot()) {
                     int offset;
                     offset = Integer.parseInt(stage_exe.getIdexe().getSignExt(), 2);
                     stage_if.setPC(stage_if.getPC() + offset);
                 }
-                if (exemem.getALU_result() != 0 && stage_exe.isnot()) {
+                if (exemem.getALU_result() != 0 && stage_exe.isNot()) {
                     int offset;
                     offset = Integer.parseInt(stage_exe.getIdexe().getSignExt(), 2);
                     stage_if.setPC(stage_if.getPC() + offset);
