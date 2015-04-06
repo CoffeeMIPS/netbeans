@@ -9,20 +9,16 @@ import java.util.HashMap;
 
 public class Assembler {
 
-    private static File file;
-    private static int lineNumber = 0;
-    private static boolean debugMode = false;
-    private static HashMap<String, String> instructionCodes = new HashMap<String, String>();
-    private static HashMap<String, instructionParser> instructions = new HashMap<String, instructionParser>();
-    private static HashMap<String, String> registers = new HashMap<String, String>();
-    private static HashMap<String, Integer> labels = new HashMap<String, Integer>();
-    private static HashMap<Integer, Instruction> assembled = new HashMap<Integer, Instruction>();
+    private  File file;
+    private  int lineNumber = 0;
+    private  boolean debugMode = false;
+    private  HashMap<String, String> instructionCodes = new HashMap<String, String>();
+    private  HashMap<String, instructionParser> instructions = new HashMap<String, instructionParser>();
+    private  HashMap<String, String> registers = new HashMap<String, String>();
+    private  HashMap<String, Integer> labels = new HashMap<String, Integer>();
+    private  HashMap<Integer, Instruction> assembled = new HashMap<Integer, Instruction>();
 
-    // Prevent an object of this class from being created
-    private Assembler() {
-    }
-
-    private static void initInstructionCodes() {
+    private  void initInstructionCodes() {
         // R-Type Instructions
         instructionCodes.put("add", "100000");
         instructionCodes.put("sub", "100010");
@@ -48,7 +44,7 @@ public class Assembler {
         instructionCodes.put("jal", "000011");
     }
 
-    private static void initInstructions() {
+    private  void initInstructions() {
         // R-Type Instructions
         instructions.put("add", instructionR_std);
         instructions.put("sub", instructionR_std);
@@ -74,7 +70,7 @@ public class Assembler {
         instructions.put("jal", instructionJ);
     }
 
-    private static void initRegisterCodes() {
+    private  void initRegisterCodes() {
         // Constant 0
         registers.put("$zero", "00000");
         // Assembler temporary
@@ -135,7 +131,7 @@ public class Assembler {
     }
 
     // Returns unsigned 5-bit binary representation of decimal value
-    private static String parseUnsigned5BitBin(int dec) {
+    private  String parseUnsigned5BitBin(int dec) {
 		// int decValue = Integer.parseInt(dec); this was used when argument was
         // a string
         String bin = Integer.toBinaryString(dec);
@@ -151,7 +147,7 @@ public class Assembler {
     }
 
     // Returns signed 16-bit binary representation of decimal value
-    private static String parseSigned16BitBin(int dec) {
+    private  String parseSigned16BitBin(int dec) {
         // int decValue = Integer.parseInt(dec);
         String bin = Integer.toBinaryString(dec);
 
@@ -169,7 +165,7 @@ public class Assembler {
 
 	// Returns unsigned 32-bit binary representation of decimal value
     // (for use in J-Format instruction)
-    private static String parseUnsigned32BitBin(int dec) {
+    private  String parseUnsigned32BitBin(int dec) {
         String bin = Integer.toBinaryString(dec);
 
         int l = bin.length();
@@ -184,7 +180,7 @@ public class Assembler {
 
 	// Returns 8-digit (8-nibble) hexadecimal string representation of decimal
     // value
-    private static String parse8DigitHex(int dec) {
+    private  String parse8DigitHex(int dec) {
         String hex = Integer.toHexString(dec);
 
         int l = hex.length();
@@ -198,7 +194,7 @@ public class Assembler {
     }
 
     // Returns the register address as a String
-    private static String getRegister(String reg) {
+    private  String getRegister(String reg) {
         // Numeral address reference, e.g. $8
         if (reg.matches("[$]\\d+")) {
             return parseUnsigned5BitBin(Integer.parseInt(reg.substring(1)));
@@ -208,7 +204,7 @@ public class Assembler {
     }
 
     // Instructions: add, sub, and, or, nor, slt
-    private static instructionParser instructionR_std = new instructionParser() {
+    private  instructionParser instructionR_std = new instructionParser() {
         public String parse(String[] parts) {
             String opcode = "000000"; // instrCode.substring(2, 8);
             String rs = getRegister(parts[2]);
@@ -221,7 +217,7 @@ public class Assembler {
     };
 
     // Instructions: sll, srl
-    private static instructionParser instructionR_shift = new instructionParser() {
+    private  instructionParser instructionR_shift = new instructionParser() {
         public String parse(String[] parts) {
             String opcode = "000000";
             String rs = "00000";
@@ -235,7 +231,7 @@ public class Assembler {
     };
 
     // Instructions: jr
-    private static instructionParser instructionR_jr = new instructionParser() {
+    private  instructionParser instructionR_jr = new instructionParser() {
         public String parse(String[] parts) {
             String opcode = "000000";
             String rs = getRegister(parts[1]);
@@ -248,7 +244,7 @@ public class Assembler {
     };
 
     // Instructions: addi, andi, ori
-    private static instructionParser instructionI_std = new instructionParser() {
+    private  instructionParser instructionI_std = new instructionParser() {
         public String parse(String[] parts) {
             String opcode = instructionCodes.get(parts[0]);
             String rs = getRegister(parts[2]);
@@ -260,7 +256,7 @@ public class Assembler {
     };
 
     // Instructions: beq, bne
-    private static instructionParser instructionI_branch = new instructionParser() {
+    private  instructionParser instructionI_branch = new instructionParser() {
         public String parse(String[] parts) {
             String opcode = instructionCodes.get(parts[0]);
             String rs = getRegister(parts[1]);
@@ -271,7 +267,7 @@ public class Assembler {
     };
 
     // Instructions: lw, sw
-    private static instructionParser instructionI_word = new instructionParser() {
+    private  instructionParser instructionI_word = new instructionParser() {
         public String parse(String[] parts) {
             String opcode = instructionCodes.get(parts[0]);
             String rs = getRegister(parts[3]);
@@ -282,7 +278,7 @@ public class Assembler {
     };
 
     // Instructions: j, jal
-    private static instructionParser instructionJ = new instructionParser() {
+    private  instructionParser instructionJ = new instructionParser() {
         public String parse(String[] parts) {
             String opcode = instructionCodes.get(parts[0]);
             // Compute the jump address and crop to 26 bits
@@ -294,12 +290,12 @@ public class Assembler {
     };
 
     // Set debug mode, which shows detailed parsing information
-    public static void setDebugMode(boolean mode) {
+    public  void setDebugMode(boolean mode) {
         debugMode = mode;
     }
 
     // Run assembly process on file with given filename
-    public static HashMap<Integer, Instruction> assembleFile(String filename) {
+    public  HashMap<Integer, Instruction> assembleFile(String filename) {
         // Initialize HashMaps
         initInstructionCodes();
         initInstructions();
@@ -313,7 +309,7 @@ public class Assembler {
     }
 
     // Scan file for labels and add their reference to the labels HashMap
-    private static void getLabels() {
+    private void getLabels() {
         try {
             Scanner scanner = new Scanner(file);
 
@@ -350,7 +346,7 @@ public class Assembler {
     }
 
     // Perform actual assembly of the instructions into binary
-    private static void assemble() {
+    private void assemble() {
         try {
             Scanner scanner = new Scanner(file);
 

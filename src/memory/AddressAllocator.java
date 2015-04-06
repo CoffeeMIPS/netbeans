@@ -33,8 +33,7 @@ public class AddressAllocator {
 					Programs.put(pNum, sd);
 					sd.setCode_seg_start_address(parse8DigitHex(physicalAddress));
 					for (int i = 0; i < sd.getCode_seg().size(); i++) {
-						Memory.put(parse8DigitHex(physicalAddress), sd
-								.getCode_seg().get(i));
+						Memory.put(parse8DigitHex(physicalAddress), sd.getCode_seg().get(i));
 						physicalAddress++;
 					}
 					sd.setCode_seg_end_address(parse8DigitHex(physicalAddress - 1));

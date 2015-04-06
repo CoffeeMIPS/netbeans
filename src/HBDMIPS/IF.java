@@ -30,7 +30,8 @@ public class IF {
 	public IF(IF_ID ifid,String filePath) {
 		this.ifid = ifid;
                 this.filePath = filePath;
-		ins_mem =new HashMap<Integer, Instruction>(Assembler.assembleFile(filePath));
+                Assembler assemble = new Assembler();
+		ins_mem =new HashMap<Integer, Instruction>(assemble.assembleFile(filePath));
                 for (Map.Entry<Integer, Instruction> entrySet : ins_mem.entrySet()) {
                 Integer key = entrySet.getKey();
                 Instruction value = entrySet.getValue();
