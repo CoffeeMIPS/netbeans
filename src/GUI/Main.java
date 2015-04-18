@@ -16,6 +16,7 @@ import HBDMIPS.IF;
 import HBDMIPS.IF_ID;
 import HBDMIPS.MEM;
 import HBDMIPS.MEM_WB;
+import HBDMIPS.Timer;
 import HBDMIPS.WB;
 import java.awt.Font;
 import java.util.HashMap;
@@ -32,6 +33,9 @@ public class Main extends javax.swing.JFrame {
     boolean run;
     int lineOfInstructions;
     int currentLineOfInstructions;
+    boolean modeBit;
+    boolean interruptBit;
+    Timer timer;
     //
     ID_EXE idexe;
     IF_ID ifid;
@@ -275,8 +279,7 @@ public class Main extends javax.swing.JFrame {
     private void assembleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assembleButtonActionPerformed
         if (!filePath.isEmpty() && filePath != null) {
             binaryText.setText("");
-            Assembler assemble = new Assembler();
-            HashMap<Integer, Instruction> assembled = new HashMap<Integer, Instruction>(assemble.assembleFile(filePath));
+            HashMap<Integer, Instruction> assembled = new HashMap<Integer, Instruction>(Assembler.assembleFile(filePath));
             this.lineOfInstructions = assembled.size();
             binaryText.setVisible(true);
             binaryText.setText("Address       Instruction\n\n");
@@ -303,6 +306,7 @@ public class Main extends javax.swing.JFrame {
 
     private void runButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runButtonActionPerformed
         if (run) {
+            timer = new Timer();
             currentLineOfInstructions = 0;
             idexe = new ID_EXE();
             ifid = new IF_ID();
@@ -363,6 +367,13 @@ public class Main extends javax.swing.JFrame {
             currentLineOfInstructions = stage_if.getPC();
             regMon.setText(stage_id.getRegfile().print());
             dataCacheMon.setText(stage_mem.print());
+            timer.action();
+            if(timer.check_timer()){
+//                if timer is check go here
+            }
+            if(interruptBit){
+//                here where must go to IVT
+            }
         } else {
             nextIns.setVisible(false);
             runButton.setVisible(true);
@@ -406,6 +417,13 @@ public class Main extends javax.swing.JFrame {
             stage_mem.action();
             stage_wb.action();
             currentLineOfInstructions = stage_if.getPC();
+            timer.action();
+            if(timer.check_timer()){
+//                if timer is check go here
+            }
+            if(interruptBit){
+//                here where must go to IVT
+            }
         }
         regMon.setText(stage_id.getRegfile().print());
         dataCacheMon.setText(stage_mem.print());

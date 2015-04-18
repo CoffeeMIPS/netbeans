@@ -1,11 +1,11 @@
 .code
-j test
-addi $t0,$zero,10
-test:
-addi $t0,$zero,10
+addi $t0,$0,5
+addi $a0,$a0,1
 .data
-11
-12
-13
-14
-15
+1
+2
+3
+4
+5
+6
+7
