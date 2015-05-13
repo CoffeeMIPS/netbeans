@@ -46,6 +46,9 @@ public class Assembler {
         // J-Type Instructions
         instructionCodes.put("j", "000010");
         instructionCodes.put("jal", "000011");
+        
+        // SysCall Instruction
+        instructionCodes.put("syscall", "001100");
     }
 
     private static void initInstructions() {
@@ -72,6 +75,9 @@ public class Assembler {
         // J-Type Instructions
         instructions.put("j", instructionJ);
         instructions.put("jal", instructionJ);
+        
+        // SysCall Instruction
+        instructions.put("syscall", instructionSysCall);
     }
 
     private static void initRegisterCodes() {
@@ -293,6 +299,16 @@ public class Assembler {
         }
     };
 
+        private static instructionParser instructionSysCall = new instructionParser() {
+        public String parse(String[] parts) {
+            String opcode = "000000";
+            String Code = "00000000000000000000";
+            String funct = instructionCodes.get(parts[0]);
+            return opcode + Code + funct;
+        }
+    };
+
+    
     // Set debug mode, which shows detailed parsing information
     public static void setDebugMode(boolean mode) {
         debugMode = mode;

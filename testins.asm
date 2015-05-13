@@ -1,4 +1,4 @@
-addi $a1,$zero,10
+syscall
 jr $a1
 jal test
 slt $t0,$t1,$t2
