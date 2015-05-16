@@ -279,8 +279,8 @@ public class Main extends javax.swing.JFrame {
     private void assembleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assembleButtonActionPerformed
         if (!filePath.isEmpty() && filePath != null) {
             binaryText.setText("");
-            HashMap<Integer, Instruction> assembled = new HashMap<Integer, Instruction>(Assembler.assembleFile(filePath));
-            this.lineOfInstructions = assembled.size();
+            Assembler assemble = new Assembler();
+            HashMap<Integer, Instruction> assembled = new HashMap<Integer, Instruction>(assemble.assembleFile(filePath));            this.lineOfInstructions = assembled.size();
             binaryText.setVisible(true);
             binaryText.setText("Address       Instruction\n\n");
             for (int i = 0; i < assembled.size(); i++) {
