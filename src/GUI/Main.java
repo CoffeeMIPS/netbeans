@@ -11,11 +11,13 @@ import FileHandler.FileIO;
 import com.sun.rowset.internal.Row;
 import java.awt.Component;
 import java.awt.Font;
+import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JFileChooser;
 import javax.swing.JTable;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
+import memory.SegmentDefragmenter;
 
 /**
  *
@@ -44,15 +46,46 @@ public class Main extends javax.swing.JFrame {
         for (int i = 0; i < mipsCode.getRowCount(); i++) {
             mipsCode.setValueAt(Integer.toHexString(i*4), i, 0);
         }
-        mipsCode.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-        
-        mipsCode.getColumn("Assembled").setMinWidth(180);
-        mipsCode.getColumn("Code").setMaxWidth(150);
-        mipsCode.getColumn("Code").setMinWidth(110);
-        mipsCode.getColumn("Add.").setMaxWidth(90);
-        mipsCode.getColumn("C").setMaxWidth(20);
-                
+        setStyle(mipsCode);
+        setStyle(program1);
+        setStyle(program2);
+        setStyle(program3);
+        loadprogram1();
 }
+    private void loadprogram1(){
+        HashMap<Integer, SegmentDefragmenter> programs= computer.aa.getPrograms();
+        System.out.println(programs.toString());
+        SegmentDefragmenter sd = programs.get(0);
+        ArrayList<String> starr = sd.getCode_seg();
+        int start_address =Integer.parseInt(sd.getCode_seg_start_address(), 16);
+        for (int i = 0; i < starr.size(); i++) {
+            program1.setValueAt(starr.get(i), i, 2);
+            program1.setValueAt(Integer.toHexString(start_address+i*4), i, 0);
+        }
+        sd = programs.get(1);
+        starr = sd.getCode_seg();
+        start_address =Integer.parseInt(sd.getCode_seg_start_address(), 16);
+        for (int i = 0; i < starr.size(); i++) {
+            program2.setValueAt(starr.get(i), i, 2);
+            program2.setValueAt(Integer.toHexString(start_address+i*4), i, 0);
+        }
+        sd = programs.get(2);
+        starr = sd.getCode_seg();
+        start_address =Integer.parseInt(sd.getCode_seg_start_address(), 16);
+        for (int i = 0; i < starr.size(); i++) {
+            program3.setValueAt(starr.get(i), i, 2);
+            program3.setValueAt(Integer.toHexString(start_address+i*4), i, 0);
+        }
+        
+    }
+    
+    private void setStyle(JTable table){
+        table.getColumn("Assembled").setMinWidth(180);
+        table.getColumn("Code").setMaxWidth(150);
+        table.getColumn("Code").setMinWidth(110);
+        table.getColumn("Add.").setMaxWidth(90);
+        table.getColumn("C").setMaxWidth(20);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -72,7 +105,7 @@ public class Main extends javax.swing.JFrame {
         jScrollPane9 = new javax.swing.JScrollPane();
         program2 = new javax.swing.JTable();
         jScrollPane10 = new javax.swing.JScrollPane();
-        prgram3 = new javax.swing.JTable();
+        program3 = new javax.swing.JTable();
         assembleButton = new javax.swing.JButton();
         monitors = new javax.swing.JTabbedPane();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -86,8 +119,6 @@ public class Main extends javax.swing.JFrame {
         regTable = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         dataCacheMon = new javax.swing.JTextArea();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
         runButton = new javax.swing.JButton();
         nextIns = new javax.swing.JButton();
         execAll = new javax.swing.JButton();
@@ -97,12 +128,15 @@ public class Main extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem4 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         mipsCode.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"00000000", null, null, "*"},
+                {"00000000", null, null, ""},
                 {"00000004", null, null, null},
                 {"00000008", null, null, null},
                 {"00000012", null, null, null},
@@ -228,10 +262,21 @@ public class Main extends javax.swing.JFrame {
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Add.", "Code", "Assembled", "C"
             }
         ));
         jScrollPane8.setViewportView(program1);
@@ -243,28 +288,50 @@ public class Main extends javax.swing.JFrame {
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Add.", "Code", "Assembled", "C"
             }
         ));
         jScrollPane9.setViewportView(program2);
 
         assemblyTab.addTab("Program 2", jScrollPane9);
 
-        prgram3.setModel(new javax.swing.table.DefaultTableModel(
+        program3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Add.", "Code", "Assembled", "C"
             }
         ));
-        jScrollPane10.setViewportView(prgram3);
+        jScrollPane10.setViewportView(program3);
 
         assemblyTab.addTab("Program 3", jScrollPane10);
 
@@ -323,12 +390,6 @@ public class Main extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Data Cache", jScrollPane2);
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane5.setViewportView(jTextArea2);
-
-        jTabbedPane2.addTab("Instrcution Cache", jScrollPane5);
-
         runButton.setText("Run");
         runButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -365,12 +426,12 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(nextIns, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(execAll))
-                    .addComponent(assemblyTab, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(assemblyTab, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 744, Short.MAX_VALUE)
-                    .addComponent(monitors, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap(116, Short.MAX_VALUE))
+                    .addComponent(jTabbedPane2)
+                    .addComponent(monitors, javax.swing.GroupLayout.DEFAULT_SIZE, 744, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -413,7 +474,26 @@ public class Main extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Edit");
+        jMenu2.setText("Help");
+
+        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
+        jMenuItem3.setText("Document");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem3);
+        jMenu2.add(jSeparator2);
+
+        jMenuItem4.setText("About");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem4);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -424,7 +504,8 @@ public class Main extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -441,6 +522,7 @@ public class Main extends javax.swing.JFrame {
         int result = input.showOpenDialog(this);
         if (result == JFileChooser.APPROVE_OPTION) {
             filePath = input.getSelectedFile().getAbsolutePath();
+            System.out.println(filePath);
             String file = FileIO.Fread(filePath.replace("\\", "/"));
             String[] line = file.split("\n");
             for (int i = 0; i < line.length; i++) {
@@ -488,7 +570,8 @@ public class Main extends javax.swing.JFrame {
     private void assembleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assembleButtonActionPerformed
         if (!filePath.isEmpty() && filePath != null) {
             Assembler assemble = new Assembler();
-            HashMap<Integer, Instruction> assembled = new HashMap<Integer, Instruction>(assemble.assembleFile(filePath));            this.lineOfInstructions = assembled.size();
+            HashMap<Integer, Instruction> assembled = new HashMap<Integer, Instruction>(assemble.assembleFile(filePath));            
+            this.lineOfInstructions = assembled.size();
             for (int i = 0; i < assembled.size(); i++) {
                 mipsCode.setValueAt(assembled.get(i).getAddress(), i, 0);
                 mipsCode.setValueAt(assembled.get(i).getInstruction(), i, 2);
@@ -503,6 +586,14 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -554,27 +645,28 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextArea memMon;
     private javax.swing.JTable mipsCode;
     private javax.swing.JTabbedPane monitors;
     private javax.swing.JButton nextIns;
-    private javax.swing.JTable prgram3;
     private javax.swing.JTable program1;
     private javax.swing.JTable program2;
+    private javax.swing.JTable program3;
     private javax.swing.JTable regTable;
     private javax.swing.JButton runButton;
     // End of variables declaration//GEN-END:variables
