@@ -9,8 +9,8 @@ addi $t0,$t0,2
 test:
 addi $t0,$t0,3
 addi $t0,$t0,4
-addi $t0,$t0,5
-addi $t0,$t0,6
+addi $v0,$zero,10
+syscall
 .data
 1
 2

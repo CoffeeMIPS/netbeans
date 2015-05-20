@@ -194,8 +194,9 @@ public class Computer {
     }
 
     void fix_memory_table(JTable memoryTable) {
+        DefaultTableModel model=new DefaultTableModel(new Object[]{"Address","Content"}, 0);
+        memoryTable.setModel(model);
         for (int i = 0; i < aa.getMemory().size(); i++) {
-            DefaultTableModel model = (DefaultTableModel) memoryTable.getModel();
             model.addRow(new Object[]{aa.parse8DigitHex(i), aa.getMemory().get(aa.parse8DigitHex(i))});
         }            
     }
