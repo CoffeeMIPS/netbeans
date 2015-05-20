@@ -1,6 +1,7 @@
-package memory;
+package SyscallAPI;
 
 import FileHandler.FileIO;
+import memory.AddressAllocator;
 
 public class Mem2Cache {
 

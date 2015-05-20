@@ -9,7 +9,12 @@ public class AddressAllocator {
 	private HashMap<String, String> Memory = new HashMap<String, String>();
 	private HashMap<Integer, SegmentDefragmenter> Programs = new HashMap<Integer, SegmentDefragmenter>();
 	private int physicalAddress = 0;
-
+        
+        public boolean replace(String index,String context){
+            Memory.replace(index, context);
+            return true;
+        }
+        
 	public HashMap<String, String> getMemory() {
 		return Memory;
 	}
@@ -52,9 +57,7 @@ public class AddressAllocator {
 			e.printStackTrace();
 		}
 
-		for (int i = 0; i < Memory.size(); i++) {
-			System.out.println(parse8DigitHex(i) + " : "+ Memory.get(parse8DigitHex(i)));
-		}
+		printMemory();
 		for (int i = 0; i < Programs.size(); i++) {
 			System.out.println("Code Start: "+Programs.get(i).getCode_seg_start_address());
 			System.out.println("Code End: "+Programs.get(i).getCode_seg_end_address());
@@ -76,4 +79,10 @@ public class AddressAllocator {
 	public void setPrograms(HashMap<Integer, SegmentDefragmenter> programs) {
 		Programs = programs;
 	}
+        
+        public void printMemory(){
+            for (int i = 0; i < Memory.size(); i++) {
+			System.out.println(parse8DigitHex(i) + " : "+ Memory.get(parse8DigitHex(i)));
+		}
+        }
 }

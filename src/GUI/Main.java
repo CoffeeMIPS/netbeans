@@ -8,20 +8,14 @@ package GUI;
 import Assembler.Assembler;
 import Assembler.Instruction;
 import FileHandler.FileIO;
-import HBDMIPS.EXE;
-import HBDMIPS.EXE_MEM;
-import HBDMIPS.ID;
-import HBDMIPS.ID_EXE;
-import HBDMIPS.IF;
-import HBDMIPS.IF_ID;
-import HBDMIPS.MEM;
-import HBDMIPS.MEM_WB;
-import HBDMIPS.Timer;
-import HBDMIPS.WB;
+import com.sun.rowset.internal.Row;
+import java.awt.Component;
 import java.awt.Font;
 import java.util.HashMap;
 import javax.swing.JFileChooser;
-import memory.AddressAllocator;
+import javax.swing.JTable;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
@@ -30,51 +24,35 @@ import memory.AddressAllocator;
 public class Main extends javax.swing.JFrame {
 
     String filePath = null;
-    boolean run;
     int lineOfInstructions;
-    int currentLineOfInstructions;
-    boolean modeBit;
-    boolean interruptBit;
-    Timer timer;
-    //
-    ID_EXE idexe;
-    IF_ID ifid;
-    EXE_MEM exemem;
-    MEM_WB memwb;
-
-    IF stage_if;
-    ID stage_id;
-    EXE stage_exe;
-    MEM stage_mem;
-    WB stage_wb;
-    AddressAllocator aa;
-
+    Monitor monitor;
+    Computer computer;
     /**
      * Creates new form Main
      */
     public Main() {
         initComponents();
-        run = true;
-        assemblyText.setVisible(false);
-        binaryText.setVisible(false);
-        binaryText.setEditable(false);
-        assemblyText.setEditable(false);
         assembleButton.setVisible(false);
         runButton.setVisible(false);
         nextIns.setVisible(false);
         execAll.setVisible(false);
-        this.currentLineOfInstructions = 0;
+        computer = new Computer();
 
-        Font font = regMon.getFont();
-        float size = font.getSize() + 3.5f;
-        regMon.setFont(font.deriveFont(size));
-        aa = new AddressAllocator();
-        String memory="";
-        for (int i = 0; i < aa.getMemory().size(); i++) {
-            memory += (aa.parse8DigitHex(i) + " : " + aa.getMemory().get(aa.parse8DigitHex(i))+"\n");
+        memMon.setText(computer.getMemory());
+        monitor = new Monitor(computer.aa.getMemory());
+        
+        for (int i = 0; i < mipsCode.getRowCount(); i++) {
+            mipsCode.setValueAt(Integer.toHexString(i*4), i, 0);
         }
-        memMon.setText(memory);
-    }
+        mipsCode.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+        
+        mipsCode.getColumn("Assembled").setMinWidth(180);
+        mipsCode.getColumn("Code").setMaxWidth(150);
+        mipsCode.getColumn("Code").setMinWidth(110);
+        mipsCode.getColumn("Add.").setMaxWidth(90);
+        mipsCode.getColumn("C").setMaxWidth(20);
+                
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -87,48 +65,208 @@ public class Main extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         assemblyTab = new javax.swing.JTabbedPane();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        assemblyText = new javax.swing.JTextArea();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        binaryText = new javax.swing.JTextArea();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        mipsCode = new javax.swing.JTable();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        program1 = new javax.swing.JTable();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        program2 = new javax.swing.JTable();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        prgram3 = new javax.swing.JTable();
         assembleButton = new javax.swing.JButton();
         monitors = new javax.swing.JTabbedPane();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
         jScrollPane4 = new javax.swing.JScrollPane();
         memMon = new javax.swing.JTextArea();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        regMon = new javax.swing.JTextArea();
         jScrollPane7 = new javax.swing.JScrollPane();
         currnt_ins = new javax.swing.JTextArea();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        Simonitor = new javax.swing.JTextArea();
         jTabbedPane2 = new javax.swing.JTabbedPane();
-        jScrollPane9 = new javax.swing.JScrollPane();
-        insCacheMon = new javax.swing.JTextArea();
-        jScrollPane10 = new javax.swing.JScrollPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        regTable = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
         dataCacheMon = new javax.swing.JTextArea();
-        jScrollPane11 = new javax.swing.JScrollPane();
-        jTextArea9 = new javax.swing.JTextArea();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTextArea2 = new javax.swing.JTextArea();
         runButton = new javax.swing.JButton();
         nextIns = new javax.swing.JButton();
         execAll = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        assemblyText.setColumns(20);
-        assemblyText.setRows(5);
-        jScrollPane1.setViewportView(assemblyText);
+        mipsCode.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"00000000", null, null, "*"},
+                {"00000004", null, null, null},
+                {"00000008", null, null, null},
+                {"00000012", null, null, null},
+                {"00000016", null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {"", null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Add.", "Code", "Assembled", "C"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+            };
 
-        assemblyTab.addTab("MIPS Assembly", jScrollPane1);
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        mipsCode.setToolTipText("");
+        mipsCode.setAutoscrolls(false);
+        mipsCode.setName(""); // NOI18N
+        mipsCode.setVerifyInputWhenFocusTarget(false);
+        jScrollPane6.setViewportView(mipsCode);
 
-        binaryText.setColumns(20);
-        binaryText.setRows(5);
-        jScrollPane2.setViewportView(binaryText);
+        assemblyTab.addTab("Code", jScrollPane6);
 
-        assemblyTab.addTab("MIPS Binary", jScrollPane2);
+        program1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane8.setViewportView(program1);
+
+        assemblyTab.addTab("Program 1", jScrollPane8);
+
+        program2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane9.setViewportView(program2);
+
+        assemblyTab.addTab("Program 2", jScrollPane9);
+
+        prgram3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane10.setViewportView(prgram3);
+
+        assemblyTab.addTab("Program 3", jScrollPane10);
 
         assembleButton.setText("Assemble");
         assembleButton.addActionListener(new java.awt.event.ActionListener() {
@@ -137,23 +275,11 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane3.setViewportView(jTextArea1);
-
-        monitors.addTab("Monitor", jScrollPane3);
-
         memMon.setColumns(20);
         memMon.setRows(5);
         jScrollPane4.setViewportView(memMon);
 
         monitors.addTab("Memory", jScrollPane4);
-
-        regMon.setColumns(20);
-        regMon.setRows(5);
-        jScrollPane5.setViewportView(regMon);
-
-        monitors.addTab("Registers", jScrollPane5);
 
         currnt_ins.setColumns(20);
         currnt_ins.setRows(5);
@@ -161,23 +287,47 @@ public class Main extends javax.swing.JFrame {
 
         monitors.addTab("Current", jScrollPane7);
 
-        insCacheMon.setColumns(20);
-        insCacheMon.setRows(5);
-        jScrollPane9.setViewportView(insCacheMon);
+        Simonitor.setEditable(false);
+        Simonitor.setColumns(80);
+        Simonitor.setRows(25);
+        Simonitor.setWrapStyleWord(true);
+        Simonitor.setFocusable(false);
+        jScrollPane3.setViewportView(Simonitor);
 
-        jTabbedPane2.addTab("Instruction Cache", jScrollPane9);
+        monitors.addTab("Monitor", jScrollPane3);
+
+        regTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"0 zero", null, "8   t0", null, "16 s0", null, "24 t8", null},
+                {"1*at", null, "9   t1", null, "17 s1", null, "25 t9", null},
+                {"2 v0", null, "10 t2", null, "18 s2", null, "26*k0", null},
+                {"3 v1", null, "11 t3", null, "19 s3", null, "27*k1", null},
+                {"4 a0", null, "12 t4", null, "20 s4", null, "28 gp", null},
+                {"5 a1", null, "13 t5", null, "21 s5", null, "29 sp", null},
+                {"6 a2", null, "14 t6", null, "22 s6", null, "30 fp", null},
+                {"7 a3", null, "15 t7", null, "23 s7", null, "31 ra", null}
+            },
+            new String [] {
+                "Reg", "Value", "Reg", "Value", "Reg", "Value", "Reg", "Value"
+            }
+        ));
+        regTable.setRequestFocusEnabled(false);
+        regTable.setRowSelectionAllowed(false);
+        jScrollPane1.setViewportView(regTable);
+
+        jTabbedPane2.addTab("Registers", jScrollPane1);
 
         dataCacheMon.setColumns(20);
         dataCacheMon.setRows(5);
-        jScrollPane10.setViewportView(dataCacheMon);
+        jScrollPane2.setViewportView(dataCacheMon);
 
-        jTabbedPane2.addTab("Data Cache", jScrollPane10);
+        jTabbedPane2.addTab("Data Cache", jScrollPane2);
 
-        jTextArea9.setColumns(20);
-        jTextArea9.setRows(5);
-        jScrollPane11.setViewportView(jTextArea9);
+        jTextArea2.setColumns(20);
+        jTextArea2.setRows(5);
+        jScrollPane5.setViewportView(jTextArea2);
 
-        jTabbedPane2.addTab("OS", jScrollPane11);
+        jTabbedPane2.addTab("Instrcution Cache", jScrollPane5);
 
         runButton.setText("Run");
         runButton.addActionListener(new java.awt.event.ActionListener() {
@@ -207,7 +357,6 @@ public class Main extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(assemblyTab, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(assembleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -215,33 +364,35 @@ public class Main extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(nextIns, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(execAll)))
+                        .addComponent(execAll))
+                    .addComponent(assemblyTab, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTabbedPane2)
-                    .addComponent(monitors, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 744, Short.MAX_VALUE)
+                    .addComponent(monitors, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap(116, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(monitors, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(assemblyTab, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(assembleButton)
-                            .addComponent(runButton)
-                            .addComponent(nextIns)
-                            .addComponent(execAll))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addComponent(assemblyTab)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(runButton)
+                    .addComponent(nextIns)
+                    .addComponent(execAll)
+                    .addComponent(assembleButton))
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(monitors, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jMenu1.setText("File");
 
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem1.setText("Open File...");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -249,6 +400,16 @@ public class Main extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jMenuItem1);
+        jMenu1.add(jSeparator1);
+
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem2.setText("Exit");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem2);
 
         jMenuBar1.add(jMenu1);
 
@@ -263,175 +424,85 @@ public class Main extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 21, Short.MAX_VALUE))
+                .addGap(0, 11, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void assembleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assembleButtonActionPerformed
-        if (!filePath.isEmpty() && filePath != null) {
-            binaryText.setText("");
-            Assembler assemble = new Assembler();
-            HashMap<Integer, Instruction> assembled = new HashMap<Integer, Instruction>(assemble.assembleFile(filePath));            this.lineOfInstructions = assembled.size();
-            binaryText.setVisible(true);
-            binaryText.setText("Address       Instruction\n\n");
-            for (int i = 0; i < assembled.size(); i++) {
-                binaryText.setText(binaryText.getText().toString() + assembled.get(i).getAddress() + " : " + assembled.get(i).getInstruction() + "\n");
-            }
-            runButton.setVisible(true);
-            nextIns.setVisible(false);
-        }
-    }//GEN-LAST:event_assembleButtonActionPerformed
-
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         JFileChooser input = new JFileChooser();
         int result = input.showOpenDialog(this);
         if (result == JFileChooser.APPROVE_OPTION) {
-            assemblyText.setVisible(true);
-            assembleButton.setVisible(true);
             filePath = input.getSelectedFile().getAbsolutePath();
-            assemblyText.setText(FileIO.Fread(filePath.replace("\\", "/")));
+            String file = FileIO.Fread(filePath.replace("\\", "/"));
+            String[] line = file.split("\n");
+            for (int i = 0; i < line.length; i++) {
+                mipsCode.setValueAt(line[i], i, 1);
+            }
+            assembleButton.setVisible(true);
         } else if (result == JFileChooser.CANCEL_OPTION) {
             System.out.println("Cancel was selected");
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void runButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runButtonActionPerformed
-        if (run) {
-            timer = new Timer();
-            currentLineOfInstructions = 0;
-            idexe = new ID_EXE();
-            ifid = new IF_ID();
-            exemem = new EXE_MEM();
-            memwb = new MEM_WB();
+    private void execAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_execAllActionPerformed
+        while (computer.currentLineOfInstructions < computer.lineOfInstructions) {
+            computer.runSingleSigle();
+        }
+        computer.Fix_regfile_table(regTable);
+        dataCacheMon.setText(computer.get_cache_mem());
+        execAll.setVisible(false);
+        runButton.setVisible(true);
+        nextIns.setVisible(false);
+    }//GEN-LAST:event_execAllActionPerformed
 
-            stage_if = new IF(ifid, filePath);
-            stage_id = new ID(ifid, idexe, stage_if);
-            stage_exe = new EXE(idexe, exemem);
-            stage_mem = new MEM(exemem, memwb, stage_if);
-            stage_wb = new WB(stage_id, memwb);
-            run = false;
+    private void nextInsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextInsActionPerformed
+        if (computer.runSingleSigle()) {
+            Simonitor.setText(monitor.toString());
+            currnt_ins.setText(computer.getCurrentIns());
+            computer.Fix_regfile_table(regTable);
+            dataCacheMon.setText(computer.get_cache_mem());
+        } else {
+            nextIns.setVisible(false);
+            runButton.setVisible(true);
+        }
+    }//GEN-LAST:event_nextInsActionPerformed
+
+    private void runButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runButtonActionPerformed
+        if (computer.isRunable()) {
+            computer.run_init(filePath,lineOfInstructions);
+            computer.Fix_regfile_table(regTable);
             runButton.setVisible(false);
             nextIns.setVisible(true);
             execAll.setVisible(true);
         }
     }//GEN-LAST:event_runButtonActionPerformed
 
-    private void nextInsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextInsActionPerformed
-        if (currentLineOfInstructions < lineOfInstructions) {
-            stage_if.action();
-            currnt_ins.setText(stage_if.getInstruction());
-            stage_id.action();
-            stage_exe.action();
-            if (stage_exe.isJump()){ // PC & 0xf0000000
-                int old_pc = stage_if.getPC();
-                int pcbits = old_pc/(2^28);
-                // not added pc to sign but it's ready for use then
-                int offset = Integer.parseInt(stage_exe.getJ_pc(), 2);
-                stage_if.setPC(offset);
-                if(stage_exe.isRegwrite()){
-                    stage_exe.getExemem().setALU_result(old_pc);
-                    stage_exe.getExemem().setWrite_Register(31);
-                }
+    private void assembleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assembleButtonActionPerformed
+        if (!filePath.isEmpty() && filePath != null) {
+            Assembler assemble = new Assembler();
+            HashMap<Integer, Instruction> assembled = new HashMap<Integer, Instruction>(assemble.assembleFile(filePath));            this.lineOfInstructions = assembled.size();
+            for (int i = 0; i < assembled.size(); i++) {
+                mipsCode.setValueAt(assembled.get(i).getAddress(), i, 0);
+                mipsCode.setValueAt(assembled.get(i).getInstruction(), i, 2);
+                
             }
-            if (stage_exe.isJumpReg()){
-                int pc = stage_exe.getIdexe().getRS_DATA();
-                stage_exe.getExemem().setControlBits("0000000000100");
-                stage_if.setPC(pc); 
-            }
-            if (stage_exe.isBranch()) {
-                if (exemem.getALU_result() == 0 && !stage_exe.isNot()) {
-                    int offset;
-                    
-                    offset = Integer.parseInt(stage_exe.getIdexe().getSignExt(), 2);
-                    stage_if.setPC(stage_if.getPC() + offset);
-
-                }
-                if (exemem.getALU_result() != 0 && stage_exe.isNot()) {
-                    int offset;
-                    offset = Integer.parseInt(stage_exe.getIdexe().getSignExt(), 2);
-                    stage_if.setPC(stage_if.getPC() + offset);
-
-                }
-            }
-            stage_mem.action();
-            stage_wb.action();
-            currentLineOfInstructions = stage_if.getPC();
-            regMon.setText(stage_id.getRegfile().print());
-            dataCacheMon.setText(stage_mem.print());
-            timer.action();
-            if(timer.check_timer()){
-//                if timer is check go here
-            }
-            if(interruptBit){
-//                here where must go to IVT
-            }
-        } else {
-            nextIns.setVisible(false);
             runButton.setVisible(true);
-            run = true;
+            nextIns.setVisible(false);
         }
-    }//GEN-LAST:event_nextInsActionPerformed
+    }//GEN-LAST:event_assembleButtonActionPerformed
 
-    private void execAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_execAllActionPerformed
-        while (currentLineOfInstructions < lineOfInstructions) {
-            stage_if.action();
-            stage_id.action();
-            stage_exe.action();
-            if (stage_exe.isJump()){ // PC & 0xf0000000
-                int old_pc = stage_if.getPC();
-                int pcbits = old_pc/(2^28);
-                // not added pc to sign but it's ready for use then
-                int offset = Integer.parseInt(stage_exe.getJ_pc(), 2);
-                stage_if.setPC(offset);
-                if(stage_exe.isRegwrite()){
-                    stage_exe.getExemem().setALU_result(old_pc);
-                    stage_exe.getExemem().setWrite_Register(31);
-                }
-            }
-            if (stage_exe.isJumpReg()){
-                int pc = stage_exe.getIdexe().getRS_DATA();
-                stage_exe.getExemem().setControlBits("0000000000100");
-                stage_if.setPC(pc); 
-            }
-            if (stage_exe.isBranch()) {
-                if (exemem.getALU_result() == 0 && !stage_exe.isNot()) {
-                    int offset;
-                    offset = Integer.parseInt(stage_exe.getIdexe().getSignExt(), 2);
-                    stage_if.setPC(stage_if.getPC() + offset);
-                }
-                if (exemem.getALU_result() != 0 && stage_exe.isNot()) {
-                    int offset;
-                    offset = Integer.parseInt(stage_exe.getIdexe().getSignExt(), 2);
-                    stage_if.setPC(stage_if.getPC() + offset);
-                }
-            }
-            stage_mem.action();
-            stage_wb.action();
-            currentLineOfInstructions = stage_if.getPC();
-            timer.action();
-            if(timer.check_timer()){
-//                if timer is check go here
-            }
-            if(interruptBit){
-//                here where must go to IVT
-            }
-        }
-        regMon.setText(stage_id.getRegfile().print());
-        dataCacheMon.setText(stage_mem.print());
-        execAll.setVisible(false);
-        runButton.setVisible(true);
-        nextIns.setVisible(false);
-        run = true;
-    }//GEN-LAST:event_execAllActionPerformed
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -472,35 +543,39 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea Simonitor;
     private javax.swing.JButton assembleButton;
     private javax.swing.JTabbedPane assemblyTab;
-    private javax.swing.JTextArea assemblyText;
-    private javax.swing.JTextArea binaryText;
     private javax.swing.JTextArea currnt_ins;
     private javax.swing.JTextArea dataCacheMon;
     private javax.swing.JButton execAll;
-    private javax.swing.JTextArea insCacheMon;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
-    private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea9;
+    private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextArea memMon;
+    private javax.swing.JTable mipsCode;
     private javax.swing.JTabbedPane monitors;
     private javax.swing.JButton nextIns;
-    private javax.swing.JTextArea regMon;
+    private javax.swing.JTable prgram3;
+    private javax.swing.JTable program1;
+    private javax.swing.JTable program2;
+    private javax.swing.JTable regTable;
     private javax.swing.JButton runButton;
     // End of variables declaration//GEN-END:variables
 }
