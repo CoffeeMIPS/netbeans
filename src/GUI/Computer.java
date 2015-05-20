@@ -17,6 +17,7 @@ import HBDMIPS.Register_file;
 import HBDMIPS.Timer;
 import HBDMIPS.WB;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import memory.AddressAllocator;
 
 /**
@@ -190,5 +191,12 @@ public class Computer {
             regTable.setValueAt(regfile.getRegfile(n), r, 2*c+1);
         }
         
+    }
+
+    void fix_memory_table(JTable memoryTable) {
+        for (int i = 0; i < aa.getMemory().size(); i++) {
+            DefaultTableModel model = (DefaultTableModel) memoryTable.getModel();
+            model.addRow(new Object[]{aa.parse8DigitHex(i), aa.getMemory().get(aa.parse8DigitHex(i))});
+        }            
     }
 }

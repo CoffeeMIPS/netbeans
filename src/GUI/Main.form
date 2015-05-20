@@ -100,7 +100,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="11" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -148,6 +148,7 @@
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
               <Group type="102" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="monitors" min="-2" pref="425" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jTabbedPane2" min="-2" pref="191" max="-2" attributes="0"/>
@@ -178,213 +179,11 @@
                 <Component class="javax.swing.JTable" name="mipsCode">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="4" rowCount="100">
-                        <Column editable="true" title="Add." type="java.lang.Object">
-                          <Data value="00000000"/>
-                          <Data value="00000004"/>
-                          <Data value="00000008"/>
-                          <Data value="00000012"/>
-                          <Data value="00000016"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value=""/>
-                          <Data value="null"/>
-                        </Column>
+                      <Table columnCount="4" rowCount="0">
+                        <Column editable="true" title="Add." type="java.lang.Object"/>
                         <Column editable="true" title="Code" type="java.lang.String"/>
                         <Column editable="true" title="Assembled" type="java.lang.String"/>
-                        <Column editable="true" title="C" type="java.lang.Object">
-                          <Data value=""/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                        </Column>
+                        <Column editable="true" title="C" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="toolTipText" type="java.lang.String" value=""/>
@@ -392,6 +191,9 @@
                     <Property name="name" type="java.lang.String" value="" noResource="true"/>
                     <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value=" new JTable(new DefaultTableModel(new Object[]{&quot;Column1&quot;, &quot;Column2&quot;,&quot;Column1&quot;, &quot;Column2&quot;},3))"/>
+                  </AuxValues>
                 </Component>
               </SubComponents>
             </Container>
@@ -412,7 +214,7 @@
                 <Component class="javax.swing.JTable" name="program1">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="4" rowCount="15">
+                      <Table columnCount="4" rowCount="0">
                         <Column editable="true" title="Add." type="java.lang.Object"/>
                         <Column editable="true" title="Code" type="java.lang.Object"/>
                         <Column editable="true" title="Assembled" type="java.lang.Object"/>
@@ -440,7 +242,7 @@
                 <Component class="javax.swing.JTable" name="program2">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="4" rowCount="15">
+                      <Table columnCount="4" rowCount="0">
                         <Column editable="true" title="Add." type="java.lang.Object"/>
                         <Column editable="true" title="Code" type="java.lang.Object"/>
                         <Column editable="true" title="Assembled" type="java.lang.Object"/>
@@ -468,7 +270,7 @@
                 <Component class="javax.swing.JTable" name="program3">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="4" rowCount="15">
+                      <Table columnCount="4" rowCount="0">
                         <Column editable="true" title="Add." type="java.lang.Object"/>
                         <Column editable="true" title="Code" type="java.lang.Object"/>
                         <Column editable="true" title="Assembled" type="java.lang.Object"/>
@@ -493,10 +295,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
           <SubComponents>
-            <Container class="javax.swing.JScrollPane" name="jScrollPane4">
-              <AuxValues>
-                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-              </AuxValues>
+            <Container class="javax.swing.JScrollPane" name="memoryTableContainer">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
                   <JTabbedPaneConstraints tabName="Memory">
@@ -507,33 +306,18 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTextArea" name="memMon">
+                <Component class="javax.swing.JTable" name="memoryTable">
                   <Properties>
-                    <Property name="columns" type="int" value="20"/>
-                    <Property name="rows" type="int" value="5"/>
+                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                      <Table columnCount="2" rowCount="0">
+                        <Column editable="true" title="Address" type="java.lang.Object"/>
+                        <Column editable="true" title="Content" type="java.lang.Object"/>
+                      </Table>
+                    </Property>
                   </Properties>
-                </Component>
-              </SubComponents>
-            </Container>
-            <Container class="javax.swing.JScrollPane" name="jScrollPane7">
-              <AuxValues>
-                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-              </AuxValues>
-              <Constraints>
-                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                  <JTabbedPaneConstraints tabName="Current">
-                    <Property name="tabTitle" type="java.lang.String" value="Current"/>
-                  </JTabbedPaneConstraints>
-                </Constraint>
-              </Constraints>
-
-              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-              <SubComponents>
-                <Component class="javax.swing.JTextArea" name="currnt_ins">
-                  <Properties>
-                    <Property name="columns" type="int" value="20"/>
-                    <Property name="rows" type="int" value="5"/>
-                  </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JTable(new DefaultTableModel(new Object[]{&quot;Address&quot;, &quot;Contain&quot;},0));"/>
+                  </AuxValues>
                 </Component>
               </SubComponents>
             </Container>
@@ -558,6 +342,28 @@
                     <Property name="rows" type="int" value="25"/>
                     <Property name="wrapStyleWord" type="boolean" value="true"/>
                     <Property name="focusable" type="boolean" value="false"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane7">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                  <JTabbedPaneConstraints tabName="Current">
+                    <Property name="tabTitle" type="java.lang.String" value="Current"/>
+                  </JTabbedPaneConstraints>
+                </Constraint>
+              </Constraints>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTextArea" name="currnt_ins">
+                  <Properties>
+                    <Property name="columns" type="int" value="20"/>
+                    <Property name="rows" type="int" value="5"/>
                   </Properties>
                 </Component>
               </SubComponents>

@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import javax.swing.table.DefaultTableModel;
 import Assembler.Assembler;
 import Assembler.Instruction;
 import FileHandler.FileIO;
@@ -40,7 +41,7 @@ public class Main extends javax.swing.JFrame {
         execAll.setVisible(false);
         computer = new Computer();
 
-        memMon.setText(computer.getMemory());
+        computer.fix_memory_table(memoryTable);
         monitor = new Monitor(computer.aa.getMemory());
         
         for (int i = 0; i < mipsCode.getRowCount(); i++) {
@@ -50,31 +51,31 @@ public class Main extends javax.swing.JFrame {
         setStyle(program1);
         setStyle(program2);
         setStyle(program3);
-        loadprogram1();
+        loadprograms();
 }
-    private void loadprogram1(){
+    private void loadprograms(){
         HashMap<Integer, SegmentDefragmenter> programs= computer.aa.getPrograms();
         System.out.println(programs.toString());
         SegmentDefragmenter sd = programs.get(0);
         ArrayList<String> starr = sd.getCode_seg();
         int start_address =Integer.parseInt(sd.getCode_seg_start_address(), 16);
         for (int i = 0; i < starr.size(); i++) {
-            program1.setValueAt(starr.get(i), i, 2);
-            program1.setValueAt(Integer.toHexString(start_address+i*4), i, 0);
+            DefaultTableModel model = (DefaultTableModel) program1.getModel();
+            model.addRow(new Object[]{Integer.toHexString(start_address+i*4),"",starr.get(i),""});
         }
         sd = programs.get(1);
         starr = sd.getCode_seg();
         start_address =Integer.parseInt(sd.getCode_seg_start_address(), 16);
         for (int i = 0; i < starr.size(); i++) {
-            program2.setValueAt(starr.get(i), i, 2);
-            program2.setValueAt(Integer.toHexString(start_address+i*4), i, 0);
+            DefaultTableModel model = (DefaultTableModel) program2.getModel();
+            model.addRow(new Object[]{Integer.toHexString(start_address+i*4),"",starr.get(i),""});
         }
         sd = programs.get(2);
         starr = sd.getCode_seg();
         start_address =Integer.parseInt(sd.getCode_seg_start_address(), 16);
         for (int i = 0; i < starr.size(); i++) {
-            program3.setValueAt(starr.get(i), i, 2);
-            program3.setValueAt(Integer.toHexString(start_address+i*4), i, 0);
+            DefaultTableModel model = (DefaultTableModel) program3.getModel();
+            model.addRow(new Object[]{Integer.toHexString(start_address+i*4),"",starr.get(i),""});
         }
         
     }
@@ -99,7 +100,7 @@ public class Main extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         assemblyTab = new javax.swing.JTabbedPane();
         jScrollPane6 = new javax.swing.JScrollPane();
-        mipsCode = new javax.swing.JTable();
+        mipsCode =  new JTable(new DefaultTableModel(new Object[]{"Column1", "Column2","Column1", "Column2"},3));
         jScrollPane8 = new javax.swing.JScrollPane();
         program1 = new javax.swing.JTable();
         jScrollPane9 = new javax.swing.JScrollPane();
@@ -108,12 +109,12 @@ public class Main extends javax.swing.JFrame {
         program3 = new javax.swing.JTable();
         assembleButton = new javax.swing.JButton();
         monitors = new javax.swing.JTabbedPane();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        memMon = new javax.swing.JTextArea();
-        jScrollPane7 = new javax.swing.JScrollPane();
-        currnt_ins = new javax.swing.JTextArea();
+        memoryTableContainer = new javax.swing.JScrollPane();
+        memoryTable = new JTable(new DefaultTableModel(new Object[]{"Address", "Contain"},0));
         jScrollPane3 = new javax.swing.JScrollPane();
         Simonitor = new javax.swing.JTextArea();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        currnt_ins = new javax.swing.JTextArea();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         regTable = new javax.swing.JTable();
@@ -136,106 +137,7 @@ public class Main extends javax.swing.JFrame {
 
         mipsCode.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"00000000", null, null, ""},
-                {"00000004", null, null, null},
-                {"00000008", null, null, null},
-                {"00000012", null, null, null},
-                {"00000016", null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {"", null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Add.", "Code", "Assembled", "C"
@@ -259,21 +161,7 @@ public class Main extends javax.swing.JFrame {
 
         program1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Add.", "Code", "Assembled", "C"
@@ -285,21 +173,7 @@ public class Main extends javax.swing.JFrame {
 
         program2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Add.", "Code", "Assembled", "C"
@@ -311,21 +185,7 @@ public class Main extends javax.swing.JFrame {
 
         program3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Add.", "Code", "Assembled", "C"
@@ -342,17 +202,17 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        memMon.setColumns(20);
-        memMon.setRows(5);
-        jScrollPane4.setViewportView(memMon);
+        memoryTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
 
-        monitors.addTab("Memory", jScrollPane4);
+            },
+            new String [] {
+                "Address", "Content"
+            }
+        ));
+        memoryTableContainer.setViewportView(memoryTable);
 
-        currnt_ins.setColumns(20);
-        currnt_ins.setRows(5);
-        jScrollPane7.setViewportView(currnt_ins);
-
-        monitors.addTab("Current", jScrollPane7);
+        monitors.addTab("Memory", memoryTableContainer);
 
         Simonitor.setEditable(false);
         Simonitor.setColumns(80);
@@ -362,6 +222,12 @@ public class Main extends javax.swing.JFrame {
         jScrollPane3.setViewportView(Simonitor);
 
         monitors.addTab("Monitor", jScrollPane3);
+
+        currnt_ins.setColumns(20);
+        currnt_ins.setRows(5);
+        jScrollPane7.setViewportView(currnt_ins);
+
+        monitors.addTab("Current", jScrollPane7);
 
         regTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -445,6 +311,7 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(assembleButton))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(monitors, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -511,7 +378,7 @@ public class Main extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 11, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -526,7 +393,8 @@ public class Main extends javax.swing.JFrame {
             String file = FileIO.Fread(filePath.replace("\\", "/"));
             String[] line = file.split("\n");
             for (int i = 0; i < line.length; i++) {
-                mipsCode.setValueAt(line[i], i, 1);
+                DefaultTableModel model = (DefaultTableModel) mipsCode.getModel();
+                model.addRow(new Object[]{Integer.toHexString(i*4),line[i],"",""});
             }
             assembleButton.setVisible(true);
         } else if (result == JFileChooser.CANCEL_OPTION) {
@@ -538,6 +406,7 @@ public class Main extends javax.swing.JFrame {
         while (computer.currentLineOfInstructions < computer.lineOfInstructions) {
             computer.runSingleSigle();
         }
+        computer.fix_memory_table(memoryTable);
         computer.Fix_regfile_table(regTable);
         dataCacheMon.setText(computer.get_cache_mem());
         execAll.setVisible(false);
@@ -547,6 +416,7 @@ public class Main extends javax.swing.JFrame {
 
     private void nextInsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextInsActionPerformed
         if (computer.runSingleSigle()) {
+            computer.fix_memory_table(memoryTable);
             Simonitor.setText(monitor.toString());
             currnt_ins.setText(computer.getCurrentIns());
             computer.Fix_regfile_table(regTable);
@@ -559,6 +429,7 @@ public class Main extends javax.swing.JFrame {
 
     private void runButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runButtonActionPerformed
         if (computer.isRunable()) {
+            
             computer.run_init(filePath,lineOfInstructions);
             computer.Fix_regfile_table(regTable);
             runButton.setVisible(false);
@@ -573,6 +444,7 @@ public class Main extends javax.swing.JFrame {
             HashMap<Integer, Instruction> assembled = new HashMap<Integer, Instruction>(assemble.assembleFile(filePath));            
             this.lineOfInstructions = assembled.size();
             for (int i = 0; i < assembled.size(); i++) {
+                
                 mipsCode.setValueAt(assembled.get(i).getAddress(), i, 0);
                 mipsCode.setValueAt(assembled.get(i).getInstruction(), i, 2);
                 
@@ -652,7 +524,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
@@ -660,7 +531,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTextArea memMon;
+    private javax.swing.JTable memoryTable;
+    private javax.swing.JScrollPane memoryTableContainer;
     private javax.swing.JTable mipsCode;
     private javax.swing.JTabbedPane monitors;
     private javax.swing.JButton nextIns;
