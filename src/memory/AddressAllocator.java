@@ -10,11 +10,7 @@ public class AddressAllocator {
 	private HashMap<Integer, SegmentDefragmenter> Programs = new HashMap<Integer, SegmentDefragmenter>();
 	private int physicalAddress = 0;
         
-        public boolean replace(String index,String context){
-            Memory.replace(index, context);
-            return true;
-        }
-        
+               
 	public HashMap<String, String> getMemory() {
 		return Memory;
 	}
