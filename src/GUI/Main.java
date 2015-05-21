@@ -113,8 +113,6 @@ public class Main extends javax.swing.JFrame {
         memoryTable = new JTable(new DefaultTableModel(new Object[]{"Address", "Contain"},0));
         jScrollPane3 = new javax.swing.JScrollPane();
         Simonitor = new javax.swing.JTextArea();
-        jScrollPane7 = new javax.swing.JScrollPane();
-        currnt_ins = new javax.swing.JTextArea();
         otherTable = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         regTable = new javax.swing.JTable();
@@ -230,12 +228,6 @@ public class Main extends javax.swing.JFrame {
         jScrollPane3.setViewportView(Simonitor);
 
         monitors.addTab("Monitor", jScrollPane3);
-
-        currnt_ins.setColumns(20);
-        currnt_ins.setRows(5);
-        jScrollPane7.setViewportView(currnt_ins);
-
-        monitors.addTab("Current", jScrollPane7);
 
         regTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -492,7 +484,6 @@ public class Main extends javax.swing.JFrame {
         if (computer.runSingleSigle()) {
             computer.fix_memory_table(memoryTable);
             Simonitor.setText(monitor.toString());
-            currnt_ins.setText(computer.getCurrentIns());
             computer.Fix_regfile_table(regTable);
             dataCacheMon.setText(computer.get_cache_mem());
         } else {
@@ -589,7 +580,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTabbedPane assemblyTab;
     private javax.swing.JTable cp0Table;
     private javax.swing.JTable cp1Table;
-    private javax.swing.JTextArea currnt_ins;
     private javax.swing.JTextArea dataCacheMon;
     private javax.swing.JButton execAll;
     private javax.swing.JMenu jMenu1;
@@ -609,7 +599,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JPopupMenu.Separator jSeparator1;
