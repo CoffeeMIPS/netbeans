@@ -115,9 +115,15 @@ public class Main extends javax.swing.JFrame {
         Simonitor = new javax.swing.JTextArea();
         jScrollPane7 = new javax.swing.JScrollPane();
         currnt_ins = new javax.swing.JTextArea();
-        jTabbedPane2 = new javax.swing.JTabbedPane();
+        otherTable = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         regTable = new javax.swing.JTable();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        cp0Table = new javax.swing.JTable();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        cp1Table = new javax.swing.JTable();
+        jScrollPane11 = new javax.swing.JScrollPane();
+        jTable3 = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         dataCacheMon = new javax.swing.JTextArea();
         runButton = new javax.swing.JButton();
@@ -250,13 +256,70 @@ public class Main extends javax.swing.JFrame {
         regTable.setRowSelectionAllowed(false);
         jScrollPane1.setViewportView(regTable);
 
-        jTabbedPane2.addTab("Registers", jScrollPane1);
+        otherTable.addTab("Registers", jScrollPane1);
+
+        cp0Table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"0 Context", null, "8   BadVAddr", null, "16 Config", null, "24 DEPC", null},
+                {"1 Random", null, "9   Count", null, "17 LLAddr", null, "25 PerfCtl", null},
+                {"2 EntryLo0", null, "10 EntryHi", null, "18 WatchLo", null, "26 ECC", null},
+                {"3 EntryLo1", null, "11 Compare", null, "19 WatchHi", null, "27 CacheErr", null},
+                {"4 Context", null, "12 SR", null, "20", null, "28 TagLo", null},
+                {"5 PageMask", null, "13 Cause", null, "21 ", null, "29 TagHi", null},
+                {"6 Wired", null, "14 EPC", null, "22 ", null, "30 ErrorEPC", null},
+                {"7 HWREna", null, "15 PRId", null, "23 Debug", null, "31 DESAVE", null}
+            },
+            new String [] {
+                "Reg", "Value", "Reg", "Value", "Reg", "Value", "Reg", "Value"
+            }
+        ));
+        jScrollPane4.setViewportView(cp0Table);
+
+        otherTable.addTab("CP0", jScrollPane4);
+
+        cp1Table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"0", null, "8   ", null, "16 ", null, "24 ", null},
+                {"1", null, "9   ", null, "17 ", null, "25 ", null},
+                {"2 ", null, "10 ", null, "18 ", null, "26", null},
+                {"3 ", null, "11 ", null, "19 ", null, "27", null},
+                {"4 ", null, "12 ", null, "20 ", null, "28 ", null},
+                {"5 ", null, "13 ", null, "21 ", null, "29 ", null},
+                {"6 ", null, "14 ", null, "22 ", null, "30 ", null},
+                {"7 ", null, "15 ", null, "23 ", null, "31 ", null}
+            },
+            new String [] {
+                "Reg", "Value", "Reg", "Value", "Reg", "Value", "Reg", "Value"
+            }
+        ));
+        jScrollPane5.setViewportView(cp1Table);
+
+        otherTable.addTab("CP1", jScrollPane5);
+
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"PC", null, "", null, "", null, "", null},
+                {"hi", null, "", null, "", null, "", null},
+                {"lo", null, "", null, "", null, "", null},
+                {"", null, "", null, "", null, "", null},
+                {"", null, "", null, "", null, "", null},
+                {"", null, "", null, "", null, "", null},
+                {"", null, "", null, "", null, "", null},
+                {"", null, "", null, "", null, "31 ra", null}
+            },
+            new String [] {
+                "Reg", "Value", "Reg", "Value", "Reg", "Value", "Reg", "Value"
+            }
+        ));
+        jScrollPane11.setViewportView(jTable3);
+
+        otherTable.addTab("Other", jScrollPane11);
 
         dataCacheMon.setColumns(20);
         dataCacheMon.setRows(5);
         jScrollPane2.setViewportView(dataCacheMon);
 
-        jTabbedPane2.addTab("Data Cache", jScrollPane2);
+        otherTable.addTab("Data Cache", jScrollPane2);
 
         runButton.setText("Run");
         runButton.addActionListener(new java.awt.event.ActionListener() {
@@ -297,7 +360,7 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(assemblyTab, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTabbedPane2)
+                    .addComponent(otherTable)
                     .addComponent(monitors, javax.swing.GroupLayout.DEFAULT_SIZE, 744, Short.MAX_VALUE))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
@@ -316,7 +379,7 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(monitors, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(otherTable, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -524,6 +587,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTextArea Simonitor;
     private javax.swing.JButton assembleButton;
     private javax.swing.JTabbedPane assemblyTab;
+    private javax.swing.JTable cp0Table;
+    private javax.swing.JTable cp1Table;
     private javax.swing.JTextArea currnt_ins;
     private javax.swing.JTextArea dataCacheMon;
     private javax.swing.JButton execAll;
@@ -538,8 +603,11 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
+    private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
@@ -547,12 +615,13 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
-    private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JTable jTable3;
     private javax.swing.JTable memoryTable;
     private javax.swing.JScrollPane memoryTableContainer;
     private javax.swing.JTable mipsCode;
     private javax.swing.JTabbedPane monitors;
     private javax.swing.JButton nextIns;
+    private javax.swing.JTabbedPane otherTable;
     private javax.swing.JTable program1;
     private javax.swing.JTable program2;
     private javax.swing.JTable program3;

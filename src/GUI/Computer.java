@@ -104,6 +104,9 @@ public class Computer {
 
                 }
             }
+            if (stage_exe.isSyscall()){
+                System.out.println("here is Syscall");
+            }
             stage_mem.action();
             stage_wb.action();
             currentLineOfInstructions = stage_if.getPC();
@@ -192,7 +195,7 @@ public class Computer {
         }
         
     }
-
+    
     void fix_memory_table(JTable memoryTable) {
         DefaultTableModel model=new DefaultTableModel(new Object[]{"Address","Content"}, 0);
         memoryTable.setModel(model);

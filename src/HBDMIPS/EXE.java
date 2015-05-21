@@ -16,6 +16,14 @@ public class EXE {
                 return Boolean.TRUE;
             return Boolean.FALSE;
         }
+        public boolean isSyscall(){
+            String func_bit = getIdexe().getSignExt().substring(26, 32);
+            String ALUOp = getIdexe().getControlBits().substring(1, 3)+getIdexe().getControlBits().substring(11, 13);
+            if("001100".equals(func_bit) && "1000".equals(ALUOp)){
+                return true;
+            }
+            return false;
+        }
         public boolean isRegwrite(){
             return idexe.getControlBits().charAt(0)=='1';
         }
@@ -119,6 +127,8 @@ public class EXE {
                         case "000010":
                                 return "1111";
                         case "001000": // jump register (jr)
+                                return "0010"; // it's a fake add 
+                        case "001100": // syscall
                                 return "0010"; // it's a fake add 
 			default:
 				break;

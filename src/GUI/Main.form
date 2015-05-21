@@ -137,7 +137,7 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jTabbedPane2" max="32767" attributes="0"/>
+                      <Component id="otherTable" max="32767" attributes="0"/>
                       <Component id="monitors" pref="744" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace pref="31" max="32767" attributes="0"/>
@@ -161,7 +161,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="monitors" min="-2" pref="425" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jTabbedPane2" min="-2" pref="191" max="-2" attributes="0"/>
+                  <Component id="otherTable" min="-2" pref="191" max="-2" attributes="0"/>
                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -380,7 +380,7 @@
             </Container>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JTabbedPane" name="jTabbedPane2">
+        <Container class="javax.swing.JTabbedPane" name="otherTable">
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
           <SubComponents>
@@ -450,6 +450,210 @@
                     </Property>
                     <Property name="requestFocusEnabled" type="boolean" value="false"/>
                     <Property name="rowSelectionAllowed" type="boolean" value="false"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane4">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                  <JTabbedPaneConstraints tabName="CP0">
+                    <Property name="tabTitle" type="java.lang.String" value="CP0"/>
+                  </JTabbedPaneConstraints>
+                </Constraint>
+              </Constraints>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTable" name="cp0Table">
+                  <Properties>
+                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                      <Table columnCount="8" rowCount="8">
+                        <Column editable="true" title="Reg" type="java.lang.Object">
+                          <Data value="0 Context"/>
+                          <Data value="1 Random"/>
+                          <Data value="2 EntryLo0"/>
+                          <Data value="3 EntryLo1"/>
+                          <Data value="4 Context"/>
+                          <Data value="5 PageMask"/>
+                          <Data value="6 Wired"/>
+                          <Data value="7 HWREna"/>
+                        </Column>
+                        <Column editable="true" title="Value" type="java.lang.Object"/>
+                        <Column editable="true" title="Reg" type="java.lang.Object">
+                          <Data value="8   BadVAddr"/>
+                          <Data value="9   Count"/>
+                          <Data value="10 EntryHi"/>
+                          <Data value="11 Compare"/>
+                          <Data value="12 SR"/>
+                          <Data value="13 Cause"/>
+                          <Data value="14 EPC"/>
+                          <Data value="15 PRId"/>
+                        </Column>
+                        <Column editable="true" title="Value" type="java.lang.Object"/>
+                        <Column editable="true" title="Reg" type="java.lang.Object">
+                          <Data value="16 Config"/>
+                          <Data value="17 LLAddr"/>
+                          <Data value="18 WatchLo"/>
+                          <Data value="19 WatchHi"/>
+                          <Data value="20"/>
+                          <Data value="21 "/>
+                          <Data value="22 "/>
+                          <Data value="23 Debug"/>
+                        </Column>
+                        <Column editable="true" title="Value" type="java.lang.Object"/>
+                        <Column editable="true" title="Reg" type="java.lang.Object">
+                          <Data value="24 DEPC"/>
+                          <Data value="25 PerfCtl"/>
+                          <Data value="26 ECC"/>
+                          <Data value="27 CacheErr"/>
+                          <Data value="28 TagLo"/>
+                          <Data value="29 TagHi"/>
+                          <Data value="30 ErrorEPC"/>
+                          <Data value="31 DESAVE"/>
+                        </Column>
+                        <Column editable="true" title="Value" type="java.lang.Object"/>
+                      </Table>
+                    </Property>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane5">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                  <JTabbedPaneConstraints tabName="CP1">
+                    <Property name="tabTitle" type="java.lang.String" value="CP1"/>
+                  </JTabbedPaneConstraints>
+                </Constraint>
+              </Constraints>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTable" name="cp1Table">
+                  <Properties>
+                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                      <Table columnCount="8" rowCount="8">
+                        <Column editable="true" title="Reg" type="java.lang.Object">
+                          <Data value="0"/>
+                          <Data value="1"/>
+                          <Data value="2 "/>
+                          <Data value="3 "/>
+                          <Data value="4 "/>
+                          <Data value="5 "/>
+                          <Data value="6 "/>
+                          <Data value="7 "/>
+                        </Column>
+                        <Column editable="true" title="Value" type="java.lang.Object"/>
+                        <Column editable="true" title="Reg" type="java.lang.Object">
+                          <Data value="8   "/>
+                          <Data value="9   "/>
+                          <Data value="10 "/>
+                          <Data value="11 "/>
+                          <Data value="12 "/>
+                          <Data value="13 "/>
+                          <Data value="14 "/>
+                          <Data value="15 "/>
+                        </Column>
+                        <Column editable="true" title="Value" type="java.lang.Object"/>
+                        <Column editable="true" title="Reg" type="java.lang.Object">
+                          <Data value="16 "/>
+                          <Data value="17 "/>
+                          <Data value="18 "/>
+                          <Data value="19 "/>
+                          <Data value="20 "/>
+                          <Data value="21 "/>
+                          <Data value="22 "/>
+                          <Data value="23 "/>
+                        </Column>
+                        <Column editable="true" title="Value" type="java.lang.Object"/>
+                        <Column editable="true" title="Reg" type="java.lang.Object">
+                          <Data value="24 "/>
+                          <Data value="25 "/>
+                          <Data value="26"/>
+                          <Data value="27"/>
+                          <Data value="28 "/>
+                          <Data value="29 "/>
+                          <Data value="30 "/>
+                          <Data value="31 "/>
+                        </Column>
+                        <Column editable="true" title="Value" type="java.lang.Object"/>
+                      </Table>
+                    </Property>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane11">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                  <JTabbedPaneConstraints tabName="Other">
+                    <Property name="tabTitle" type="java.lang.String" value="Other"/>
+                  </JTabbedPaneConstraints>
+                </Constraint>
+              </Constraints>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTable" name="jTable3">
+                  <Properties>
+                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                      <Table columnCount="8" rowCount="8">
+                        <Column editable="true" title="Reg" type="java.lang.Object">
+                          <Data value="PC"/>
+                          <Data value="hi"/>
+                          <Data value="lo"/>
+                          <Data value=""/>
+                          <Data value=""/>
+                          <Data value=""/>
+                          <Data value=""/>
+                          <Data value=""/>
+                        </Column>
+                        <Column editable="true" title="Value" type="java.lang.Object"/>
+                        <Column editable="true" title="Reg" type="java.lang.Object">
+                          <Data value=""/>
+                          <Data value=""/>
+                          <Data value=""/>
+                          <Data value=""/>
+                          <Data value=""/>
+                          <Data value=""/>
+                          <Data value=""/>
+                          <Data value=""/>
+                        </Column>
+                        <Column editable="true" title="Value" type="java.lang.Object"/>
+                        <Column editable="true" title="Reg" type="java.lang.Object">
+                          <Data value=""/>
+                          <Data value=""/>
+                          <Data value=""/>
+                          <Data value=""/>
+                          <Data value=""/>
+                          <Data value=""/>
+                          <Data value=""/>
+                          <Data value=""/>
+                        </Column>
+                        <Column editable="true" title="Value" type="java.lang.Object"/>
+                        <Column editable="true" title="Reg" type="java.lang.Object">
+                          <Data value=""/>
+                          <Data value=""/>
+                          <Data value=""/>
+                          <Data value=""/>
+                          <Data value=""/>
+                          <Data value=""/>
+                          <Data value=""/>
+                          <Data value="31 ra"/>
+                        </Column>
+                        <Column editable="true" title="Value" type="java.lang.Object"/>
+                      </Table>
+                    </Property>
                   </Properties>
                 </Component>
               </SubComponents>
