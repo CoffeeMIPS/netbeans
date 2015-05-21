@@ -144,8 +144,8 @@ public class Computer {
         }
     }                                         
 
-    public String getCurrentIns(){
-        return stage_if.getInstruction();
+    public int getPC(){
+        return stage_if.getPC();
     }   
 
 

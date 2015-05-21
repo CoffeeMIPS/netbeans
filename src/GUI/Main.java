@@ -81,6 +81,7 @@ public class Main extends javax.swing.JFrame {
     }
     
     private void setStyle(JTable table){
+        table.setEnabled(false);
         table.getColumn("Assembled").setMinWidth(180);
         table.getColumn("Code").setMaxWidth(150);
         table.getColumn("Code").setMinWidth(110);
@@ -297,7 +298,7 @@ public class Main extends javax.swing.JFrame {
                 {"", null, "", null, "", null, "", null},
                 {"", null, "", null, "", null, "", null},
                 {"", null, "", null, "", null, "", null},
-                {"", null, "", null, "", null, "31 ra", null}
+                {"", null, "", null, "", null, "", null}
             },
             new String [] {
                 "Reg", "Value", "Reg", "Value", "Reg", "Value", "Reg", "Value"
@@ -484,6 +485,39 @@ public class Main extends javax.swing.JFrame {
         if (computer.runSingleSigle()) {
             computer.fix_memory_table(memoryTable);
             Simonitor.setText(monitor.toString());
+            int pc = (computer.getPC())*4; 
+            mipsCode.clearSelection();
+            program1.clearSelection();
+            program2.clearSelection();
+            program3.clearSelection();
+            for(int i=0;i<mipsCode.getRowCount();i++){
+                if(Integer.parseInt((String) mipsCode.getValueAt(i, 0),16) == pc)
+                {
+                    assemblyTab.setSelectedIndex(0);
+                    mipsCode.setRowSelectionInterval(i, i);
+                }
+            }
+            for(int i=0;i<program1.getRowCount();i++){
+                if(Integer.parseInt((String) program1.getValueAt(i, 0),16) == pc)
+                {
+                    assemblyTab.setSelectedIndex(0);
+                    program1.setRowSelectionInterval(i, i);
+                }
+            }
+            for(int i=0;i<program2.getRowCount();i++){
+                if(Integer.parseInt((String) program2.getValueAt(i, 0),16) == pc)
+                {
+                    assemblyTab.setSelectedIndex(0);
+                    program2.setRowSelectionInterval(i, i);
+                }
+            }
+            for(int i=0;i<program3.getRowCount();i++){
+                if(Integer.parseInt((String) program3.getValueAt(i, 0),16) == pc)
+                {
+                    assemblyTab.setSelectedIndex(0);
+                    program3.setRowSelectionInterval(i, i);
+                }
+            }
             computer.Fix_regfile_table(regTable);
             dataCacheMon.setText(computer.get_cache_mem());
         } else {

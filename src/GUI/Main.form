@@ -627,7 +627,7 @@
                           <Data value=""/>
                           <Data value=""/>
                           <Data value=""/>
-                          <Data value="31 ra"/>
+                          <Data value=""/>
                         </Column>
                         <Column editable="true" title="Value" type="java.lang.Object"/>
                       </Table>
