@@ -20,7 +20,23 @@ public class ID{
 		this.idexe = idexe;
 		this.stage_if = stage_if;
 	}
-
+        
+        
+        /**
+         * ِِDo the job of InstructionDecode stage.
+         * This includes:
+         * 1- Fetch instruction from IF/ID.
+         * 2- Set opcode of Control Unit.
+         * 3- Check J-Type or I-Type so Set PC.
+         * 4- Set Register File in ID stage. 
+         *      [Considering exception of Write Data]
+         * 5- Save SignExtended Address of InstructionCode
+         *    to ID/EXE Pipeline Register. 
+         * 6- Save 13bit ControlBits come from CU
+         *    to ID/EXE Pipeline Register.
+         * 7- Save RS, RT Addresses & Data to ID/EXE Pipeline Register.
+         * 8- Save current PC  to ID/EXE Pipeline Register.
+         */
 	public void action() {
 
 		String instruction = ifid.getIns();
