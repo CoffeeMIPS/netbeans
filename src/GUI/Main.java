@@ -12,6 +12,7 @@ import FileHandler.FileIO;
 import com.sun.rowset.internal.Row;
 import java.awt.Component;
 import java.awt.Font;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JFileChooser;
@@ -114,7 +115,7 @@ public class Main extends javax.swing.JFrame {
         memoryTable = new JTable(new DefaultTableModel(new Object[]{"Address", "Contain"},0));
         jScrollPane3 = new javax.swing.JScrollPane();
         Simonitor = new javax.swing.JTextArea();
-        otherTable = new javax.swing.JTabbedPane();
+        Table = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         regTable = new javax.swing.JTable();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -122,7 +123,7 @@ public class Main extends javax.swing.JFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         cp1Table = new javax.swing.JTable();
         jScrollPane11 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        otherTable = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         dataCacheMon = new javax.swing.JTextArea();
         runButton = new javax.swing.JButton();
@@ -136,11 +137,10 @@ public class Main extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jSeparator3 = new javax.swing.JPopupMenu.Separator();
         jMenuItem4 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Coffee MIPS");
 
         mipsCode.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -249,7 +249,7 @@ public class Main extends javax.swing.JFrame {
         regTable.setRowSelectionAllowed(false);
         jScrollPane1.setViewportView(regTable);
 
-        otherTable.addTab("Registers", jScrollPane1);
+        Table.addTab("Registers", jScrollPane1);
 
         cp0Table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -268,18 +268,18 @@ public class Main extends javax.swing.JFrame {
         ));
         jScrollPane4.setViewportView(cp0Table);
 
-        otherTable.addTab("CP0", jScrollPane4);
+        Table.addTab("CP0", jScrollPane4);
 
         cp1Table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"0", null, "8   ", null, "16 ", null, "24 ", null},
-                {"1", null, "9   ", null, "17 ", null, "25 ", null},
-                {"2 ", null, "10 ", null, "18 ", null, "26", null},
-                {"3 ", null, "11 ", null, "19 ", null, "27", null},
-                {"4 ", null, "12 ", null, "20 ", null, "28 ", null},
-                {"5 ", null, "13 ", null, "21 ", null, "29 ", null},
-                {"6 ", null, "14 ", null, "22 ", null, "30 ", null},
-                {"7 ", null, "15 ", null, "23 ", null, "31 ", null}
+                {"0 f0", null, "8   f8", null, "16 f16", null, "24 f24", null},
+                {"1 f1", null, "9   f9", null, "17 f17", null, "25 f25", null},
+                {"2 f2", null, "10 f10", null, "18 f18", null, "26 f26", null},
+                {"3 f3", null, "11 f11", null, "19 f19", null, "27 f27", null},
+                {"4 f4", null, "12 f12", null, "20 f20", null, "28 f28", null},
+                {"5 f5", null, "13 f13", null, "21 f21", null, "29 f29", null},
+                {"6 f6", null, "14 f14", null, "22 f22", null, "30 f30", null},
+                {"7 f7", null, "15 f15", null, "23 f23", null, "31 f31", null}
             },
             new String [] {
                 "Reg", "Value", "Reg", "Value", "Reg", "Value", "Reg", "Value"
@@ -287,9 +287,9 @@ public class Main extends javax.swing.JFrame {
         ));
         jScrollPane5.setViewportView(cp1Table);
 
-        otherTable.addTab("CP1", jScrollPane5);
+        Table.addTab("CP1", jScrollPane5);
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        otherTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"PC", null, "", null, "", null, "", null},
                 {"hi", null, "", null, "", null, "", null},
@@ -304,15 +304,15 @@ public class Main extends javax.swing.JFrame {
                 "Reg", "Value", "Reg", "Value", "Reg", "Value", "Reg", "Value"
             }
         ));
-        jScrollPane11.setViewportView(jTable3);
+        jScrollPane11.setViewportView(otherTable);
 
-        otherTable.addTab("Other", jScrollPane11);
+        Table.addTab("Other", jScrollPane11);
 
         dataCacheMon.setColumns(20);
         dataCacheMon.setRows(5);
         jScrollPane2.setViewportView(dataCacheMon);
 
-        otherTable.addTab("Data Cache", jScrollPane2);
+        Table.addTab("Data Cache", jScrollPane2);
 
         runButton.setText("Run");
         runButton.addActionListener(new java.awt.event.ActionListener() {
@@ -353,7 +353,7 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(assemblyTab, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(otherTable)
+                    .addComponent(Table)
                     .addComponent(monitors, javax.swing.GroupLayout.DEFAULT_SIZE, 744, Short.MAX_VALUE))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
@@ -372,7 +372,7 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(monitors, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(otherTable, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Table, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -411,15 +411,6 @@ public class Main extends javax.swing.JFrame {
         jMenu2.add(jMenuItem3);
         jMenu2.add(jSeparator2);
 
-        jMenuItem5.setText("Bug Report");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem5);
-        jMenu2.add(jSeparator3);
-
         jMenuItem4.setText("About");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -449,6 +440,7 @@ public class Main extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -560,15 +552,15 @@ public class Main extends javax.swing.JFrame {
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
+       
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
+        about about_UI = new about();
+        about_UI.parent = this;
+        about_UI.setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
-
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -610,6 +602,7 @@ public class Main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea Simonitor;
+    private javax.swing.JTabbedPane Table;
     private javax.swing.JButton assembleButton;
     private javax.swing.JTabbedPane assemblyTab;
     private javax.swing.JTable cp0Table;
@@ -623,7 +616,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
@@ -637,14 +629,12 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
-    private javax.swing.JPopupMenu.Separator jSeparator3;
-    private javax.swing.JTable jTable3;
     private javax.swing.JTable memoryTable;
     private javax.swing.JScrollPane memoryTableContainer;
     private javax.swing.JTable mipsCode;
     private javax.swing.JTabbedPane monitors;
     private javax.swing.JButton nextIns;
-    private javax.swing.JTabbedPane otherTable;
+    private javax.swing.JTable otherTable;
     private javax.swing.JTable program1;
     private javax.swing.JTable program2;
     private javax.swing.JTable program3;

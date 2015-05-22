@@ -53,16 +53,6 @@
             </MenuItem>
             <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator2">
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem5">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Bug Report"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem5ActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator3">
-            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem4">
               <Properties>
                 <Property name="text" type="java.lang.String" value="About"/>
@@ -78,11 +68,12 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="title" type="java.lang.String" value="Coffee MIPS"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="menuBar" type="java.lang.String" value="jMenuBar1"/>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -137,7 +128,7 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="otherTable" max="32767" attributes="0"/>
+                      <Component id="Table" max="32767" attributes="0"/>
                       <Component id="monitors" pref="744" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace pref="31" max="32767" attributes="0"/>
@@ -161,7 +152,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="monitors" min="-2" pref="425" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="otherTable" min="-2" pref="191" max="-2" attributes="0"/>
+                  <Component id="Table" min="-2" pref="191" max="-2" attributes="0"/>
                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -358,7 +349,7 @@
             </Container>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JTabbedPane" name="otherTable">
+        <Container class="javax.swing.JTabbedPane" name="Table">
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
           <SubComponents>
@@ -519,47 +510,47 @@
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="8" rowCount="8">
                         <Column editable="true" title="Reg" type="java.lang.Object">
-                          <Data value="0"/>
-                          <Data value="1"/>
-                          <Data value="2 "/>
-                          <Data value="3 "/>
-                          <Data value="4 "/>
-                          <Data value="5 "/>
-                          <Data value="6 "/>
-                          <Data value="7 "/>
+                          <Data value="0 f0"/>
+                          <Data value="1 f1"/>
+                          <Data value="2 f2"/>
+                          <Data value="3 f3"/>
+                          <Data value="4 f4"/>
+                          <Data value="5 f5"/>
+                          <Data value="6 f6"/>
+                          <Data value="7 f7"/>
                         </Column>
                         <Column editable="true" title="Value" type="java.lang.Object"/>
                         <Column editable="true" title="Reg" type="java.lang.Object">
-                          <Data value="8   "/>
-                          <Data value="9   "/>
-                          <Data value="10 "/>
-                          <Data value="11 "/>
-                          <Data value="12 "/>
-                          <Data value="13 "/>
-                          <Data value="14 "/>
-                          <Data value="15 "/>
+                          <Data value="8   f8"/>
+                          <Data value="9   f9"/>
+                          <Data value="10 f10"/>
+                          <Data value="11 f11"/>
+                          <Data value="12 f12"/>
+                          <Data value="13 f13"/>
+                          <Data value="14 f14"/>
+                          <Data value="15 f15"/>
                         </Column>
                         <Column editable="true" title="Value" type="java.lang.Object"/>
                         <Column editable="true" title="Reg" type="java.lang.Object">
-                          <Data value="16 "/>
-                          <Data value="17 "/>
-                          <Data value="18 "/>
-                          <Data value="19 "/>
-                          <Data value="20 "/>
-                          <Data value="21 "/>
-                          <Data value="22 "/>
-                          <Data value="23 "/>
+                          <Data value="16 f16"/>
+                          <Data value="17 f17"/>
+                          <Data value="18 f18"/>
+                          <Data value="19 f19"/>
+                          <Data value="20 f20"/>
+                          <Data value="21 f21"/>
+                          <Data value="22 f22"/>
+                          <Data value="23 f23"/>
                         </Column>
                         <Column editable="true" title="Value" type="java.lang.Object"/>
                         <Column editable="true" title="Reg" type="java.lang.Object">
-                          <Data value="24 "/>
-                          <Data value="25 "/>
-                          <Data value="26"/>
-                          <Data value="27"/>
-                          <Data value="28 "/>
-                          <Data value="29 "/>
-                          <Data value="30 "/>
-                          <Data value="31 "/>
+                          <Data value="24 f24"/>
+                          <Data value="25 f25"/>
+                          <Data value="26 f26"/>
+                          <Data value="27 f27"/>
+                          <Data value="28 f28"/>
+                          <Data value="29 f29"/>
+                          <Data value="30 f30"/>
+                          <Data value="31 f31"/>
                         </Column>
                         <Column editable="true" title="Value" type="java.lang.Object"/>
                       </Table>
@@ -582,7 +573,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="jTable3">
+                <Component class="javax.swing.JTable" name="otherTable">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="8" rowCount="8">
