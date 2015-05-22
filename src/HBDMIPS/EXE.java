@@ -1,5 +1,11 @@
 package HBDMIPS;
 
+
+/**
+ * Represents Execute stage.
+ * 
+ * @author HBD
+ */
 public class EXE {
 	private ID_EXE idexe = new ID_EXE();
 	private EXE_MEM exemem = new EXE_MEM();
