@@ -453,7 +453,7 @@ public class Main extends javax.swing.JFrame {
             String[] line = file.split("\n");
             for (int i = 0; i < line.length; i++) {
                 DefaultTableModel model = (DefaultTableModel) mipsCode.getModel();
-                model.addRow(new Object[]{Integer.toHexString(i*4),line[i],"",""});
+                model.addRow(new Object[]{"",line[i],"",""});
             }
             assembleButton.setVisible(true);
         } else if (result == JFileChooser.CANCEL_OPTION) {
@@ -483,6 +483,7 @@ public class Main extends javax.swing.JFrame {
             program2.clearSelection();
             program3.clearSelection();
             for(int i=0;i<mipsCode.getRowCount();i++){
+                if(!((String) mipsCode.getValueAt(i, 0)).equals(""))
                 if(Integer.parseInt((String) mipsCode.getValueAt(i, 0),16) == pc)
                 {
                     assemblyTab.setSelectedIndex(0);
@@ -490,6 +491,7 @@ public class Main extends javax.swing.JFrame {
                 }
             }
             for(int i=0;i<program1.getRowCount();i++){
+                if(!((String) program1.getValueAt(i, 0)).equals(""))
                 if(Integer.parseInt((String) program1.getValueAt(i, 0),16) == pc)
                 {
                     assemblyTab.setSelectedIndex(0);
@@ -497,6 +499,7 @@ public class Main extends javax.swing.JFrame {
                 }
             }
             for(int i=0;i<program2.getRowCount();i++){
+                if(!((String) program2.getValueAt(i, 0)).equals(""))
                 if(Integer.parseInt((String) program2.getValueAt(i, 0),16) == pc)
                 {
                     assemblyTab.setSelectedIndex(0);
@@ -504,6 +507,7 @@ public class Main extends javax.swing.JFrame {
                 }
             }
             for(int i=0;i<program3.getRowCount();i++){
+                if(!((String) program3.getValueAt(i, 0)).equals(""))
                 if(Integer.parseInt((String) program3.getValueAt(i, 0),16) == pc)
                 {
                     assemblyTab.setSelectedIndex(0);
@@ -534,11 +538,15 @@ public class Main extends javax.swing.JFrame {
             Assembler assemble = new Assembler();
             HashMap<Integer, Instruction> assembled = new HashMap<Integer, Instruction>(assemble.assembleFile(filePath));            
             this.lineOfInstructions = assembled.size();
-            for (int i = 0; i < assembled.size(); i++) {
-                
-                mipsCode.setValueAt(assembled.get(i).getAddress(), i, 0);
-                mipsCode.setValueAt(assembled.get(i).getInstruction(), i, 2);
-                
+            int code_number=0;
+            for (int i = 0; i < mipsCode.getRowCount(); i++) {
+                String code = (String)mipsCode.getValueAt(i, 1);
+                if(code.indexOf(':')==-1){
+                    mipsCode.setValueAt(assembled.get(code_number).getAddress(), i, 0);
+                    mipsCode.setValueAt(assembled.get(code_number).getInstruction(), i, 2);
+                    code_number++;   
+                }
+                             
             }
             runButton.setVisible(true);
             nextIns.setVisible(false);
