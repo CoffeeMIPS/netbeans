@@ -502,7 +502,7 @@ public class Main extends javax.swing.JFrame {
                 if(!((String) program2.getValueAt(i, 0)).equals(""))
                 if(Integer.parseInt((String) program2.getValueAt(i, 0),16) == pc)
                 {
-                    assemblyTab.setSelectedIndex(0);
+                    assemblyTab.setSelectedIndex(1);
                     program2.setRowSelectionInterval(i, i);
                 }
             }

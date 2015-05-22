@@ -71,15 +71,15 @@ public class Computer {
     public boolean runSingleSigle(){
         if (currentLineOfInstructions < lineOfInstructions) {
             stage_if.action();
+            int old_pc = getPC();
             stage_id.action();
             stage_exe.action();
             if (stage_exe.isJump()){ // PC & 0xf0000000
-                int old_pc = stage_if.getPC();
                 int pcbits = old_pc/(2^28);
                 // not added pc to sign but it's ready for use then
                 int offset = Integer.parseInt(stage_exe.getJ_pc(), 2);
                 stage_if.setPC(offset);
-                if(stage_exe.isRegwrite()){
+                if(stage_exe.isRegwrite()){ // it's means have jal (our agreement(
                     stage_exe.getExemem().setALU_result(old_pc);
                     stage_exe.getExemem().setWrite_Register(31);
                 }

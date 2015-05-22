@@ -282,15 +282,26 @@ public class Assembler {
             return opcode + rs + rt + immediate;
         }
     };
-
+    private String makeString(String str,int num){
+        while(str.length()<num){
+            str = "0".concat(str);
+        }
+        return str;        
+    }
     // Instructions: j, jal
     private instructionParser instructionJ = new instructionParser() {
         public String parse(String[] parts) {
             String opcode = instructionCodes.get(parts[0]);
-            // Compute the jump address and crop to 26 bits
-            int fullAddress = 0x00400000 + 4 * labels.get(parts[1]);
-            String address = parseUnsigned32BitBin(fullAddress)
-                    .substring(4, 30);
+            String address;
+            if(parts[1].length()==4&&parts[1].charAt(0)=='f'){
+                int func_num = Integer.parseInt(parts[1].substring(1, 4));
+                address = "1111111111111111111".concat(makeString(Integer.toBinaryString(func_num),7));
+            }
+            else{
+                // Compute the jump address and crop to 26 bits
+                int fullAddress = 0x00400000 + 4 * labels.get(parts[1]);
+                address = parseUnsigned32BitBin(fullAddress).substring(4, 30);
+            }
             return opcode + address;
         }
     };
