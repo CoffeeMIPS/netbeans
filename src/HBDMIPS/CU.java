@@ -48,7 +48,6 @@ public class CU {
 		case 2:
 			// JUMP
 			return "0000000000100";
-                        // not implemented yet
                 case 3:
                         // JAL
                         return "1000000000100";

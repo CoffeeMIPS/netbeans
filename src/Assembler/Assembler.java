@@ -305,12 +305,16 @@ public class Assembler {
             String address;
             if(modeBit&&parts[1].length()==4&&parts[1].charAt(0)=='f'){
                 int func_num = Integer.parseInt(parts[1].substring(1, 4));
-                //addresses with below format forbiden to use ass 
+                //addresses with below format forbiden to use 
                 address = "0111111111111111111".concat(makeString(Integer.toBinaryString(func_num),7));
             }
             else{
                 // Compute the jump address and crop to 26 bits
-                int fullAddress = 0x00400000 + 4 * labels.get(parts[1]);
+                int offset = 0x00400000 ;
+                if(modeBit){
+                    offset = 0;
+                }
+                int fullAddress = offset + 4 * labels.get(parts[1]);
                 address = parseUnsigned32BitBin(fullAddress).substring(4, 30);
             }
             return opcode + address;
