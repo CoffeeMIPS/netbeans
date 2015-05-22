@@ -536,7 +536,9 @@ public class Main extends javax.swing.JFrame {
     private void assembleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assembleButtonActionPerformed
         if (!filePath.isEmpty() && filePath != null) {
             Assembler assemble = new Assembler();
+            assemble.setModeBit(true);
             HashMap<Integer, Instruction> assembled = new HashMap<Integer, Instruction>(assemble.assembleFile(filePath));            
+            assemble.setModeBit(false);
             this.lineOfInstructions = assembled.size();
             int code_number=0;
             for (int i = 0; i < mipsCode.getRowCount(); i++) {

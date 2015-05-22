@@ -12,6 +12,9 @@ public class Assembler {
     private File file;
     private int lineNumber = 0;
     private boolean debugMode = false;
+    private boolean modeBit = false; 
+//bitMode represent Assemble in kernel Mode or in user Mode
+//(in kernel mode we have functions that not allow in user mode like f010)
     private HashMap<String, String> instructionCodes = new HashMap<String, String>();
     private HashMap<String, instructionParser> instructions = new HashMap<String, instructionParser>();
     private HashMap<String, String> registers = new HashMap<String, String>();
@@ -128,6 +131,13 @@ public class Assembler {
         registers.put("$fp", "11110");
         // Return address
         registers.put("$ra", "11111");
+    }
+
+    /**
+     * @param bitMode the bitMode to set
+     */
+    public void setModeBit(boolean modeBit) {
+        this.modeBit = modeBit;
     }
 
     // Interface to allow instruction mapping to a parse function
@@ -293,9 +303,10 @@ public class Assembler {
         public String parse(String[] parts) {
             String opcode = instructionCodes.get(parts[0]);
             String address;
-            if(parts[1].length()==4&&parts[1].charAt(0)=='f'){
+            if(modeBit&&parts[1].length()==4&&parts[1].charAt(0)=='f'){
                 int func_num = Integer.parseInt(parts[1].substring(1, 4));
-                address = "1111111111111111111".concat(makeString(Integer.toBinaryString(func_num),7));
+                //addresses with below format forbiden to use ass 
+                address = "0111111111111111111".concat(makeString(Integer.toBinaryString(func_num),7));
             }
             else{
                 // Compute the jump address and crop to 26 bits

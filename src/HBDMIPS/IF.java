@@ -55,7 +55,9 @@ public class IF {
 		this.ifid = ifid;
                 this.filePath = filePath;
                 Assembler assemble = new Assembler();
+                assemble.setModeBit(true);
                 ins_mem =new HashMap<Integer, Instruction>(assemble.assembleFile(filePath));
+                assemble.setModeBit(false);
             for (Map.Entry<Integer, Instruction> entrySet : ins_mem.entrySet()) {
                 Integer key = entrySet.getKey();
                 Instruction value = entrySet.getValue();

@@ -50,6 +50,7 @@ public class Computer {
         runable = true;
         currentLineOfInstructions = 0;
         aa = new AddressAllocator();
+        modeBit = true;//means in kernel Mode at first
         this.memory="";
         for (int i = 0; i < aa.getMemory().size(); i++) {
             this.memory += (aa.parse8DigitHex(i) + " : " + aa.getMemory().get(aa.parse8DigitHex(i))+"\n");
