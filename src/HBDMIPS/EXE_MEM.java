@@ -106,7 +106,7 @@ public class EXE_MEM {
 	}
         /**
          * 
-         * @return Write_Register - address want to write to .
+         * @return Write_Register - address want to write to in RegisterFile.
          */
 	public int getWrite_Register() {
 		return Write_Register;
