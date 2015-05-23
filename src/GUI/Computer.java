@@ -38,6 +38,8 @@ public class Computer {
     int currentLineOfInstructions;
     boolean modeBit;
     boolean interruptBit;
+    int interruptReason;
+    boolean enableintrrupt;
     int baseAddress;
     Timer timer;
     //
@@ -55,6 +57,7 @@ public class Computer {
     
     public Computer(){
         runable = true;
+        enableintrrupt = true;
         currentLineOfInstructions = 0;
         aa = new AddressAllocator();
         modeBit = true;//means in kernel Mode at first
@@ -91,6 +94,11 @@ public class Computer {
                 String func_first = pc4bit.concat(func_sign);
                 if(stage_exe.getJ_pc().equals(func_first.concat("1100100".concat("00")))){//means function 100
                     System.out.println("func100");
+                }
+                else if(stage_exe.getJ_pc().equals(func_first.concat("1100011".concat("00")))){//means function 99
+                    modeBit=false;
+                    enableintrrupt=true;
+                    interruptBit=false;
                 }else if(stage_exe.getJ_pc().equals(func_first.concat("0010100".concat("00")))){//means function 20
                     //this function change pc to selected program (program pid must saved in v0)
                     System.out.println("func20");
@@ -117,8 +125,6 @@ public class Computer {
                     int pcbits = old_pc/(2^28);
                     // not added pc to sign but it's ready for use then
                     int offset = Integer.parseInt(stage_exe.getJ_pc(), 2);
-                    if(!modeBit)
-                        offset = Integer.parseInt(stage_exe.getJ_pc(), 2) + baseAddress;
                     stage_if.setPC(offset);
                     if(stage_exe.isRegwrite()){ // it's means have jal (our agreement)
                         stage_exe.getExemem().setALU_result(old_pc); // this old_pc \
@@ -150,17 +156,42 @@ public class Computer {
             }
             if (stage_exe.isSyscall()){
                 System.out.println("here is Syscall");
+                enableintrrupt=false;
+                modeBit=true;
+                interruptBit=true;
+                interruptReason=1; // reason 1 for syscall in program
             }
             stage_mem.action(modeBit);
             stage_wb.action(modeBit);
             currentLineOfInstructions = stage_if.getPC();
             timer.action();
-            if(timer.check_timer()){
+            if(timer.check_timer()&& enableintrrupt){
+                interruptReason = 2;
                 interruptBit = true;
                 modeBit=true; //means in kernel Mode now
             }
             if(interruptBit){
-//                here where must go to IVT
+                int syscallReason=getRegisterFile().getRegfile(2);
+                switch(interruptReason){
+                    case 1:
+                        switch (syscallReason){
+                        case 10:
+                            System.out.println("exit");
+                            break;
+                        }
+                    
+                    case 2:
+                        //for timer intrupt
+                        break;
+                        
+                    case 3:
+                        //for exception
+                        break;
+                }
+                stage_if.setPC(0);
+                currentLineOfInstructions = 0;
+                lineOfInstructions=stage_if.getIns_mem().size();
+                interruptBit=false;
             }
             return true;
         } else {
