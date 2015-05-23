@@ -11,7 +11,8 @@ import java.util.Map;
  */
 public class IF {
         private String filePath;
-	HashMap<Integer, Instruction> ins_mem;
+	private HashMap<Integer, Instruction> ins_mem;
+        private HashMap<Integer, Instruction> ins_cache;
 	int PC = 0;
         String ins = null;
 	IF_ID ifid;        
@@ -75,8 +76,12 @@ public class IF {
          *  2- Increment of PC by 1.
          *  3- Save the new <b>PC</b> in IF/ID Pipeline Register. 
          */
-	public void action() {
-		ifid.setIns(ins_mem.get(PC).getInstruction());
+	public void action(boolean mode) {
+                if(mode)
+                    ifid.setIns(ins_mem.get(PC).getInstruction());
+                else
+                    ifid.setIns(ins_cache.get(PC).getInstruction());
+                
 		PC++;
 		ifid.setPC(PC);
 	}
@@ -89,7 +94,35 @@ public class IF {
          * as string .
          */
         public String getInstruction(){
-            return ins_mem.get(this.PC-1).getInstruction();
+            return getIns_mem().get(this.PC-1).getInstruction();
         }
+
+    /**
+     * @return the ins_mem
+     */
+    public HashMap<Integer, Instruction> getIns_mem() {
+        return ins_mem;
+    }
+
+    /**
+     * @param ins_mem the ins_mem to set
+     */
+    public void setIns_mem(HashMap<Integer, Instruction> ins_mem) {
+        this.ins_mem = ins_mem;
+    }
+
+    /**
+     * @return the ins_cache
+     */
+    public HashMap<Integer, Instruction> getIns_cache() {
+        return ins_cache;
+    }
+
+    /**
+     * @param ins_cache the ins_cache to set
+     */
+    public void setIns_cache(HashMap<Integer, Instruction> ins_cache) {
+        this.ins_cache = ins_cache;
+    }
 }
 

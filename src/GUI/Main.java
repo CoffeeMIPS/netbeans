@@ -56,7 +56,7 @@ public class Main extends javax.swing.JFrame {
 }
     private void loadprograms(){
         HashMap<Integer, SegmentDefragmenter> programs= computer.aa.getPrograms();
-        System.out.println(programs.toString());
+//        System.out.println(programs.toString());
         SegmentDefragmenter sd = programs.get(0);
         ArrayList<String> starr = sd.getCode_seg();
         int start_address =Integer.parseInt(sd.getCode_seg_start_address(), 16);
@@ -448,7 +448,7 @@ public class Main extends javax.swing.JFrame {
         int result = input.showOpenDialog(this);
         if (result == JFileChooser.APPROVE_OPTION) {
             filePath = input.getSelectedFile().getAbsolutePath();
-            System.out.println(filePath);
+//            System.out.println(filePath);
             String file = FileIO.Fread(filePath.replace("\\", "/"));
             String[] line = file.split("\n");
             for (int i = 0; i < line.length; i++) {
@@ -472,12 +472,9 @@ public class Main extends javax.swing.JFrame {
         runButton.setVisible(true);
         nextIns.setVisible(false);
     }//GEN-LAST:event_execAllActionPerformed
-
-    private void nextInsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextInsActionPerformed
-        if (computer.runSingleSigle()) {
-            computer.fix_memory_table(memoryTable);
-            Simonitor.setText(monitor.toString());
-            int pc = (computer.getPC())*4; 
+    
+    private void selectTrueInstruction(){
+        int pc = (computer.getPC())*4; 
             mipsCode.clearSelection();
             program1.clearSelection();
             program2.clearSelection();
@@ -494,7 +491,7 @@ public class Main extends javax.swing.JFrame {
                 if(!((String) program1.getValueAt(i, 0)).equals(""))
                 if(Integer.parseInt((String) program1.getValueAt(i, 0),16) == pc)
                 {
-                    assemblyTab.setSelectedIndex(0);
+                    assemblyTab.setSelectedIndex(1);
                     program1.setRowSelectionInterval(i, i);
                 }
             }
@@ -502,7 +499,7 @@ public class Main extends javax.swing.JFrame {
                 if(!((String) program2.getValueAt(i, 0)).equals(""))
                 if(Integer.parseInt((String) program2.getValueAt(i, 0),16) == pc)
                 {
-                    assemblyTab.setSelectedIndex(1);
+                    assemblyTab.setSelectedIndex(2);
                     program2.setRowSelectionInterval(i, i);
                 }
             }
@@ -510,11 +507,19 @@ public class Main extends javax.swing.JFrame {
                 if(!((String) program3.getValueAt(i, 0)).equals(""))
                 if(Integer.parseInt((String) program3.getValueAt(i, 0),16) == pc)
                 {
-                    assemblyTab.setSelectedIndex(0);
+                    assemblyTab.setSelectedIndex(3);
                     program3.setRowSelectionInterval(i, i);
                 }
-            }
+            }      
+    }
+    
+    private void nextInsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextInsActionPerformed
+        if (computer.runSingleSigle()) {
+            computer.fix_memory_table(memoryTable);
+            Simonitor.setText(monitor.toString());
+            selectTrueInstruction();
             computer.Fix_regfile_table(regTable);
+            computer.update_other_table(otherTable);
             dataCacheMon.setText(computer.get_cache_mem());
         } else {
             nextIns.setVisible(false);

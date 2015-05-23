@@ -17,7 +17,7 @@ public class MEM {
 		data_mem = new ArrayList<>(FileHandler.FileIO.FiletoStringArray("dataCache.txt"));
 	}
 
-	public void action() {
+	public void action(boolean mode) {
 		boolean MEM_READ = (exemem.getControlBits().charAt(4)) == '0' ? false
 				: true;
 		boolean MEM_WRITE = (exemem.getControlBits().charAt(5)) == '0' ? false

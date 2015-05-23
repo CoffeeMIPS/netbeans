@@ -37,7 +37,7 @@ public class ID{
          * 7- Save RS, RT Addresses & Data to ID/EXE Pipeline Register.
          * 8- Save current PC  to ID/EXE Pipeline Register.
          */
-	public void action() {
+	public void action(boolean mode) {
 
 		String instruction = ifid.getIns();
 		cu.setOpcode(instruction.substring(0, 6));

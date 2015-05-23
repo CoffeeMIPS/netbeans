@@ -42,7 +42,7 @@ public class EXE {
         public boolean isNot(){
             return idexe.getControlBits().charAt(9)=='1';
         }
-	public void action() {
+	public void action(boolean mode) {
                 
 		boolean REG_DEST = (getIdexe().getControlBits().charAt(7)) == '0' ? false : true;
 		String ALUOp = getIdexe().getControlBits().substring(1, 3)+getIdexe().getControlBits().substring(11, 13);
@@ -56,7 +56,7 @@ public class EXE {
 		}
                 String alucu_func = alu_cu(func_bit,ALUOp);
                 if(isJump()){
-                    setJ_pc(getIdexe().getSignExt().substring(6,32));
+                    setJ_pc(getIdexe().getSignExt());
                 }
                 if(alucu_func == "1110" || alucu_func == "1111"){
                     int data1 = getIdexe().getRT_DATA();

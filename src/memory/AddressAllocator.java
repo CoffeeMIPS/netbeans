@@ -66,7 +66,10 @@ public class AddressAllocator {
 		String hex = Integer.toHexString(0x00400000 + 4 * dec);
 		return hex;
 	}
-
+        public static String parse8DigitHexkernel(int dec) {
+		String hex = Integer.toHexString(0x00000000 + 4 * dec);
+		return hex;
+	}
 
 	public HashMap<Integer, SegmentDefragmenter> getPrograms() {
 		return Programs;

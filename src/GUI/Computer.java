@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import Assembler.Instruction;
 import HBDMIPS.EXE;
 import HBDMIPS.EXE_MEM;
 import HBDMIPS.ID;
@@ -16,9 +17,14 @@ import HBDMIPS.MEM_WB;
 import HBDMIPS.Register_file;
 import HBDMIPS.Timer;
 import HBDMIPS.WB;
+import SyscallAPI.Mem2Cache;
+import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import memory.AddressAllocator;
+import static memory.AddressAllocator.parse8DigitHex;
+import memory.SegmentDefragmenter;
 
 /**
  *
@@ -32,6 +38,7 @@ public class Computer {
     int currentLineOfInstructions;
     boolean modeBit;
     boolean interruptBit;
+    int baseAddress;
     Timer timer;
     //
     ID_EXE idexe;
@@ -69,22 +76,56 @@ public class Computer {
     public String get_cache_mem(){
         return stage_mem.print();
     }
+        public static int Hex2Decimal(String hex) {
+        int deci = (Integer.parseInt(hex, 16) - Integer.parseInt("400000", 16)) / 4;
+        return deci;
+    }
     public boolean runSingleSigle(){
         if (currentLineOfInstructions < lineOfInstructions) {
-            stage_if.action();
-            stage_id.action();
-            stage_exe.action();
+            stage_if.action(modeBit);
+            stage_id.action(modeBit);
+            stage_exe.action(modeBit);
             if (stage_exe.isJump()){ // PC & 0xf0000000
-                int old_pc = getPC();
-                int pcbits = old_pc/(2^28);
-                // not added pc to sign but it's ready for use then
-                int offset = Integer.parseInt(stage_exe.getJ_pc(), 2);
-                stage_if.setPC(offset);
-                if(stage_exe.isRegwrite()){ // it's means have jal (our agreement)
-                    stage_exe.getExemem().setALU_result(old_pc); // this old_pc \
-                    //should not increment because it increment in IF 
-                    stage_exe.getExemem().setWrite_Register(31);
-                    // use mips structure to save new_pc in ra (not assign directly)
+                String pc4bit = "0000";
+                String func_sign = "0111111111111111111";
+                String func_first = pc4bit.concat(func_sign);
+                if(stage_exe.getJ_pc().equals(func_first.concat("1100100".concat("00")))){//means function 100
+                    System.out.println("func100");
+                }else if(stage_exe.getJ_pc().equals(func_first.concat("0010100".concat("00")))){//means function 20
+                    //this function change pc to selected program (program pid must saved in v0)
+                    System.out.println("func20");
+                    HashMap<Integer, SegmentDefragmenter> programs= aa.getPrograms();
+                    int selected = getRegfile().getRegfile(2);
+                    SegmentDefragmenter sd = programs.get(selected);
+                    String startadd = sd.getCode_seg_start_address();
+                    stage_if.setPC(Integer.parseInt(startadd, 16)/4);
+                    lineOfInstructions = Integer.parseInt(startadd, 16)+sd.getCode_seg().size();
+                    modeBit = false;
+                    HashMap<Integer, Instruction> cache = new HashMap<Integer, Instruction>();              
+
+                    int physicalAddress =Hex2Decimal(startadd);
+                    baseAddress = physicalAddress;
+                    sd.setCode_seg_start_address(parse8DigitHex(physicalAddress));
+			for (int i = 0; i < sd.getCode_seg().size(); i++) {
+			cache.put(stage_if.getPC()+i,new Instruction( sd.getCode_seg().get(i),parse8DigitHex(physicalAddress)));
+			physicalAddress++;
+                        }
+                    stage_if.setIns_cache(cache);
+                }
+                else{
+                    int old_pc = getPC();
+                    int pcbits = old_pc/(2^28);
+                    // not added pc to sign but it's ready for use then
+                    int offset = Integer.parseInt(stage_exe.getJ_pc(), 2);
+                    if(!modeBit)
+                        offset = Integer.parseInt(stage_exe.getJ_pc(), 2) + baseAddress;
+                    stage_if.setPC(offset);
+                    if(stage_exe.isRegwrite()){ // it's means have jal (our agreement)
+                        stage_exe.getExemem().setALU_result(old_pc); // this old_pc \
+                        //should not increment because it increment in IF 
+                        stage_exe.getExemem().setWrite_Register(31);
+                        // use mips structure to save new_pc in ra (not assign directly)
+                    }
                 }
             }
             if (stage_exe.isJumpReg()){
@@ -110,8 +151,8 @@ public class Computer {
             if (stage_exe.isSyscall()){
                 System.out.println("here is Syscall");
             }
-            stage_mem.action();
-            stage_wb.action();
+            stage_mem.action(modeBit);
+            stage_wb.action(modeBit);
             currentLineOfInstructions = stage_if.getPC();
             timer.action();
             if(timer.check_timer()){
@@ -208,5 +249,13 @@ public class Computer {
         for (int i = 0; i < aa.getMemory().size(); i++) {
             model.addRow(new Object[]{aa.parse8DigitHex(i), aa.getMemory().get(aa.parse8DigitHex(i))});
         }            
+    }
+    
+    Register_file getRegfile(){
+            return stage_id.getRegfile();
+    }
+
+    void update_other_table(JTable otherTable) {
+        otherTable.setValueAt(getPC(), 0, 1);
     }
 }

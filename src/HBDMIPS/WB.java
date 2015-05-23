@@ -9,7 +9,7 @@ public class WB {
 		this.memwb = memwb;
 	}
 
-	public void action() {
+	public void action(boolean mode) {
 		boolean MEM2REG = (memwb.getControlBits().charAt(8)) == '0' ? false
 				: true;
 		boolean REG_WRITE = (memwb.getControlBits().charAt(0)) == '0' ? false
