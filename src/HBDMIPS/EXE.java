@@ -120,27 +120,49 @@ public class EXE {
                 String alucu_func = alu_cu(func_bit,ALUOp);//initialize ALUControl.
                 if(isJump()){
                     setJ_pc(getIdexe().getSignExt().substring(6,32));//PC changes
-                                                           //to the signExtend 
-                                                            //substring []
+                    //to the signExtend substring 0 to 25 [6 to 31 in our convention]
+                    //shifted left by 2bits and then bits 28 to 31 of old PC 
+                    //comes in 4 higher value bits.
                 }
+                
+                //If Instruction is Shift then read data1 from ID/EXE Pipeline 
+                //Register, read Shift amount from there which consists of bits 6 to 10
+                //[21 to 25 in our convention] InstructionCode.
+                //Save the Result of Shift in ALU_Result into EXE/MEM Pipeline
+                //Register.
                 if(alucu_func == "1110" || alucu_func == "1111"){
                     int data1 = getIdexe().getRT_DATA();
                     String Shift_amount = getIdexe().getSignExt().substring(21,26);
                     int data2 = (byte)Long.parseLong(Shift_amount, 2);
                     getExemem().setALU_result(alu(data1,data2,alucu_func));
                 }
+                
+                
+                //Else Instruction is a simple ADD, Branch, and or LOAD/Store.
+                //Read Data1 from ID/EXE Pipeline Register.
+                //Decide on Data2 according to the ALU_SRC[if It's true then We
+                //have a Load or something, Otherwise it's R-Type and or branch.]
                 else{
                     int data1 = getIdexe().getRS_DATA();
                     int data2 = ALU_Src?(byte)Long.parseLong(getIdexe().getSignExt(), 2):getIdexe().getRT_DATA();
                     getExemem().setALU_result(alu(data1,data2,alucu_func));
                 }
-		
+		//Save Zero, PC, RT_DATA[maybe used for Write Data of MEM], Control Bits
+                // All to EXE/MEM.
 		getExemem().setZERO(getExemem().getALU_result()==0?true:false);// 1 means branch occurs! and 0 is not occur!
 		getExemem().setNew_PC(getIdexe().getPC()+(byte)Long.parseLong(getIdexe().getSignExt(), 2));
 		getExemem().setRT_DATA(getIdexe().getRT_DATA());
 		getExemem().setControlBits(getIdexe().getControlBits());
 		
-	}	
+	}
+        
+        
+        /**
+         * Calculate The nor of????????????????????????????????????????????????
+         * @param data1
+         * @param data2
+         * @return result - Not OF OR of Inputs.
+         */
         public static int nor32(int data1,int data2){
         int result = 0 ;
         for(int i=1;i<32;i*=2){
@@ -153,6 +175,15 @@ public class EXE {
         }
         return result;
     }
+        
+        
+        /**
+         * 
+         * @param data_1 - input 1
+         * @param data_2 - input 2
+         * @param op - Operation that should be taken decided by ALUcontrol.
+         * @return result - Operation taken result.
+         */
 	public int alu(int data_1, int data_2, String op) {
 		switch (op) {
 		case "0010":
@@ -176,7 +207,15 @@ public class EXE {
 		}
 		return 0;
 	}
-
+        
+        
+        
+        /**
+         * 
+         * @param func_bit - 6bit function come from sgnExtend lower bits.
+         * @param Aluop - 2 of 2bits ALUop come from controlUnit.
+         * @return op - Appropriate operation. 
+         */
 	public String alu_cu(String func_bit, String Aluop) {
 		switch (Aluop) {
 		case "1000":
@@ -221,42 +260,42 @@ public class EXE {
 	}
 
     /**
-     * @return the idexe
+     * @return ID/EXE - The whole of ID/EXE Pipeline Register in EXE stage.
      */
     public ID_EXE getIdexe() {
         return idexe;
     }
 
     /**
-     * @param idexe the idexe to set
+     * @param idexe - Set the Whole ID/EXE by an object of its type.
      */
     public void setIdexe(ID_EXE idexe) {
         this.idexe = idexe;
     }
 
     /**
-     * @return the exemem
+     * @return EXE/MEM - The whole of EXE/MEM as an object of its type.
      */
     public EXE_MEM getExemem() {
         return exemem;
     }
 
     /**
-     * @param exemem the exemem to set
+     * @param exemem - Set the Whole EXE/MEM by an object of its type.
      */
     public void setExemem(EXE_MEM exemem) {
         this.exemem = exemem;
     }
 
     /**
-     * @return the j_pc
+     * @return the j_pc - PC of Jump if its occurring.
      */
     public String getJ_pc() {
         return j_pc;
     }
 
     /**
-     * @param j_pc the j_pc to set
+     * @param j_pc the j_pc to set for Jump.
      */
     public void setJ_pc(String j_pc) {
         this.j_pc = j_pc;
