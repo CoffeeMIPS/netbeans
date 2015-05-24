@@ -41,11 +41,11 @@ public class ID{
 
 		String instruction = ifid.getIns();
 		cu.setOpcode(instruction.substring(0, 6));
-		if (Integer.parseInt(instruction.substring(0, 6),2) == 2){
-                        //it means I-Type or J-Type instruction,
-                        //so PC should change. 
-			stage_if.setPC(Integer.parseInt(instruction.substring(6, 32),2)); 
-		}
+//		if (Integer.parseInt(instruction.substring(0, 6),2) == 2){
+//                        //it means I-Type or J-Type instruction,
+//                        //so PC should change. 
+//			stage_if.setPC(Integer.parseInt(instruction.substring(6, 32),2)); 
+//		}
                 // R-Type instruction format: 6bit opcode - 5bit RS - 5bit RT
                 //                            5bit RD - 5bit shamt - 6bit func.
 		int RS = Integer.parseInt(instruction.substring(6, 11), 2);

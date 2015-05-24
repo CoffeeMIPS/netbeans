@@ -92,15 +92,29 @@ public class Computer {
                 String pc4bit = "0000";
                 String func_sign = "0111111111111111111";
                 String func_first = pc4bit.concat(func_sign);
-                if(stage_exe.getJ_pc().equals(func_first.concat("1100100".concat("00")))){//means function 100
+                if(stage_exe.getJ_pc().equals(func_first.concat("1100100".concat("00")))){// function 100
                     System.out.println("func100");
                 }
-                else if(stage_exe.getJ_pc().equals(func_first.concat("1100011".concat("00")))){//means function 99
+                else if(stage_exe.getJ_pc().equals(func_first.concat("1100011".concat("00")))){// function 99
+                    //this function change mode of cpu to user mode
                     modeBit=false;
                     enableintrrupt=true;
                     interruptBit=false;
-                }else if(stage_exe.getJ_pc().equals(func_first.concat("0010100".concat("00")))){//means function 20
+                }
+                else if(stage_exe.getJ_pc().equals(func_first.concat("1100010".concat("00")))){// function 98
+                    //this function make pcb for cpu
+                    
+                }  
+                else if(stage_exe.getJ_pc().equals(func_first.concat("1100001".concat("00")))){// function 97
+                    //this function set time to variable in v0
+                    int time = getRegfile().getRegfile(2);
+                    timer.set_timer(time);
+                }  
+                else if(stage_exe.getJ_pc().equals(func_first.concat("0010100".concat("00")))){// function 20
                     //this function change pc to selected program (program pid must saved in v0)
+                    modeBit=false;
+                    enableintrrupt=true;
+                    interruptBit=false;
                     System.out.println("func20");
                     HashMap<Integer, SegmentDefragmenter> programs= aa.getPrograms();
                     int selected = getRegfile().getRegfile(2);

@@ -13,13 +13,14 @@ public class Timer {
     int current_coutner=0;
     int counter=0;
     public void set_timer(int num){
+        current_coutner=0;
         counter = num;
     }
     public int get_timer(){
         return current_coutner;
     }
     public boolean check_timer(){
-        return current_coutner==counter?Boolean.TRUE:Boolean.FALSE;
+        return current_coutner==counter;
     }
     public void action(){
         current_coutner=current_coutner+1;
