@@ -110,6 +110,10 @@ public class Computer {
                     int time = getRegfile().getRegfile(2);
                     timer.set_timer(time);
                 }  
+                else if(stage_exe.getJ_pc().equals(func_first.concat("1100000".concat("00")))){// function 96
+                    //this function for content switch between process with pid in v0 and v1
+                    
+                }  
                 else if(stage_exe.getJ_pc().equals(func_first.concat("0010100".concat("00")))){// function 20
                     //this function change pc to selected program (program pid must saved in v0)
                     modeBit=false;
@@ -142,7 +146,7 @@ public class Computer {
                     stage_if.setPC(offset);
                     if(stage_exe.isRegwrite()){ // it's means have jal (our agreement)
                         stage_exe.getExemem().setALU_result(old_pc); // this old_pc \
-                        //should not increment because it increment in IF 
+                        //should not increment because it incremented in IF stage
                         stage_exe.getExemem().setWrite_Register(31);
                         // use mips structure to save new_pc in ra (not assign directly)
                     }

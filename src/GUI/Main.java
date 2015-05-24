@@ -9,16 +9,10 @@ import javax.swing.table.DefaultTableModel;
 import Assembler.Assembler;
 import Assembler.Instruction;
 import FileHandler.FileIO;
-import com.sun.rowset.internal.Row;
-import java.awt.Component;
-import java.awt.Font;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JFileChooser;
 import javax.swing.JTable;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumnModel;
 import memory.SegmentDefragmenter;
 
 /**
