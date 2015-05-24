@@ -1,5 +1,10 @@
 package HBDMIPS;
 
+
+/**
+ * Represents Control Unit in stage InstructionDecode. 
+ * @author HBD
+ */
 public class CU {
 	String opcode;
 	String out;
@@ -8,12 +13,29 @@ public class CU {
 
 	}
 
+        
+        /**
+         * Do the job of CU.
+         * This includes:
+         * 1- Gets 6bit Opcode from 26 to 31.
+         *    [0 to 5 in our convention from left to right :| ]
+         * 2- Outputs 13bits of Control.
+         * @param op - 5bits of opcode.
+         * @return out - 13bits of Control represented in String.
+         */
 	public String action(String op) {
 		opcode = op;
 		out = decode(Integer.parseInt(op, 2));
 		return out;
 	}
 
+        
+        
+        /**
+         * 
+         * @param op - 5bits opcode represented in String.
+         * @return out - 13bits of CotrolBits represented in String.
+         */
 	public String decode(int op) { // regwrite aluop(2) alusrc memread
                                        // memwrite branch regdest mem2reg
                                        // this bit added optionaly not compatible with book :
@@ -48,6 +70,7 @@ public class CU {
 		case 2:
 			// JUMP
 			return "0000000000100";
+                        // not implemented yet
                 case 3:
                         // JAL
                         return "1000000000100";
@@ -56,7 +79,12 @@ public class CU {
 		}
 
 	}
-
+        
+        
+        /**
+         * Set Opcode which CU should decide on.
+         * @param opcode - 5bits Opcode represented in String.
+         */
 	public void setOpcode(String opcode) {
 		this.opcode = opcode;
 	}
