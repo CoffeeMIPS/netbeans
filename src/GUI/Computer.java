@@ -6,6 +6,7 @@
 package GUI;
 
 import Assembler.Instruction;
+import HBDMIPS.CP0;
 import HBDMIPS.EXE;
 import HBDMIPS.EXE_MEM;
 import HBDMIPS.ID;
@@ -18,6 +19,7 @@ import HBDMIPS.Register_file;
 import HBDMIPS.Timer;
 import HBDMIPS.WB;
 import SyscallAPI.Mem2Cache;
+import SyscallAPI.PCB;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JTable;
@@ -31,6 +33,8 @@ import memory.SegmentDefragmenter;
  * @author cloud
  */
 public class Computer {
+    PCB programs[];
+    CP0 cp0;
     String filePath = null;
     private String memory;
     private boolean runable;
@@ -65,6 +69,7 @@ public class Computer {
         for (int i = 0; i < aa.getMemory().size(); i++) {
             this.memory += (aa.parse8DigitHex(i) + " : " + aa.getMemory().get(aa.parse8DigitHex(i))+"\n");
         }
+//        cp0 = new CP0();
     }
     
     public Register_file getRegisterFile(){
@@ -83,7 +88,7 @@ public class Computer {
         int deci = (Integer.parseInt(hex, 16) - Integer.parseInt("400000", 16)) / 4;
         return deci;
     }
-    public boolean runSingleSigle(){
+    public boolean runSingleSycle(){
         if (currentLineOfInstructions < lineOfInstructions) {
             stage_if.action(modeBit);
             stage_id.action(modeBit);
@@ -114,15 +119,43 @@ public class Computer {
                     //this function for content switch between process with pid in v0 and v1
                     
                 }  
+                else if(stage_exe.getJ_pc().equals(func_first.concat("1011111".concat("00")))){// function 95
+                    //initial PCB of programs
+                    programs = new PCB[3];
+                    PCB program0 = new PCB(0,PCB.READY_STATE,4);
+                    PCB program1 = new PCB(1,PCB.READY_STATE,1);
+                    PCB program2 = new PCB(2,PCB.READY_STATE,2);          
+                    programs [0] = program0;
+                    programs [1] = program1;
+                    programs [2] = program2;
+                }
+                else if(stage_exe.getJ_pc().equals(func_first.concat("1011110".concat("00")))){// function 94
+                    //this function for FCFS : choose one program and put it in v0 register if there is not return -1 in v0
+                    
+                }
+                
+                else if(stage_exe.getJ_pc().equals(func_first.concat("1011101".concat("00")))){// function 93
+                    //this function for terminate running process : change schedulingState to finish
+                    
+                }
+                else if(stage_exe.getJ_pc().equals(func_first.concat("1011100".concat("00")))){// function 92
+                    //this function for check OS run for first time or not ? return in a0 register
+                    
+                }
+                
                 else if(stage_exe.getJ_pc().equals(func_first.concat("0010100".concat("00")))){// function 20
                     //this function change pc to selected program (program pid must saved in v0)
                     modeBit=false;
                     enableintrrupt=true;
                     interruptBit=false;
                     System.out.println("func20");
-                    HashMap<Integer, SegmentDefragmenter> programs= aa.getPrograms();
+                    HashMap<Integer, SegmentDefragmenter> programsHashmap= aa.getPrograms();
                     int selected = getRegfile().getRegfile(2);
-                    SegmentDefragmenter sd = programs.get(selected);
+                    for(PCB program:programs){
+                        if(program.getPid()==selected)
+                            program.setSchedulingState(PCB.EXECUTE_STATE);
+                    }
+                    SegmentDefragmenter sd = programsHashmap.get(selected);
                     String startadd = sd.getCode_seg_start_address();
                     stage_if.setPC(Integer.parseInt(startadd, 16)/4);
                     lineOfInstructions = Integer.parseInt(startadd, 16)+sd.getCode_seg().size();
@@ -142,7 +175,7 @@ public class Computer {
                     int old_pc = getPC();
                     int pcbits = old_pc/(2^28);
                     // not added pc to sign but it's ready for use then
-                    int offset = Integer.parseInt(stage_exe.getJ_pc(), 2);
+                    int offset = Integer.parseInt(stage_exe.getJ_pc(), 2)/4;
                     stage_if.setPC(offset);
                     if(stage_exe.isRegwrite()){ // it's means have jal (our agreement)
                         stage_exe.getExemem().setALU_result(old_pc); // this old_pc \
@@ -190,6 +223,7 @@ public class Computer {
             }
             if(interruptBit){
                 int syscallReason=getRegisterFile().getRegfile(2);
+                getRegisterFile().setRegfile(27, interruptReason);
                 switch(interruptReason){
                     case 1:
                         switch (syscallReason){

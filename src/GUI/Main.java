@@ -78,10 +78,9 @@ public class Main extends javax.swing.JFrame {
     private void setStyle(JTable table){
         table.setEnabled(false);
         table.getColumn("Assembled").setMinWidth(180);
-        table.getColumn("Code").setMaxWidth(150);
-        table.getColumn("Code").setMinWidth(110);
+        table.getColumn("Code").setMaxWidth(180);
+        table.getColumn("Code").setMinWidth(150);
         table.getColumn("Add.").setMaxWidth(90);
-        table.getColumn("C").setMaxWidth(20);
     }
 
     /**
@@ -141,11 +140,11 @@ public class Main extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Add.", "Code", "Assembled", "C"
+                "Add.", "Code", "Assembled"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -457,7 +456,7 @@ public class Main extends javax.swing.JFrame {
 
     private void execAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_execAllActionPerformed
         while (computer.currentLineOfInstructions < computer.lineOfInstructions) {
-            computer.runSingleSigle();
+            computer.runSingleSycle();
         }
         computer.fix_memory_table(memoryTable);
         computer.Fix_regfile_table(regTable);
@@ -508,7 +507,7 @@ public class Main extends javax.swing.JFrame {
     }
     
     private void nextInsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextInsActionPerformed
-        if (computer.runSingleSigle()) {
+        if (computer.runSingleSycle()) {
             computer.fix_memory_table(memoryTable);
             Simonitor.setText(monitor.toString());
             selectTrueInstruction();

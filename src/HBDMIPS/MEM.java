@@ -36,14 +36,12 @@ public class MEM {
          * Do the job of Memory.
          * This includes:
          * 1- Get controlBits from EXE/MEM Pipeline Register.
-         * 2- If branch taken, then Set PC of the instruction to 
-         *     branch's pc.
-         * 3- If MEM_Write is Set then we should write Data which 
+         * 2- If MEM_Write is Set then we should write Data which 
          *    is stored in RT_DATA in EXE/MEM, to the address of 
          *    memory that ALU_Result points to.
-         * 4- If MEM_READ is Set then we should read Data which
+         * 3- If MEM_READ is Set then we should read Data which
          *    ALU_Result points to its address in memory.
-         * 5- Store ALU_Result, WriteRegister, controlBits in 
+         * 4- Store ALU_Result, WriteRegister, controlBits in 
          *    in MEM/WB Pipeline Register.
          */
 	public void action(boolean modebit) {
@@ -51,12 +49,6 @@ public class MEM {
 				: true;
 		boolean MEM_WRITE = (exemem.getControlBits().charAt(5)) == '0' ? false
 				: true;
-		boolean BRANCH = (exemem.getControlBits().charAt(6)) == '0' ? false
-				: true;
-
-		if (BRANCH && exemem.ZERO) {
-			stage_if.setPC(exemem.getNew_PC());
-		}
 		if (MEM_WRITE) {
 			data_mem.set(exemem.getALU_result(), Integer.toString(exemem.getRT_DATA()));
 			System.out.println("datamem with this address : "+ exemem.getALU_result() + "\t"+ data_mem.get(exemem.getALU_result()));
