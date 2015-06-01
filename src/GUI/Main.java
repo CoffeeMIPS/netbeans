@@ -78,8 +78,7 @@ public class Main extends javax.swing.JFrame {
     private void setStyle(JTable table){
         table.setEnabled(false);
         table.getColumn("Assembled").setMinWidth(180);
-        table.getColumn("Code").setMaxWidth(180);
-        table.getColumn("Code").setMinWidth(150);
+        table.getColumn("Code").setMinWidth(170);
         table.getColumn("Add.").setMaxWidth(90);
     }
 

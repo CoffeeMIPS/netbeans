@@ -24,7 +24,8 @@ public class PCB {
     int memarea;   
     
     //Processor state data
-    Register_file regs;
+    private Register_file regs;
+    private int PC;
     int stackPointer;
     int framePointer;
     
@@ -35,7 +36,8 @@ public class PCB {
     public PCB(int pid,int schedulingState,int inputTime){
         this.pid = pid;
         this.schedulingState = schedulingState;
-        this.inputTime = inputTime;                
+        this.inputTime = inputTime;
+        this.regs = new Register_file("NEW");
     }
 
     /**
@@ -78,5 +80,33 @@ public class PCB {
      */
     public void setSchedulingState(int schedulingState) {
         this.schedulingState = schedulingState;
+    }
+
+    /**
+     * @return the regs
+     */
+    public Register_file getRegs() {
+        return regs;
+    }
+
+    /**
+     * @param regs the regs to set
+     */
+    public void setRegs(Register_file regs) {
+        this.regs = regs;
+    }
+
+    /**
+     * @return the PC
+     */
+    public int getPC() {
+        return PC;
+    }
+
+    /**
+     * @param PC the PC to set
+     */
+    public void setPC(int PC) {
+        this.PC = PC;
     }
 }

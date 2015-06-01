@@ -7,7 +7,7 @@ package HBDMIPS;
  * @author HBD
  */
 public class ID{
-	public Register_file regfile = new Register_file();// 32 of 32bit
+	public Register_file regfile = new Register_file("FILE");// 32 of 32bit
                                                            //MIPS architecture 
                                                            //Registers.
 	private CU cu = new CU(); //Control Unit

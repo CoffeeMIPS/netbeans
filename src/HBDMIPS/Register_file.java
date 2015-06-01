@@ -12,13 +12,22 @@ import java.util.List;
 public class Register_file {
 	int[] Regfile = new int[32];
 
-	public Register_file(){
-		List<String> ins_mem = new ArrayList<String>(FileHandler.FileIO.FiletoStringArray("RegData.txt"));
+	public Register_file(String Type){
+            if (Type.equals("FILE")){
+                List<String> ins_mem = new ArrayList<String>(FileHandler.FileIO.FiletoStringArray("RegData.txt"));
                 //RegisterFile is Saved and wiil be saved after run into RegData.txt
                 for (int i = 0; i < Regfile.length; i++) {
 			Regfile[i] = Integer.parseInt(ins_mem.get(i), 2);//Load registerFile from
                                                                          //RegData.txt line by line.
 		}
+            }
+            if (Type.equals("NEW")){
+                
+            }
+            else{
+                
+            }
+		
 	}
         /**
          * Get whole of current registerFile .
@@ -53,7 +62,7 @@ public class Register_file {
          * @param regNum - number of specified register.
          * @param Value - content to be saved to that register.
          */
-        public void setRegfile(int regNum,int Value) {
+        public void setReg(int regNum,int Value) {
 		Regfile[regNum] = Value;
 	}
         

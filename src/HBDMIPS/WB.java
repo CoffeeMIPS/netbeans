@@ -37,10 +37,10 @@ public class WB {
 				: true;
 		if (REG_WRITE) {
 			if (!MEM2REG)
-				id.regfile.setRegfile(memwb.Write_Register,
+				id.regfile.setReg(memwb.Write_Register,
 						memwb.getALU_result());
 			else
-				id.regfile.setRegfile(memwb.Write_Register,
+				id.regfile.setReg(memwb.Write_Register,
 						memwb.getREAD_DATA());
 		}
 	}

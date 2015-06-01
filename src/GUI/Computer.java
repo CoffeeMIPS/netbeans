@@ -33,6 +33,8 @@ import memory.SegmentDefragmenter;
  * @author cloud
  */
 public class Computer {
+    Register_file defaultRegisters ;
+    PCB currentProgram;
     PCB programs[];
     CP0 cp0;
     String filePath = null;
@@ -128,21 +130,47 @@ public class Computer {
                     programs [0] = program0;
                     programs [1] = program1;
                     programs [2] = program2;
+                    getRegfile().setReg(26, 1);
                 }
                 else if(stage_exe.getJ_pc().equals(func_first.concat("1011110".concat("00")))){// function 94
-                    //this function for FCFS : choose one program and put it in v0 register if there is not return -1 in v0
-                    
+                    //this function for Batch : choose one program and put it in v0 register if there is not return -1 in v0
+                    int min = 999;
+                    for (PCB program : programs) {
+                        if (program.getSchedulingState()==PCB.READY_STATE && program.getInputTime() < min) {
+                            min = program.getInputTime();
+                        }
+                    }
+                    PCB choosenProgram = null;
+                    for (PCB program : programs) {
+                        if (program.getSchedulingState()==PCB.READY_STATE && program.getInputTime() == min) {
+                            choosenProgram = program;
+                            break;
+                        }
+                    }
+                    if(choosenProgram != null)
+                        getRegfile().setReg(2, choosenProgram.getPid());
+                    else
+                        getRegfile().setReg(2, -1);
                 }
                 
                 else if(stage_exe.getJ_pc().equals(func_first.concat("1011101".concat("00")))){// function 93
                     //this function for terminate running process : change schedulingState to finish
-                    
+                    for (PCB program : programs) {
+                        if (program.getSchedulingState()==PCB.EXECUTE_STATE) {
+                            program.setSchedulingState(PCB.FINISH_STATE);
+                            break;
+                        }
+                    }
                 }
                 else if(stage_exe.getJ_pc().equals(func_first.concat("1011100".concat("00")))){// function 92
                     //this function for check OS run for first time or not ? return in a0 register
-                    
+                    if(getRegisterFile().getRegfile(26)==0)
+                        getRegisterFile().setReg(4, 1);
+                    else
+                        getRegisterFile().setReg(4, 0);
+                    getRegisterFile().setReg(26, 1);
                 }
-                
+
                 else if(stage_exe.getJ_pc().equals(func_first.concat("0010100".concat("00")))){// function 20
                     //this function change pc to selected program (program pid must saved in v0)
                     modeBit=false;
@@ -151,9 +179,14 @@ public class Computer {
                     System.out.println("func20");
                     HashMap<Integer, SegmentDefragmenter> programsHashmap= aa.getPrograms();
                     int selected = getRegfile().getRegfile(2);
+                    defaultRegisters = getRegfile();
                     for(PCB program:programs){
                         if(program.getPid()==selected)
+                        {
                             program.setSchedulingState(PCB.EXECUTE_STATE);
+                            stage_id.regfile = program.getRegs();
+                            currentProgram = program;
+                        }
                     }
                     SegmentDefragmenter sd = programsHashmap.get(selected);
                     String startadd = sd.getCode_seg_start_address();
@@ -223,12 +256,16 @@ public class Computer {
             }
             if(interruptBit){
                 int syscallReason=getRegisterFile().getRegfile(2);
-                getRegisterFile().setRegfile(27, interruptReason);
+                getRegisterFile().setReg(27, interruptReason);
+                if (currentProgram != null){
+                    currentProgram.setPC(stage_if.getPC());
+                }
                 switch(interruptReason){
                     case 1:
                         switch (syscallReason){
                         case 10:
                             System.out.println("exit");
+                            defaultRegisters.setReg(27, interruptReason);
                             break;
                         }
                     
@@ -244,6 +281,7 @@ public class Computer {
                 currentLineOfInstructions = 0;
                 lineOfInstructions=stage_if.getIns_mem().size();
                 interruptBit=false;
+                stage_id.regfile = defaultRegisters;
             }
             return true;
         } else {
