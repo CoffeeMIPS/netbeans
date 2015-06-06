@@ -540,10 +540,18 @@ public class Main extends javax.swing.JFrame {
             int code_number=0;
             for (int i = 0; i < mipsCode.getRowCount(); i++) {
                 String code = (String)mipsCode.getValueAt(i, 1);
-                if(code.indexOf(':')==-1){
-                    mipsCode.setValueAt(assembled.get(code_number).getAddress(), i, 0);
-                    mipsCode.setValueAt(assembled.get(code_number).getInstruction(), i, 2);
-                    code_number++;   
+                try{
+	                if(code.indexOf(':')==-1){
+	                    mipsCode.setValueAt(assembled.get(code_number).getAddress(), i, 0);
+	                    mipsCode.setValueAt(assembled.get(code_number).getInstruction(), i, 2);
+	                    code_number++;   
+	                }
+                }
+                catch(Exception e)
+                {
+                	System.out.println("there was an error in:");
+                	System.out.println(code);
+                	throw e;
                 }
                              
             }
