@@ -61,7 +61,7 @@ public class ID{
                 //ID [Or current] stage's Program counter.
                 //All in ID/EXE Pipeline Register.
 		idexe.setSignExt(signExt(instruction.substring(16, 32)));
-                String cu_result = cu.action(instruction.substring(0, 6));
+                String cu_result = cu.action(instruction.substring(0, 6),instruction);
                 if(cu_result.charAt(10)=='1'){// means if instruction is jump
                     idexe.setSignExt(("0000".concat(instruction.substring(6, 32))).concat("00"));
                 }

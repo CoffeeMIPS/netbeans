@@ -23,9 +23,9 @@ public class CU {
          * @param op - 5bits of opcode.
          * @return out - 13bits of Control represented in String.
          */
-	public String action(String op) {
+	public String action(String op,String ins) {
 		opcode = op;
-		out = decode(Integer.parseInt(op, 2));
+		out = decode(Integer.parseInt(op, 2),ins);
 		return out;
 	}
 
@@ -36,44 +36,46 @@ public class CU {
          * @param op - 5bits opcode represented in String.
          * @return out - 13bits of CotrolBits represented in String.
          */
-	public String decode(int op) { // regwrite aluop(2) alusrc memread
+	public String decode(int op,String ins) { // regwrite aluop(2) alusrc memread
                                        // memwrite branch regdest mem2reg
                                        // this bit added optionaly not compatible with book :
                                        // notbits
                                        // jump
                                        // second aluop (2)
+                                       // jr bit
 		switch (op) {
 		case 0:
+                        if("001000".equals(ins.substring(26,32)))
+                            return "11000001000001";
 			// RType
-			return "1100000100000";
+			return "11000001000000";
                 case 13:
                         //ORI
-                        return "1111000000000";
+                        return "11110000000000";
                 case 12:
                         //ANDI
-                        return "1111000000010";
+                        return "11110000000100";
 		case 8:
                         // ADDI
-			return "1001000000000";
+			return "10010000000000";
 		case 35:
 			// LW
-			return "1001100010000";
+			return "10011000100000";
 		case 43:
 			// SW
-			return "0001010100000";
+			return "00010101000000";
 		case 4:
 			// BEQ
-			return "0010001000000";
+			return "00100010000000";
                 case 5:
 			// BNE
-			return "0010001001000";
+			return "00100010010000";
 		case 2:
 			// JUMP
-			return "0000000000100";
-                        // not implemented yet
+			return "00000000001000";
                 case 3:
                         // JAL
-                        return "1000000000100";
+                        return "10000000001000";
 		default:
 			return null;
 		}

@@ -26,10 +26,7 @@ public class EXE {
          * @return isJReg - Boolean representing detection of JR. 
          */
         public boolean isJumpReg(){
-            String func_bit = getIdexe().getSignExt().substring(26, 32);
-            if("001000".equals(func_bit))
-                return Boolean.TRUE;
-            return Boolean.FALSE;
+            return idexe.getControlBits().charAt(13)=='1';
         }
         
         
