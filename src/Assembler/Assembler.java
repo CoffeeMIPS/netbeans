@@ -431,6 +431,7 @@ public class Assembler {
                 {
                 	System.out.println("there was a problem in this instruction:");
                 	System.out.println(line);
+                	throw e;
                 }
             }
             lineNumber = 0;
