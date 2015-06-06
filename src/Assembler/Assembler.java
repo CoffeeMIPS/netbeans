@@ -393,39 +393,45 @@ public class Assembler {
 
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
-
-                line = line.trim(); // Trim leading & trailing white space
-                line = line.replaceAll("^.+:([\\s]+)?", ""); // Remove labels
-                // from the line
-                line = line.replaceAll("[#].+", ""); // Remove comments
-                line = line.replace("(", ","); // This line and the following
-                // one format to allow for sw &
-                // lw instructions
-                line = line.replace(")", "");
-
-                // Do not try to parse line if it is blank or contains only
-                // white space/tabs
-                if (line.isEmpty()) {
-                    continue;
-                }
-
-                // Split into each word by commas & white space
-                String[] parts = line.split("[,\\s]+");
-
-                // This section is for debugging purposes
-                if (debugMode) {
-                    System.out.println();
-                    for (int i = 0; i < parts.length; i++) {
-                        System.out.print("[" + parts[i] + "] ");
-                    }
-                    System.out.println();
-                    System.out.print((lineNumber + 1) + ": ");
-                }
-                // Parse and write instruction
-                String ins = instructions.get(parts[0]).parse(parts);
-                Instruction tmpIns = new Instruction(ins, parse8DigitHex(0x00000000 + 4 * lineNumber));
-                assembled.put(lineNumber, tmpIns);
+                try{
+	                line = line.trim(); // Trim leading & trailing white space
+	                line = line.replaceAll("^.+:([\\s]+)?", ""); // Remove labels
+	                // from the line
+	                line = line.replaceAll("[#].+", ""); // Remove comments
+	                line = line.replace("(", ","); // This line and the following
+	                // one format to allow for sw &
+	                // lw instructions
+	                line = line.replace(")", "");
+	
+	                // Do not try to parse line if it is blank or contains only
+	                // white space/tabs
+	                if (line.isEmpty()) {
+	                    continue;
+	                }
+	
+	                // Split into each word by commas & white space
+	                String[] parts = line.split("[,\\s]+");
+	
+	                // This section is for debugging purposes
+	                if (debugMode) {
+	                    System.out.println();
+	                    for (int i = 0; i < parts.length; i++) {
+	                        System.out.print("[" + parts[i] + "] ");
+	                    }
+	                    System.out.println();
+	                    System.out.print((lineNumber + 1) + ": ");
+	                }
+	                // Parse and write instruction
+	                String ins = instructions.get(parts[0]).parse(parts);
+	                Instruction tmpIns = new Instruction(ins, parse8DigitHex(0x00000000 + 4 * lineNumber));
+	                assembled.put(lineNumber, tmpIns);
                 lineNumber++;
+                }
+                catch(Exception e)
+                {
+                	System.out.println("there was a problem in this instruction:");
+                	System.out.println(line);
+                }
             }
             lineNumber = 0;
             scanner.close();
