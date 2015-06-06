@@ -143,7 +143,7 @@ public class EXE {
                 //have a Load or something, Otherwise it's R-Type and or branch.]
                 else{
                     int data1 = getIdexe().getRS_DATA();
-                    int data2 = ALU_Src?(byte)Long.parseLong(getIdexe().getSignExt(), 2):getIdexe().getRT_DATA();
+                    int data2 = ALU_Src?(int)Long.parseLong(getIdexe().getSignExt(), 2):getIdexe().getRT_DATA();
                     getExemem().setALU_result(alu(data1,data2,alucu_func));
                 }
 		//Save Zero, PC, RT_DATA[maybe used for Write Data of MEM], Control Bits
