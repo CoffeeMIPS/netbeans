@@ -11,9 +11,13 @@ public class EXE {
 	private EXE_MEM exemem = new EXE_MEM();// EXE/MEM for EXE stage.
         public String prev_instruction = "";// ?????????????????????????????????
         private String j_pc;//If Instruction is jump PC should change.
-	public EXE(ID_EXE idexe, EXE_MEM exemem) {
+        private IF if_stage;
+        private ID id_stage;
+	public EXE(ID_EXE idexe, EXE_MEM exemem,IF if_stage,ID id_stage) {
 		this.exemem = exemem;
 		this.idexe = idexe;
+                this.if_stage = if_stage;
+                this.id_stage = id_stage;
 	}
         
         
@@ -44,8 +48,10 @@ public class EXE {
             String func_bit = getIdexe().getSignExt().substring(26, 32);
             String ALUOp = getIdexe().getControlBits().substring(1, 3)+getIdexe().getControlBits().substring(11, 13);
             if("001100".equals(func_bit) && "1000".equals(ALUOp)){
+                id_stage.regfile.setReg(31, if_stage.getPC());
                 return true;
             }
+            
             return false;
         }
         

@@ -3,6 +3,7 @@ package HBDMIPS;
 
 import java.util.ArrayList;
 import java.util.List;
+import memory.AddressAllocator;
 /**
  * Represents Memory Stage.
  * @author HBD
@@ -44,7 +45,7 @@ public class MEM {
          * 4- Store ALU_Result, WriteRegister, controlBits in 
          *    in MEM/WB Pipeline Register.
          */
-	public void action(boolean modebit) {
+	public void action(boolean modebit,memory.AddressAllocator aa) {
 		boolean MEM_READ = (exemem.getControlBits().charAt(4)) == '0' ? false
 				: true;
 		boolean MEM_WRITE = (exemem.getControlBits().charAt(5)) == '0' ? false
@@ -55,7 +56,15 @@ public class MEM {
 		}
 		// MEM_READ
 		if (MEM_READ) {
-			memwb.setREAD_DATA(Integer.parseInt(data_mem.get(exemem.getALU_result())));
+                    String data;
+                    if(modebit){
+                        int i =0 ;
+                        data = aa.getMemory().get(aa.parse8DigitHex(i));
+                    }else{
+                        data = data_mem.get(exemem.getALU_result());
+                    }
+                        
+                    memwb.setREAD_DATA(Integer.parseInt(data));
 		}
 		memwb.setALU_result(exemem.getALU_result());
 		memwb.setWrite_Register(exemem.getWrite_Register());

@@ -95,10 +95,16 @@ public class Computer {
             stage_if.action(modeBit);
             stage_id.action(modeBit);
             stage_exe.action(modeBit);
+            if(programs!=null){
+                for(PCB program:programs){
+                    program.waitAction();
+                }
+            }
             if (stage_exe.isJump()){ // PC & 0xf0000000
                 String pc4bit = "0000";
                 String func_sign = "0111111111111111111";
                 String func_first = pc4bit.concat(func_sign);
+                
                 if(stage_exe.getJ_pc().equals(func_first.concat("1100100".concat("00")))){// function 100
                     System.out.println("func100");
                 }
@@ -124,9 +130,9 @@ public class Computer {
                 else if(stage_exe.getJ_pc().equals(func_first.concat("1011111".concat("00")))){// function 95
                     //initial PCB of programs
                     programs = new PCB[3];
-                    PCB program0 = new PCB(0,PCB.READY_STATE,4);
-                    PCB program1 = new PCB(1,PCB.READY_STATE,1);
-                    PCB program2 = new PCB(2,PCB.READY_STATE,2);          
+                    PCB program0 = new PCB(0,PCB.READY_STATE,1);
+                    PCB program1 = new PCB(1,PCB.READY_STATE,2);
+                    PCB program2 = new PCB(2,PCB.READY_STATE,3); 
                     programs [0] = program0;
                     programs [1] = program1;
                     programs [2] = program2;
@@ -170,6 +176,34 @@ public class Computer {
                         getRegisterFile().setReg(4, 0);
                     getRegisterFile().setReg(26, 1);
                 }
+                else if(stage_exe.getJ_pc().equals(func_first.concat("1011011".concat("00")))){// function 91
+                    //this function for Batch : choose one program and put it in v0 register if there is not return -1 in v0
+                    
+                    int min = 1000;
+                    for (PCB program : programs) {
+                        if (program.getSchedulingState()==PCB.READY_STATE && program.getInputTime() < min) {
+                            min = program.getInputTime();
+                        }
+                    }
+                    PCB choosenProgram = null;
+                    for (PCB program : programs) {
+                        if (program.getSchedulingState()==PCB.READY_STATE && program.getInputTime() == min) {
+                            choosenProgram = program;
+                            break;
+                        }
+                    }
+                    if(choosenProgram != null)
+                        getRegfile().setReg(2, choosenProgram.getPid());
+                    else
+                        getRegfile().setReg(2, -1);
+                }
+                else if(stage_exe.getJ_pc().equals(func_first.concat("1011010".concat("00")))){// function 90
+                    //this function for wait syscall
+                    int wait_number = currentProgram.getRegs().getRegfile(3);
+                    currentProgram.setPC(currentProgram.getRegs().getRegfile(31));
+                    currentProgram.setSchedulingState(PCB.BUSY_STATE);
+                    currentProgram.setWait_time(wait_number);
+                }
 
                 else if(stage_exe.getJ_pc().equals(func_first.concat("0010100".concat("00")))){// function 20
                     //this function change pc to selected program (program pid must saved in v0)
@@ -180,17 +214,29 @@ public class Computer {
                     HashMap<Integer, SegmentDefragmenter> programsHashmap= aa.getPrograms();
                     int selected = getRegfile().getRegfile(2);
                     defaultRegisters = getRegfile();
-                    for(PCB program:programs){
-                        if(program.getPid()==selected)
-                        {
-                            program.setSchedulingState(PCB.EXECUTE_STATE);
-                            stage_id.regfile = program.getRegs();
-                            currentProgram = program;
+                    if(programs != null){
+                        for(PCB program:programs){
+                            if(program.getPid()==selected)
+                            {
+                                program.setSchedulingState(PCB.EXECUTE_STATE);
+                                stage_id.regfile = program.getRegs();
+                                currentProgram = program;
+                            }
                         }
                     }
+                    
                     SegmentDefragmenter sd = programsHashmap.get(selected);
                     String startadd = sd.getCode_seg_start_address();
-                    stage_if.setPC(Integer.parseInt(startadd, 16)/4);
+                    System.out.println("++++++++++++++++++++++++++++++++++++");
+                    System.out.println("start address said : "+ startadd);
+                    System.out.println("ra said: "+ Integer.toHexString(stage_id.regfile.getRegfile(31)*4));
+                    System.out.println("++++++++++++++++++++++++++++++++++++");
+                    if(Integer.parseInt(Integer.toString(currentProgram.getPC(), 8)) >= 400000){
+                        stage_if.setPC(currentProgram.getPC()*4/4);
+                    }else{
+                        stage_if.setPC(Integer.parseInt(startadd, 16)/4);
+                    }
+                    
                     lineOfInstructions = Integer.parseInt(startadd, 16)+sd.getCode_seg().size();
                     modeBit = false;
                     HashMap<Integer, Instruction> cache = new HashMap<Integer, Instruction>();              
@@ -245,7 +291,7 @@ public class Computer {
                 interruptBit=true;
                 interruptReason=1; // reason 1 for syscall in program
             }
-            stage_mem.action(modeBit);
+            stage_mem.action(modeBit,aa);
             stage_wb.action(modeBit);
             currentLineOfInstructions = stage_if.getPC();
             timer.action();
@@ -266,6 +312,11 @@ public class Computer {
                         case 10:
                             System.out.println("exit");
                             defaultRegisters.setReg(27, interruptReason);
+                            defaultRegisters.setReg(2, 10);
+                            break;
+                        case 20:
+                            defaultRegisters.setReg(27, interruptReason);
+                            defaultRegisters.setReg(2, 20);
                             break;
                         }
                     
@@ -302,7 +353,7 @@ public class Computer {
 
             stage_if = new IF(ifid, filePath);
             stage_id = new ID(ifid, idexe, stage_if);
-            stage_exe = new EXE(idexe, exemem);
+            stage_exe = new EXE(idexe, exemem,stage_if,stage_id);
             stage_mem = new MEM(exemem, memwb, stage_if);
             stage_wb = new WB(stage_id, memwb);
             setRunable(false);

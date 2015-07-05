@@ -32,6 +32,7 @@ public class PCB {
     //Process control information
     private int schedulingState;
     private int inputTime;
+    private int wait_time;
     
     public PCB(int pid,int schedulingState,int inputTime){
         this.pid = pid;
@@ -108,5 +109,25 @@ public class PCB {
      */
     public void setPC(int PC) {
         this.PC = PC;
+    }
+    public void waitAction(){
+        if(wait_time>0)
+            wait_time=wait_time-1;
+        else if(schedulingState == BUSY_STATE){
+            schedulingState = READY_STATE;
+        }
+    }
+    /**
+     * @return the wait_time
+     */
+    public int getWait_time() {
+        return wait_time;
+    }
+
+    /**
+     * @param wait_time the wait_time to set
+     */
+    public void setWait_time(int wait_time) {
+        this.wait_time = wait_time;
     }
 }

@@ -1,12 +1,15 @@
 .code
+addi $a0,$a0,10
 test:
-addi $t0,$t0,3
-addi $t0,$t0,4
+addi $v0,$zero,20
+addi $v1,$zero,3
+syscall
+addi $t0,$zero,10
 addi $v0,$zero,10
 syscall
 .data
-1
-2
-3
-4
-5
+11
+12
+13
+14
+15
