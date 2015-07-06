@@ -242,11 +242,9 @@ public class Computer {
                     System.out.println("start address said : "+ startadd);
                     System.out.println("ra said: "+ Integer.toHexString(stage_id.regfile.getRegfile(31)*4));
                     System.out.println("++++++++++++++++++++++++++++++++++++");
-                    if(Integer.parseInt(Integer.toString(currentProgram.getPC(), 8)) >= 400000){
-                        stage_if.setPC(currentProgram.getPC()*4/4);
-                    }else{
+                    
                         stage_if.setPC(Integer.parseInt(startadd, 16)/4);
-                    }
+                    
                     
                     lineOfInstructions = Integer.parseInt(startadd, 16)+sd.getCode_seg().size();
                     modeBit = false;
@@ -260,6 +258,11 @@ public class Computer {
 			physicalAddress++;
                         }
                     stage_if.setIns_cache(cache);
+                    if(Integer.parseInt(Integer.toString(currentProgram.getPC(), 8)) >= 400000){
+                        stage_if.setPC(currentProgram.getPC()*4/4);
+                    }else{
+                        stage_if.setPC(Integer.parseInt(startadd, 16)/4);
+                    }
                 }
                 else{
                     int old_pc = getPC();
