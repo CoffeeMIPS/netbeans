@@ -22,6 +22,8 @@ import SyscallAPI.Mem2Cache;
 import SyscallAPI.PCB;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Queue;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import memory.AddressAllocator;
@@ -33,6 +35,7 @@ import memory.SegmentDefragmenter;
  * @author cloud
  */
 public class Computer {
+    Queue<PCB> readyq ;
     Register_file defaultRegisters ;
     PCB currentProgram;
     PCB programs[];
@@ -129,13 +132,21 @@ public class Computer {
                 }  
                 else if(stage_exe.getJ_pc().equals(func_first.concat("1011111".concat("00")))){// function 95
                     //initial PCB of programs
-                    programs = new PCB[3];
-                    PCB program0 = new PCB(0,PCB.READY_STATE,1);
-                    PCB program1 = new PCB(1,PCB.READY_STATE,2);
-                    PCB program2 = new PCB(2,PCB.READY_STATE,3); 
-                    programs [0] = program0;
-                    programs [1] = program1;
-                    programs [2] = program2;
+                    if(getRegfile().getRegfile(26)!=1){
+                        programs = new PCB[3];
+                        PCB program0 = new PCB(0,PCB.READY_STATE,1);
+                        PCB program1 = new PCB(1,PCB.READY_STATE,2);
+                        PCB program2 = new PCB(2,PCB.READY_STATE,3); 
+                        programs [0] = program0;
+                        programs [1] = program1;
+                        programs [2] = program2;
+                        readyq = new LinkedList<>();
+                        for(PCB program:programs){
+                            readyq.add(program);
+                        }
+                    }
+                    
+                    
                     getRegfile().setReg(26, 1);
                 }
                 else if(stage_exe.getJ_pc().equals(func_first.concat("1011110".concat("00")))){// function 94
@@ -203,7 +214,7 @@ public class Computer {
                     currentProgram.setPC(currentProgram.getRegs().getRegfile(31));
                     currentProgram.setSchedulingState(PCB.BUSY_STATE);
                     currentProgram.setWait_time(wait_number);
-                }
+                }                
 
                 else if(stage_exe.getJ_pc().equals(func_first.concat("0010100".concat("00")))){// function 20
                     //this function change pc to selected program (program pid must saved in v0)
