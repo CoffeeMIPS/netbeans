@@ -333,7 +333,7 @@ public class Computer {
                             defaultRegisters.setReg(2, 20);
                             break;
                         }
-                    
+                    ;
                     case 2:
                         //for timer intrupt
                         break;
