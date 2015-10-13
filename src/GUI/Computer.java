@@ -292,8 +292,37 @@ public class Computer {
 
                 }
                 if (exemem.getALU_result() != 0 && stage_exe.isNot()) {
-                    int offset;
-                    offset = Integer.parseInt(stage_exe.getIdexe().getSignExt(), 2);
+                    int offset = 0;
+                    String address=stage_exe.getIdexe().getSignExt();
+                    if(address.charAt(0)=='1')
+                    {//must use 2'scompliment method for negative numbers
+                        boolean flag=true;
+                        String newAddress = "";
+                        for(int i=address.length()-1;i>=0;i--){
+                            if(flag){
+                                char ch = address.charAt(i);
+                                newAddress = ch + newAddress;
+                                if(ch=='1'){
+                                    flag=false;
+                                }
+                            }
+                            else{
+                                char ch = address.charAt(i);
+                                
+                                if(ch=='1'){
+                                    newAddress = '0' + newAddress;
+                                }
+                                if(ch=='0'){
+                                    newAddress = '1' + newAddress;
+                                }
+                            }
+                        offset = Integer.parseInt(newAddress, 2);                        
+                        offset = -1*offset;
+                        }
+                    }else{
+                        offset = Integer.parseInt(stage_exe.getIdexe().getSignExt(), 2);                        
+                    }
+                    
                     stage_if.setPC(stage_if.getPC() + offset);
 
                 }
