@@ -150,7 +150,7 @@ public class Computer {
                     getRegfile().setReg(26, 1);
                 }
                 else if(stage_exe.getJ_pc().equals(func_first.concat("1011110".concat("00")))){// function 94
-                    //this function for Batch : choose one program and put it in v0 register if there is not return -1 in v0
+                    //this function for FCFS : choose one program and put it in v0 register if there is not return -1 in v0
                     int min = 999;
                     for (PCB program : programs) {
                         if (program.getSchedulingState()==PCB.READY_STATE && program.getInputTime() < min) {
@@ -214,7 +214,15 @@ public class Computer {
                     currentProgram.setPC(currentProgram.getRegs().getRegfile(31));
                     currentProgram.setSchedulingState(PCB.BUSY_STATE);
                     currentProgram.setWait_time(wait_number);
-                }                
+                }    
+                else if(stage_exe.getJ_pc().equals(func_first.concat("1011001".concat("00")))){// function 89
+//                    this function for Round Rabin  : choose one program and put it in v0 register if there is not return -1 in v0
+
+                }    
+                else if(stage_exe.getJ_pc().equals(func_first.concat("1011000".concat("00")))){// function 88
+//                    this function for MLFQ  : choose one program and put it in v0 register if there is not return -1 in v0
+
+                }    
 
                 else if(stage_exe.getJ_pc().equals(func_first.concat("0010100".concat("00")))){// function 20
                     //this function change pc to selected program (program pid must saved in v0)
