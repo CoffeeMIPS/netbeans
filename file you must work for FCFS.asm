@@ -7,7 +7,7 @@ addi $a1,$zero,1
 beq $a1,$k1,isuserint
 j runP
 isuserint:
-addi $a0,$zero,10
+addi $a0,$zero,11
 beq $a0,$v0,exitint
 addi $a0,$zero,20
 beq $a0,$v0,waitint
