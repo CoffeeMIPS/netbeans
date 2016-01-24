@@ -37,7 +37,7 @@ public class Main extends javax.swing.JFrame {
         computer = new Computer();
 
         computer.fix_memory_table(memoryTable);
-        monitor = new Monitor(computer.aa.getMemory());
+        monitor = new Monitor(computer.aa.getMemory(),Simonitor);
         
         for (int i = 0; i < mipsCode.getRowCount(); i++) {
             mipsCode.setValueAt(Integer.toHexString(i*4), i, 0);
@@ -58,7 +58,7 @@ public class Main extends javax.swing.JFrame {
         computer = new Computer();
 
         computer.fix_memory_table(memoryTable);
-        monitor = new Monitor(computer.aa.getMemory());
+        monitor = new Monitor(computer.aa.getMemory(),Simonitor);
         
         for (int i = 0; i < mipsCode.getRowCount(); i++) {
             mipsCode.setValueAt(Integer.toHexString(i*4), i, 0);
@@ -136,8 +136,8 @@ public class Main extends javax.swing.JFrame {
         monitors = new javax.swing.JTabbedPane();
         memoryTableContainer = new javax.swing.JScrollPane();
         memoryTable = new JTable(new DefaultTableModel(new Object[]{"Address", "Contain"},0));
-        jScrollPane3 = new javax.swing.JScrollPane();
-        Simonitor = new javax.swing.JTextArea();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        Simonitor = new javax.swing.JTextPane();
         Table = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         regTable = new javax.swing.JTable();
@@ -244,14 +244,11 @@ public class Main extends javax.swing.JFrame {
 
         monitors.addTab("Memory", memoryTableContainer);
 
-        Simonitor.setEditable(false);
-        Simonitor.setColumns(80);
-        Simonitor.setRows(25);
-        Simonitor.setWrapStyleWord(true);
-        Simonitor.setFocusable(false);
-        jScrollPane3.setViewportView(Simonitor);
+        Simonitor.setContentType("text/html"); // NOI18N
+        Simonitor.setName("Simonitor"); // NOI18N
+        jScrollPane7.setViewportView(Simonitor);
 
-        monitors.addTab("Monitor", jScrollPane3);
+        monitors.addTab("Monitor", jScrollPane7);
 
         regTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -547,7 +544,8 @@ public class Main extends javax.swing.JFrame {
     private void nextInsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextInsActionPerformed
         if (computer.runSingleSycle()) {
             computer.fix_memory_table(memoryTable);
-            Simonitor.setText(monitor.toString());
+            monitor.updateMonitor();
+            
             selectTrueInstruction();
             computer.Fix_regfile_table(regTable);
             computer.update_other_table(otherTable);
@@ -655,7 +653,7 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextArea Simonitor;
+    private javax.swing.JTextPane Simonitor;
     private javax.swing.JTabbedPane Table;
     private javax.swing.JButton assembleButton;
     private javax.swing.JTabbedPane assemblyTab;
@@ -675,10 +673,10 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JPopupMenu.Separator jSeparator1;

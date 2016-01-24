@@ -321,7 +321,7 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JScrollPane" name="jScrollPane3">
+            <Container class="javax.swing.JScrollPane" name="jScrollPane7">
               <AuxValues>
                 <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
               </AuxValues>
@@ -335,13 +335,10 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTextArea" name="Simonitor">
+                <Component class="javax.swing.JTextPane" name="Simonitor">
                   <Properties>
-                    <Property name="editable" type="boolean" value="false"/>
-                    <Property name="columns" type="int" value="80"/>
-                    <Property name="rows" type="int" value="25"/>
-                    <Property name="wrapStyleWord" type="boolean" value="true"/>
-                    <Property name="focusable" type="boolean" value="false"/>
+                    <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
+                    <Property name="name" type="java.lang.String" value="Simonitor" noResource="true"/>
                   </Properties>
                 </Component>
               </SubComponents>
