@@ -66,6 +66,9 @@ public class Computer {
     WB stage_wb;
     AddressAllocator aa;
     
+    GUI.Main me;
+    
+    
     public Computer(){
         runable = true;
         enableintrrupt = true;
@@ -408,6 +411,11 @@ public class Computer {
                             defaultRegisters.setReg(27, interruptReason);
                             defaultRegisters.setReg(2, 20);
                             break;
+                        case 30:
+                            int loc = getRegisterFile().getRegfile(4);
+                            int ch = getRegisterFile().getRegfile(5);
+                            int col = getRegisterFile().getRegfile(6);
+                            me.changeMonitor(loc, ch, col);
                         }
                     ;
                     case 2:

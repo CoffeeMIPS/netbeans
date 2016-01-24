@@ -35,7 +35,8 @@ public class Main extends javax.swing.JFrame {
         nextIns.setVisible(false);
         execAll.setVisible(false);
         computer = new Computer();
-
+        computer.me = this;
+        
         computer.fix_memory_table(memoryTable);
         monitor = new Monitor(computer.aa.getMemory(),Simonitor);
         
@@ -56,6 +57,7 @@ public class Main extends javax.swing.JFrame {
         nextIns.setVisible(false);
         execAll.setVisible(false);
         computer = new Computer();
+        computer.me = this;
 
         computer.fix_memory_table(memoryTable);
         monitor = new Monitor(computer.aa.getMemory(),Simonitor);
@@ -540,6 +542,18 @@ public class Main extends javax.swing.JFrame {
                 }
             }      
     }
+    
+    public void changeMonitor(int loc,int ch,int col)
+    {
+        char[] C = new char[2];
+        C[0] = (char)ch;
+        C[1] = (char)col;
+        String s = new String(C);
+        monitor.Memory.put(memory.AddressAllocator.parse8DigitHex(loc*2+monitor.startAddress),s.substring(0, 1));
+        monitor.Memory.put(memory.AddressAllocator.parse8DigitHex(loc*2+monitor.startAddress+1),s.substring(1, 2));
+        monitor.updateMonitor();
+    }
+    
     
     private void nextInsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextInsActionPerformed
         if (computer.runSingleSycle()) {
