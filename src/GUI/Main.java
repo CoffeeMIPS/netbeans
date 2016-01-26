@@ -9,10 +9,19 @@ import javax.swing.table.DefaultTableModel;
 import Assembler.Assembler;
 import Assembler.Instruction;
 import FileHandler.FileIO;
+import java.awt.Component;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Vector;
+import javax.swing.AbstractCellEditor;
+import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
+import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableColumn;
 import memory.SegmentDefragmenter;
 
 /**
@@ -25,23 +34,44 @@ public class Main extends javax.swing.JFrame {
     int lineOfInstructions;
     Monitor monitor;
     Computer computer;
+    boolean loadLock = false;
     /**
      * Creates new form Main
      */
     public Main() {
         initComponents();
+        
         assembleButton.setVisible(false);
         runButton.setVisible(false);
         nextIns.setVisible(false);
         execAll.setVisible(false);
         computer = new Computer();
-
-        computer.fix_memory_table(memoryTable);
-        monitor = new Monitor(computer.aa.getMemory());
+        computer.me = this;
         
+        computer.fix_memory_table(memoryTable);
+        monitor = new Monitor(computer.aa.getMemory(),Simonitor);
+        
+        
+        mipsCode.getModel().addTableModelListener(new TableModelListener() {
+            @Override
+            public void tableChanged (TableModelEvent e) {
+                int row = e.getFirstRow();
+                int column = e.getColumn();
+                //String columnName = model.getColumnName(column);
+                //Object data = model.getValueAt(row, column);
+                if(!loadLock)
+                {
+                    updateMainFile();
+                }
+            }
+        });
+        
+        loadLock = true;
         for (int i = 0; i < mipsCode.getRowCount(); i++) {
             mipsCode.setValueAt(Integer.toHexString(i*4), i, 0);
         }
+        loadLock = false;
+        
         setStyle(mipsCode);
         setStyle(program1);
         setStyle(program2);
@@ -49,17 +79,32 @@ public class Main extends javax.swing.JFrame {
         loadprograms();
 }
 
-    private Main(int result,JFileChooser input) {
-        initComponents();
+    private void updateMainFile()
+    {
+        String lines = "";
+        for (int i = 0; i < mipsCode.getRowCount(); i++) {
+            DefaultTableModel model = (DefaultTableModel) mipsCode.getModel();            
+            lines = lines.concat((String) model.getValueAt(i, 1)).concat("\n");
+        }
+        FileIO.TextTOFile(lines, filePath);
+                
+        updateMainProgram();
+
+        
+    }
+    
+    private void updateMainProgram()
+    {
         assembleButton.setVisible(false);
         runButton.setVisible(false);
         nextIns.setVisible(false);
         execAll.setVisible(false);
         computer = new Computer();
+        computer.me = this;
 
         computer.fix_memory_table(memoryTable);
-        monitor = new Monitor(computer.aa.getMemory());
-        
+        monitor = new Monitor(computer.aa.getMemory(),Simonitor);
+        loadLock = true;
         for (int i = 0; i < mipsCode.getRowCount(); i++) {
             mipsCode.setValueAt(Integer.toHexString(i*4), i, 0);
         }
@@ -68,18 +113,45 @@ public class Main extends javax.swing.JFrame {
         setStyle(program2);
         setStyle(program3);
         loadprograms();
-        filePath = input.getSelectedFile().getAbsolutePath();
-//            System.out.println(filePath);
-                String file = FileIO.Fread(filePath.replace("\\", "/"));
-                String[] line = file.split("\n");
-                for (int i = 0; i < line.length; i++) {
-                    DefaultTableModel model = (DefaultTableModel) mipsCode.getModel();
-                    model.addRow(new Object[]{"",line[i],"",""});
-                }
-                assembleButton.setVisible(true);
-                count++;
+        
+        String file = FileIO.Fread(filePath.replace("\\", "/"));
+        String[] line = file.split("\n");
+
+        int rowCount = mipsCode.getModel().getRowCount();
+
+        for (int i = rowCount - 1; i >= 0; i--) {
+            ((DefaultTableModel)mipsCode.getModel()).removeRow(i);
+        }
+        for (int i = 0; i < line.length; i++) {
+            DefaultTableModel model = (DefaultTableModel) mipsCode.getModel();
+            model.addRow(new Object[]{"",line[i],"",""});
+        }
+        loadLock = false;
+        assembleButton.setVisible(true);
+
     }
+    
+    
     private void loadprograms(){
+        
+        int rowCount = program1.getModel().getRowCount();
+            
+        for (int i = rowCount - 1; i >= 0; i--) {
+            ((DefaultTableModel)program1.getModel()).removeRow(i);
+        }
+        
+        rowCount = program2.getModel().getRowCount();
+            
+        for (int i = rowCount - 1; i >= 0; i--) {
+            ((DefaultTableModel)program2.getModel()).removeRow(i);
+        }
+        
+        rowCount = program3.getModel().getRowCount();
+            
+        for (int i = rowCount - 1; i >= 0; i--) {
+            ((DefaultTableModel)program3.getModel()).removeRow(i);
+        }
+        
         HashMap<Integer, SegmentDefragmenter> programs= computer.aa.getPrograms();
 //        System.out.println(programs.toString());
         SegmentDefragmenter sd = programs.get(0);
@@ -107,7 +179,7 @@ public class Main extends javax.swing.JFrame {
     }
     
     private void setStyle(JTable table){
-        table.setEnabled(false);
+        table.setEnabled(true);
         table.getColumn("Assembled").setMinWidth(180);
         table.getColumn("Code").setMinWidth(170);
         table.getColumn("Add.").setMaxWidth(90);
@@ -136,8 +208,8 @@ public class Main extends javax.swing.JFrame {
         monitors = new javax.swing.JTabbedPane();
         memoryTableContainer = new javax.swing.JScrollPane();
         memoryTable = new JTable(new DefaultTableModel(new Object[]{"Address", "Contain"},0));
-        jScrollPane3 = new javax.swing.JScrollPane();
-        Simonitor = new javax.swing.JTextArea();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        Simonitor = new javax.swing.JTextPane();
         Table = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         regTable = new javax.swing.JTable();
@@ -176,14 +248,22 @@ public class Main extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.Object.class, java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, true, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         mipsCode.setToolTipText("");
         mipsCode.setAutoscrolls(false);
         mipsCode.setName(""); // NOI18N
+        mipsCode.setRowHeight(20);
         mipsCode.setVerifyInputWhenFocusTarget(false);
         jScrollPane6.setViewportView(mipsCode);
 
@@ -244,14 +324,11 @@ public class Main extends javax.swing.JFrame {
 
         monitors.addTab("Memory", memoryTableContainer);
 
-        Simonitor.setEditable(false);
-        Simonitor.setColumns(80);
-        Simonitor.setRows(25);
-        Simonitor.setWrapStyleWord(true);
-        Simonitor.setFocusable(false);
-        jScrollPane3.setViewportView(Simonitor);
+        Simonitor.setContentType("text/html"); // NOI18N
+        Simonitor.setName("Simonitor"); // NOI18N
+        jScrollPane7.setViewportView(Simonitor);
 
-        monitors.addTab("Monitor", jScrollPane3);
+        monitors.addTab("Monitor", jScrollPane7);
 
         regTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -470,23 +547,8 @@ public class Main extends javax.swing.JFrame {
         JFileChooser input = new JFileChooser();
         int result = input.showOpenDialog(this);
         if (result == JFileChooser.APPROVE_OPTION) {
-            if(count == 0){
-                filePath = input.getSelectedFile().getAbsolutePath();
-//            System.out.println(filePath);
-                String file = FileIO.Fread(filePath.replace("\\", "/"));
-                String[] line = file.split("\n");
-                for (int i = 0; i < line.length; i++) {
-                    DefaultTableModel model = (DefaultTableModel) mipsCode.getModel();
-                    model.addRow(new Object[]{"",line[i],"",""});
-                }
-                assembleButton.setVisible(true);
-                count++;
-            }else{
-                Main new_main = new Main(result,input);
-                new_main.setVisible(true);
-                this.setVisible(false);
-            }
-            
+            filePath = input.getSelectedFile().getAbsolutePath();
+            updateMainProgram();
         } else if (result == JFileChooser.CANCEL_OPTION) {
             System.out.println("Cancel was selected");
         }
@@ -544,10 +606,23 @@ public class Main extends javax.swing.JFrame {
             }      
     }
     
+    public void changeMonitor(int loc,int ch,int col)
+    {
+        char[] C = new char[2];
+        C[0] = (char)ch;
+        C[1] = (char)col;
+        String s = new String(C);
+        monitor.Memory.put(memory.AddressAllocator.parse8DigitHex(loc*2+monitor.startAddress),s.substring(0, 1));
+        monitor.Memory.put(memory.AddressAllocator.parse8DigitHex(loc*2+monitor.startAddress+1),s.substring(1, 2));
+        monitor.updateMonitor();
+    }
+    
+    
     private void nextInsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextInsActionPerformed
         if (computer.runSingleSycle()) {
             computer.fix_memory_table(memoryTable);
-            Simonitor.setText(monitor.toString());
+            monitor.updateMonitor();
+            
             selectTrueInstruction();
             computer.Fix_regfile_table(regTable);
             computer.update_other_table(otherTable);
@@ -577,6 +652,8 @@ public class Main extends javax.swing.JFrame {
             assemble.setModeBit(false);
             this.lineOfInstructions = assembled.size();
             int code_number=0;
+
+            loadLock = true;
             for (int i = 0; i < mipsCode.getRowCount(); i++) {
                 String code = (String)mipsCode.getValueAt(i, 1);
                 try{
@@ -594,6 +671,7 @@ public class Main extends javax.swing.JFrame {
                 }
                              
             }
+            loadLock=false;
             runButton.setVisible(true);
             nextIns.setVisible(false);
         }
@@ -655,7 +733,7 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextArea Simonitor;
+    private javax.swing.JTextPane Simonitor;
     private javax.swing.JTabbedPane Table;
     private javax.swing.JButton assembleButton;
     private javax.swing.JTabbedPane assemblyTab;
@@ -675,10 +753,10 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JPopupMenu.Separator jSeparator1;
@@ -695,4 +773,24 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTable regTable;
     private javax.swing.JButton runButton;
     // End of variables declaration//GEN-END:variables
+}
+
+
+class MyTableCellEditor extends AbstractCellEditor implements TableCellEditor {
+
+    JComponent component = new JTextField();
+
+    @Override
+    public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected,
+        int rowIndex, int vColIndex) {
+
+        System.out.println("FUCKING GIVE ME TEXT");
+        ((JTextField) component).setText((String) value);
+
+        return component;
+    }
+    @Override
+    public Object getCellEditorValue() {
+        return ((JTextField) component).getText();
+    }
 }

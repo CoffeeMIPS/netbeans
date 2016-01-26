@@ -29,6 +29,8 @@ import javax.swing.table.DefaultTableModel;
 import memory.AddressAllocator;
 import static memory.AddressAllocator.parse8DigitHex;
 import memory.SegmentDefragmenter;
+import java.lang.reflect.Method;
+
 
 /**
  *
@@ -64,6 +66,9 @@ public class Computer {
     WB stage_wb;
     AddressAllocator aa;
     
+    GUI.Main me;
+    
+    
     public Computer(){
         runable = true;
         enableintrrupt = true;
@@ -93,6 +98,194 @@ public class Computer {
         int deci = (Integer.parseInt(hex, 16) - Integer.parseInt("400000", 16)) / 4;
         return deci;
     }
+        
+    public void func100()
+    {
+        System.out.println("func100");
+    }
+       
+    public void func99()
+    {
+        modeBit=false;
+        enableintrrupt=true;
+        interruptBit=false;
+    }
+    
+    public void func98()
+    {
+        //this function make pcb for cpu
+    }
+    
+    public void func97()
+    {
+        //this function set time to variable in v0
+        int time = getRegfile().getRegfile(2);
+        timer.set_timer(time);
+    }
+    
+    public void func96()
+    {
+        //this function for content switch between process with pid in v0 and v1
+    }
+    
+    public void func95()
+    {
+        System.out.println("FUCK HERE");
+        //initial PCB of programs
+        if(getRegfile().getRegfile(26)!=1){
+            programs = new PCB[3];
+            PCB program0 = new PCB(0,PCB.READY_STATE,1);
+            PCB program1 = new PCB(1,PCB.READY_STATE,2);
+            PCB program2 = new PCB(2,PCB.READY_STATE,3); 
+            programs [0] = program0;
+            programs [1] = program1;
+            programs [2] = program2;
+            readyq = new LinkedList<>();
+            for(PCB program:programs){
+                readyq.add(program);
+            }
+        }
+
+
+        getRegfile().setReg(26, 1);
+    }
+
+    public void func94()
+    {
+        //this function for FCFS : choose one program and put it in v0 register if there is not return -1 in v0
+        int min = 999;
+        for (PCB program : programs) {
+            if (program.getSchedulingState()==PCB.READY_STATE && program.getInputTime() < min) {
+                min = program.getInputTime();
+            }
+        }
+        PCB choosenProgram = null;
+        for (PCB program : programs) {
+            if (program.getSchedulingState()==PCB.READY_STATE && program.getInputTime() == min) {
+                choosenProgram = program;
+                break;
+            }
+        }
+        if(choosenProgram != null)
+            getRegfile().setReg(2, choosenProgram.getPid());
+        else
+            getRegfile().setReg(2, -1);
+    }
+    
+    public void func93()
+    {
+        //this function for terminate running process : change schedulingState to finish
+        for (PCB program : programs) {
+            if (program.getSchedulingState()==PCB.EXECUTE_STATE) {
+                program.setSchedulingState(PCB.FINISH_STATE);
+                break;
+            }
+        }
+    }
+    
+    public void func92()
+    {
+        //this function for check OS run for first time or not ? return in a0 register
+        if(getRegisterFile().getRegfile(26)==0)
+            getRegisterFile().setReg(4, 1);
+        else
+            getRegisterFile().setReg(4, 0);
+        getRegisterFile().setReg(26, 1);
+    }
+    
+    public void func91()
+    {
+        //this function for Batch : choose one program and put it in v0 register if there is not return -1 in v0
+                    
+        int min = 1000;
+        for (PCB program : programs) {
+            if (program.getSchedulingState()==PCB.READY_STATE && program.getInputTime() < min) {
+                min = program.getInputTime();
+            }
+        }
+        PCB choosenProgram = null;
+        for (PCB program : programs) {
+            if (program.getSchedulingState()==PCB.READY_STATE && program.getInputTime() == min) {
+                choosenProgram = program;
+                break;
+            }
+        }
+        if(choosenProgram != null)
+            getRegfile().setReg(2, choosenProgram.getPid());
+        else
+            getRegfile().setReg(2, -1);
+    }
+    
+    public void func90()
+    {
+        //this function for wait syscall
+        int wait_number = currentProgram.getRegs().getRegfile(3);
+        currentProgram.setPC(currentProgram.getRegs().getRegfile(31));
+        currentProgram.setSchedulingState(PCB.BUSY_STATE);
+        currentProgram.setWait_time(wait_number);
+    }
+    
+    public void func89()
+    {
+        //this function for Round Rabin  : choose one program and put it in v0 register if there is not return -1 in v0
+    }
+    
+    
+    public void func88()
+    {
+        //this function for MLFQ  : choose one program and put it in v0 register if there is not return -1 in v0
+    }
+    
+    public void func20()
+    {
+        //this function change pc to selected program (program pid must saved in v0)
+        modeBit=false;
+        enableintrrupt=true;
+        interruptBit=false;
+        System.out.println("func20");
+        HashMap<Integer, SegmentDefragmenter> programsHashmap= aa.getPrograms();
+        int selected = getRegfile().getRegfile(2);
+        defaultRegisters = getRegfile();
+        if(programs != null){
+            for(PCB program:programs){
+                if(program.getPid()==selected)
+                {
+                    program.setSchedulingState(PCB.EXECUTE_STATE);
+                    stage_id.regfile = program.getRegs();
+                    currentProgram = program;
+                }
+            }
+        }
+
+        SegmentDefragmenter sd = programsHashmap.get(selected);
+        String startadd = sd.getCode_seg_start_address();
+        System.out.println("++++++++++++++++++++++++++++++++++++");
+        System.out.println("start address said : "+ startadd);
+        System.out.println("ra said: "+ Integer.toHexString(stage_id.regfile.getRegfile(31)*4));
+        System.out.println("++++++++++++++++++++++++++++++++++++");
+
+            stage_if.setPC(Integer.parseInt(startadd, 16)/4);
+
+
+        lineOfInstructions = Integer.parseInt(startadd, 16)+sd.getCode_seg().size();
+        modeBit = false;
+        HashMap<Integer, Instruction> cache = new HashMap<Integer, Instruction>();              
+
+        int physicalAddress =Hex2Decimal(startadd);
+        baseAddress = physicalAddress;
+        sd.setCode_seg_start_address(parse8DigitHex(physicalAddress));
+            for (int i = 0; i < sd.getCode_seg().size(); i++) {
+            cache.put(stage_if.getPC()+i,new Instruction( sd.getCode_seg().get(i),parse8DigitHex(physicalAddress)));
+            physicalAddress++;
+            }
+        stage_if.setIns_cache(cache);
+        if(Integer.parseInt(Integer.toString(currentProgram.getPC(), 8)) >= 400000){
+            stage_if.setPC(currentProgram.getPC()*4/4);
+        }else{
+            stage_if.setPC(Integer.parseInt(startadd, 16)/4);
+        }
+    }
+    
     public boolean runSingleSycle(){
         if (currentLineOfInstructions < lineOfInstructions) {
             stage_if.action(modeBit);
@@ -108,171 +301,16 @@ public class Computer {
                 String func_sign = "0111111111111111111";
                 String func_first = pc4bit.concat(func_sign);
                 
-                if(stage_exe.getJ_pc().equals(func_first.concat("1100100".concat("00")))){// function 100
-                    System.out.println("func100");
-                }
-                else if(stage_exe.getJ_pc().equals(func_first.concat("1100011".concat("00")))){// function 99
-                    //this function change mode of cpu to user mode
-                    modeBit=false;
-                    enableintrrupt=true;
-                    interruptBit=false;
-                }
-                else if(stage_exe.getJ_pc().equals(func_first.concat("1100010".concat("00")))){// function 98
-                    //this function make pcb for cpu
-                    
-                }  
-                else if(stage_exe.getJ_pc().equals(func_first.concat("1100001".concat("00")))){// function 97
-                    //this function set time to variable in v0
-                    int time = getRegfile().getRegfile(2);
-                    timer.set_timer(time);
-                }  
-                else if(stage_exe.getJ_pc().equals(func_first.concat("1100000".concat("00")))){// function 96
-                    //this function for content switch between process with pid in v0 and v1
-                    
-                }  
-                else if(stage_exe.getJ_pc().equals(func_first.concat("1011111".concat("00")))){// function 95
-                    //initial PCB of programs
-                    if(getRegfile().getRegfile(26)!=1){
-                        programs = new PCB[3];
-                        PCB program0 = new PCB(0,PCB.READY_STATE,1);
-                        PCB program1 = new PCB(1,PCB.READY_STATE,2);
-                        PCB program2 = new PCB(2,PCB.READY_STATE,3); 
-                        programs [0] = program0;
-                        programs [1] = program1;
-                        programs [2] = program2;
-                        readyq = new LinkedList<>();
-                        for(PCB program:programs){
-                            readyq.add(program);
-                        }
-                    }
-                    
-                    
-                    getRegfile().setReg(26, 1);
-                }
-                else if(stage_exe.getJ_pc().equals(func_first.concat("1011110".concat("00")))){// function 94
-                    //this function for FCFS : choose one program and put it in v0 register if there is not return -1 in v0
-                    int min = 999;
-                    for (PCB program : programs) {
-                        if (program.getSchedulingState()==PCB.READY_STATE && program.getInputTime() < min) {
-                            min = program.getInputTime();
-                        }
-                    }
-                    PCB choosenProgram = null;
-                    for (PCB program : programs) {
-                        if (program.getSchedulingState()==PCB.READY_STATE && program.getInputTime() == min) {
-                            choosenProgram = program;
-                            break;
-                        }
-                    }
-                    if(choosenProgram != null)
-                        getRegfile().setReg(2, choosenProgram.getPid());
-                    else
-                        getRegfile().setReg(2, -1);
-                }
                 
-                else if(stage_exe.getJ_pc().equals(func_first.concat("1011101".concat("00")))){// function 93
-                    //this function for terminate running process : change schedulingState to finish
-                    for (PCB program : programs) {
-                        if (program.getSchedulingState()==PCB.EXECUTE_STATE) {
-                            program.setSchedulingState(PCB.FINISH_STATE);
-                            break;
-                        }
-                    }
+                
+                try{
+                    String func_str = stage_exe.getJ_pc().substring(stage_exe.getJ_pc().length()-9, stage_exe.getJ_pc().length()-2);
+                    func_str = String.valueOf(Integer.parseInt(func_str,2));
+                    Method m = Computer.class.getMethod("func"+func_str);
+                    m.invoke(this);
                 }
-                else if(stage_exe.getJ_pc().equals(func_first.concat("1011100".concat("00")))){// function 92
-                    //this function for check OS run for first time or not ? return in a0 register
-                    if(getRegisterFile().getRegfile(26)==0)
-                        getRegisterFile().setReg(4, 1);
-                    else
-                        getRegisterFile().setReg(4, 0);
-                    getRegisterFile().setReg(26, 1);
-                }
-                else if(stage_exe.getJ_pc().equals(func_first.concat("1011011".concat("00")))){// function 91
-                    //this function for Batch : choose one program and put it in v0 register if there is not return -1 in v0
-                    
-                    int min = 1000;
-                    for (PCB program : programs) {
-                        if (program.getSchedulingState()==PCB.READY_STATE && program.getInputTime() < min) {
-                            min = program.getInputTime();
-                        }
-                    }
-                    PCB choosenProgram = null;
-                    for (PCB program : programs) {
-                        if (program.getSchedulingState()==PCB.READY_STATE && program.getInputTime() == min) {
-                            choosenProgram = program;
-                            break;
-                        }
-                    }
-                    if(choosenProgram != null)
-                        getRegfile().setReg(2, choosenProgram.getPid());
-                    else
-                        getRegfile().setReg(2, -1);
-                }
-                else if(stage_exe.getJ_pc().equals(func_first.concat("1011010".concat("00")))){// function 90
-                    //this function for wait syscall
-                    int wait_number = currentProgram.getRegs().getRegfile(3);
-                    currentProgram.setPC(currentProgram.getRegs().getRegfile(31));
-                    currentProgram.setSchedulingState(PCB.BUSY_STATE);
-                    currentProgram.setWait_time(wait_number);
-                }    
-                else if(stage_exe.getJ_pc().equals(func_first.concat("1011001".concat("00")))){// function 89
-//                    this function for Round Rabin  : choose one program and put it in v0 register if there is not return -1 in v0
-
-                }    
-                else if(stage_exe.getJ_pc().equals(func_first.concat("1011000".concat("00")))){// function 88
-//                    this function for MLFQ  : choose one program and put it in v0 register if there is not return -1 in v0
-
-                }    
-
-                else if(stage_exe.getJ_pc().equals(func_first.concat("0010100".concat("00")))){// function 20
-                    //this function change pc to selected program (program pid must saved in v0)
-                    modeBit=false;
-                    enableintrrupt=true;
-                    interruptBit=false;
-                    System.out.println("func20");
-                    HashMap<Integer, SegmentDefragmenter> programsHashmap= aa.getPrograms();
-                    int selected = getRegfile().getRegfile(2);
-                    defaultRegisters = getRegfile();
-                    if(programs != null){
-                        for(PCB program:programs){
-                            if(program.getPid()==selected)
-                            {
-                                program.setSchedulingState(PCB.EXECUTE_STATE);
-                                stage_id.regfile = program.getRegs();
-                                currentProgram = program;
-                            }
-                        }
-                    }
-                    
-                    SegmentDefragmenter sd = programsHashmap.get(selected);
-                    String startadd = sd.getCode_seg_start_address();
-                    System.out.println("++++++++++++++++++++++++++++++++++++");
-                    System.out.println("start address said : "+ startadd);
-                    System.out.println("ra said: "+ Integer.toHexString(stage_id.regfile.getRegfile(31)*4));
-                    System.out.println("++++++++++++++++++++++++++++++++++++");
-                    
-                        stage_if.setPC(Integer.parseInt(startadd, 16)/4);
-                    
-                    
-                    lineOfInstructions = Integer.parseInt(startadd, 16)+sd.getCode_seg().size();
-                    modeBit = false;
-                    HashMap<Integer, Instruction> cache = new HashMap<Integer, Instruction>();              
-
-                    int physicalAddress =Hex2Decimal(startadd);
-                    baseAddress = physicalAddress;
-                    sd.setCode_seg_start_address(parse8DigitHex(physicalAddress));
-			for (int i = 0; i < sd.getCode_seg().size(); i++) {
-			cache.put(stage_if.getPC()+i,new Instruction( sd.getCode_seg().get(i),parse8DigitHex(physicalAddress)));
-			physicalAddress++;
-                        }
-                    stage_if.setIns_cache(cache);
-                    if(Integer.parseInt(Integer.toString(currentProgram.getPC(), 8)) >= 400000){
-                        stage_if.setPC(currentProgram.getPC()*4/4);
-                    }else{
-                        stage_if.setPC(Integer.parseInt(startadd, 16)/4);
-                    }
-                }
-                else{
+                catch(NoSuchMethodException e)
+                {
                     int old_pc = getPC();
                     int pcbits = old_pc/(2^28);
                     // not added pc to sign but it's ready for use then
@@ -283,7 +321,11 @@ public class Computer {
                         //should not increment because it incremented in IF stage
                         stage_exe.getExemem().setWrite_Register(31);
                         // use mips structure to save new_pc in ra (not assign directly)
-                    }
+                    }                    
+                }
+                catch(Exception e)
+                {
+                    
                 }
             }
             if (stage_exe.isJumpReg()){
@@ -369,6 +411,11 @@ public class Computer {
                             defaultRegisters.setReg(27, interruptReason);
                             defaultRegisters.setReg(2, 20);
                             break;
+                        case 30:
+                            int loc = getRegisterFile().getRegfile(4);
+                            int ch = getRegisterFile().getRegfile(5);
+                            int col = getRegisterFile().getRegfile(6);
+                            me.changeMonitor(loc, ch, col);
                         }
                     ;
                     case 2:
