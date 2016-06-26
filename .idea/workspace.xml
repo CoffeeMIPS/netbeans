@@ -1,0 +1,1352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="8476d780-48c5-4374-9c3e-b81fe63a0431" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/FPU/Add.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/FPU/Registers.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/commons_io_2_4.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/commons_io_2_4_javadoc.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/HBDMIPS/CU.java" afterPath="$PROJECT_DIR$/src/HBDMIPS/CU.java" />
+    </list>
+    <ignored path="CoffeeMIPS.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <ignored path="$PROJECT_DIR$/out/" />
+    <ignored path=".idea/dataSources.local.xml" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="CoffeeMIPS" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="Computer.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/GUI/Computer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-3.5517242">
+              <caret line="98" column="27" selection-start-line="98" selection-start-column="21" selection-end-line="98" selection-end-column="27" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#18548#18549#0" expanded="true" />
+                <element signature="e#18586#18587#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Assembler.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Assembler/Assembler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-38.0">
+              <caret line="348" column="16" selection-start-line="348" selection-start-column="16" selection-end-line="348" selection-end-column="16" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#538#554#0" expanded="true" />
+                <element signature="e#631#658#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CP0.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/HBDMIPS/CP0.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+              <folding>
+                <element signature="e#369#370#0" expanded="true" />
+                <element signature="e#390#391#0" expanded="true" />
+                <element signature="e#427#428#0" expanded="true" />
+                <element signature="e#456#457#0" expanded="true" />
+                <element signature="e#570#571#0" expanded="true" />
+                <element signature="e#600#601#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EXE.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/HBDMIPS/EXE.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-5.3103447">
+              <caret line="11" column="59" selection-start-line="11" selection-start-column="59" selection-end-line="11" selection-end-column="59" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="JAVA/" pinned="false" current-in-tab="false">
+        <entry file="uml://JAVA/">
+          <provider selected="true" editor-type-id="UmlEditorProvider">
+            <state>
+              <ID>JAVA</ID>
+              <OriginalElement />
+              <nodes>
+                <node x="150.0" y="521.201171875">com</node>
+                <node x="179.0" y="447.201171875">netscape</node>
+                <node x="40.0" y="125.201171875">memory</node>
+                <node x="350.0" y="447.201171875">oracle</node>
+                <node x="0.0" y="595.201171875">org</node>
+                <node x="214.0" y="125.201171875">HBDMIPS</node>
+                <node x="104.83593073593076" y="244.201171875">SyscallAPI</node>
+                <node x="443.0" y="521.201171875">sun</node>
+                <node x="425.5" y="0.0">FileHandler</node>
+                <node x="0.0" y="447.201171875">META-INF</node>
+                <node x="142.0" y="595.201171875">jdk</node>
+                <node x="298.0" y="521.201171875">java</node>
+                <node x="0.0" y="521.201171875">javax</node>
+                <node x="144.71850649350648" y="343.201171875">GUI</node>
+                <node x="176.07164502164503" y="6.201171875">Assembler</node>
+                <node x="506.0" y="447.201171875">javafx</node>
+              </nodes>
+              <notes />
+              <edges>
+                <edge source="GUI" target="GUI">
+                  <point x="24.5" y="14.5" />
+                  <point x="218.21850649350648" y="402.201171875" />
+                  <point x="114.7185064935065" y="402.201171875" />
+                  <point x="114.7185064935065" y="350.451171875" />
+                  <point x="-49.0" y="-7.25" />
+                </edge>
+                <edge source="GUI" target="memory">
+                  <point x="-30.625" y="-14.5" />
+                  <point x="163.09350649350648" y="313.201171875" />
+                  <point x="94.33593073593076" y="313.201171875" />
+                  <point x="94.33593073593076" y="224.201171875" />
+                  <point x="109.75" y="224.201171875" />
+                  <point x="7.75" y="14.5" />
+                </edge>
+                <edge source="HBDMIPS" target="Assembler">
+                  <point x="-32.5" y="-14.5" />
+                  <point x="246.5" y="105.201171875" />
+                  <point x="262.21450216450216" y="105.201171875" />
+                  <point x="19.14285714285714" y="14.5" />
+                </edge>
+                <edge source="GUI" target="HBDMIPS">
+                  <point x="18.375" y="-14.5" />
+                  <point x="212.09350649350648" y="303.201171875" />
+                  <point x="316.83333333333337" y="303.201171875" />
+                  <point x="316.83333333333337" y="224.201171875" />
+                  <point x="311.5" y="224.201171875" />
+                  <point x="32.500000000000014" y="14.5" />
+                </edge>
+                <edge source="memory" target="Assembler">
+                  <point x="0.0" y="-14.5" />
+                  <point x="102.0" y="95.201171875" />
+                  <point x="243.07164502164503" y="95.201171875" />
+                  <point x="0.0" y="14.5" />
+                </edge>
+                <edge source="SyscallAPI" target="HBDMIPS">
+                  <point x="52.80000000000001" y="-14.5" />
+                  <point x="223.63593073593077" y="224.201171875" />
+                  <point x="289.83333333333337" y="224.201171875" />
+                  <point x="10.833333333333343" y="14.5" />
+                </edge>
+                <edge source="Assembler" target="Assembler">
+                  <point x="-57.42857142857143" y="14.5" />
+                  <point x="185.6430735930736" y="55.201171875" />
+                  <point x="156.07164502164503" y="55.201171875" />
+                  <point x="156.07164502164503" y="30.367838541666686" />
+                  <point x="-67.0" y="9.666666666666686" />
+                </edge>
+                <edge source="GUI" target="SyscallAPI">
+                  <point x="6.125" y="-14.5" />
+                  <point x="199.84350649350648" y="293.201171875" />
+                  <point x="214.83593073593076" y="293.201171875" />
+                  <point x="44.0" y="14.5" />
+                </edge>
+                <edge source="memory" target="memory">
+                  <point x="-54.25" y="14.5" />
+                  <point x="47.75" y="174.201171875" />
+                  <point x="20.0" y="174.201171875" />
+                  <point x="20.0" y="149.36783854166666" />
+                  <point x="-62.0" y="9.666666666666657" />
+                </edge>
+                <edge source="GUI" target="Assembler">
+                  <point x="42.875" y="-14.5" />
+                  <point x="236.59350649350648" y="323.201171875" />
+                  <point x="354.5" y="323.201171875" />
+                  <point x="354.5" y="95.201171875" />
+                  <point x="300.50021645021644" y="95.201171875" />
+                  <point x="57.428571428571416" y="14.5" />
+                </edge>
+                <edge source="memory" target="SyscallAPI">
+                  <point x="54.25" y="14.5" />
+                  <point x="156.25" y="224.201171875" />
+                  <point x="170.83593073593076" y="224.201171875" />
+                  <point x="0.0" y="-14.5" />
+                </edge>
+                <edge source="HBDMIPS" target="HBDMIPS">
+                  <point x="-32.5" y="14.5" />
+                  <point x="246.5" y="184.201171875" />
+                  <point x="184.0" y="184.201171875" />
+                  <point x="184.0" y="132.451171875" />
+                  <point x="-65.0" y="-7.25" />
+                </edge>
+                <edge source="SyscallAPI" target="memory">
+                  <point x="-26.400000000000006" y="-14.5" />
+                  <point x="144.43593073593075" y="224.201171875" />
+                  <point x="140.75" y="224.201171875" />
+                  <point x="38.75" y="14.5" />
+                </edge>
+              </edges>
+              <settings layout="Hierarchic Group" zoom="1.3328600405679516" x="171.06391721199205" y="152.06391721199205" />
+              <SelectedNodes>
+                <node>memory</node>
+              </SelectedNodes>
+              <Categories />
+              <SCOPE>All</SCOPE>
+              <VISIBILITY>private</VISIBILITY>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="JAVA/HBDMIPS" pinned="false" current-in-tab="false">
+        <entry file="uml://JAVA/HBDMIPS">
+          <provider selected="true" editor-type-id="UmlEditorProvider">
+            <state>
+              <ID>JAVA</ID>
+              <OriginalElement>HBDMIPS</OriginalElement>
+              <nodes>
+                <node x="449.6573660714286" y="79.0">HBDMIPS.ID_EXE</node>
+                <node x="136.25" y="178.0">HBDMIPS.EXE_MEM</node>
+                <node x="108.0" y="371.0">HBDMIPS.CP0</node>
+                <node x="3.0" y="297.0">HBDMIPS.MEM</node>
+                <node x="171.82552083333337" y="297.0">HBDMIPS.WB</node>
+                <node x="266.65736607142856" y="79.0">HBDMIPS.CU</node>
+                <node x="197.03459821428572" y="0.0">HBDMIPS.IF_ID</node>
+                <node x="0.0" y="371.0">HBDMIPS.Timer</node>
+                <node x="304.0323660714286" y="297.0">HBDMIPS.EXE</node>
+                <node x="33.25" y="178.0">HBDMIPS.MEM_WB</node>
+                <node x="334.6573660714286" y="79.0">HBDMIPS.Register_file</node>
+                <node x="188.28459821428572" y="79.0">HBDMIPS.IF</node>
+                <node x="281.15736607142856" y="178.0">HBDMIPS.ID</node>
+              </nodes>
+              <notes />
+              <edges>
+                <edge source="HBDMIPS.EXE" target="HBDMIPS.ID">
+                  <point x="4.25" y="-14.5" />
+                  <point x="333.7823660714286" y="227.0" />
+                  <point x="313.40736607142856" y="227.0" />
+                  <point x="10.75" y="14.5" />
+                </edge>
+                <edge source="HBDMIPS.ID" target="HBDMIPS.CU">
+                  <point x="-6.14285714285711" y="-14.5" />
+                  <point x="296.51450892857144" y="128.0" />
+                  <point x="278.65736607142856" y="128.0" />
+                  <point x="-12.0" y="14.5" />
+                </edge>
+                <edge source="HBDMIPS.MEM" target="HBDMIPS.IF">
+                  <point x="-20.0" y="-14.5" />
+                  <point x="13.0" y="277.0" />
+                  <point x="17.875" y="277.0" />
+                  <point x="17.875" y="158.0" />
+                  <point x="195.11793154761907" y="158.0" />
+                  <point x="-13.666666666666664" y="14.5" />
+                </edge>
+                <edge source="HBDMIPS.EXE" target="HBDMIPS.IF">
+                  <point x="-4.25" y="-14.5" />
+                  <point x="325.2823660714286" y="237.0" />
+                  <point x="230.75" y="237.0" />
+                  <point x="230.75" y="158.0" />
+                  <point x="208.78459821428572" y="158.0" />
+                  <point x="0.0" y="14.5" />
+                </edge>
+                <edge source="HBDMIPS.WB" target="HBDMIPS.ID">
+                  <point x="12.5" y="-14.5" />
+                  <point x="209.32552083333337" y="277.0" />
+                  <point x="291.90736607142856" y="277.0" />
+                  <point x="-10.75" y="14.5" />
+                </edge>
+                <edge source="HBDMIPS.MEM" target="HBDMIPS.MEM_WB">
+                  <point x="0.0" y="-14.5" />
+                  <point x="33.0" y="267.0" />
+                  <point x="54.0" y="267.0" />
+                  <point x="-20.75" y="14.5" />
+                </edge>
+                <edge source="HBDMIPS.WB" target="HBDMIPS.MEM_WB">
+                  <point x="-12.5" y="-14.5" />
+                  <point x="184.32552083333337" y="267.0" />
+                  <point x="95.5" y="267.0" />
+                  <point x="20.75" y="14.5" />
+                </edge>
+                <edge source="HBDMIPS.EXE" target="HBDMIPS.ID_EXE">
+                  <point x="21.25" y="-14.5" />
+                  <point x="350.7823660714286" y="277.0" />
+                  <point x="497.57552083333337" y="277.0" />
+                  <point x="497.57552083333337" y="158.0" />
+                  <point x="505.4906994047619" y="158.0" />
+                  <point x="22.333333333333314" y="14.5" />
+                </edge>
+                <edge source="HBDMIPS.EXE" target="HBDMIPS.EXE_MEM">
+                  <point x="-12.75" y="-14.5" />
+                  <point x="316.7823660714286" y="247.0" />
+                  <point x="206.25" y="247.0" />
+                  <point x="28.0" y="14.5" />
+                </edge>
+                <edge source="HBDMIPS.MEM" target="HBDMIPS.EXE_MEM">
+                  <point x="20.0" y="-14.5" />
+                  <point x="53.0" y="277.0" />
+                  <point x="150.25" y="277.0" />
+                  <point x="-28.0" y="14.5" />
+                </edge>
+                <edge source="HBDMIPS.IF" target="HBDMIPS.IF_ID">
+                  <point x="0.0" y="-14.5" />
+                  <point x="208.78459821428572" y="54.0" />
+                  <point x="211.28459821428572" y="54.0" />
+                  <point x="-14.25" y="14.5" />
+                </edge>
+                <edge source="HBDMIPS.ID" target="HBDMIPS.Register_file">
+                  <point x="6.142857142857167" y="-14.5" />
+                  <point x="308.8002232142858" y="138.0" />
+                  <point x="358.4073660714286" y="138.0" />
+                  <point x="-23.75" y="14.5" />
+                </edge>
+                <edge source="HBDMIPS.ID" target="HBDMIPS.IF">
+                  <point x="-18.428571428571445" y="-14.5" />
+                  <point x="284.2287946428571" y="148.0" />
+                  <point x="222.45126488095238" y="148.0" />
+                  <point x="13.666666666666664" y="14.5" />
+                </edge>
+                <edge source="HBDMIPS.ID" target="HBDMIPS.IF_ID">
+                  <point x="-12.285714285714278" y="-14.5" />
+                  <point x="290.37165178571433" y="138.0" />
+                  <point x="239.78459821428572" y="138.0" />
+                  <point x="14.25" y="14.5" />
+                </edge>
+                <edge source="HBDMIPS.ID" target="HBDMIPS.ID_EXE">
+                  <point x="18.428571428571445" y="-14.5" />
+                  <point x="321.0859375" y="158.0" />
+                  <point x="460.8240327380953" y="158.0" />
+                  <point x="-22.333333333333343" y="14.5" />
+                </edge>
+              </edges>
+              <settings layout="Hierarchic Group" zoom="1.4043478260869569" x="101.89783281733742" y="299.8978328173374" />
+              <SelectedNodes />
+              <Categories />
+              <SCOPE>All</SCOPE>
+              <VISIBILITY>private</VISIBILITY>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MEM.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/HBDMIPS/MEM.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="3" column="7" selection-start-line="3" selection-start-column="7" selection-end-line="3" selection-end-column="7" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Register_file.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/HBDMIPS/Register_file.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="86" column="5" selection-start-line="12" selection-start-column="4" selection-end-line="86" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Registers.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/FPU/Registers.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.79941005">
+              <caret line="44" column="27" selection-start-line="44" selection-start-column="27" selection-end-line="44" selection-end-column="27" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Add.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/FPU/Add.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="6" column="1" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GradleLocalSettings">
+    <option name="externalProjectsViewState">
+      <projects_view />
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/HBDMIPS/CU.java" />
+        <option value="$PROJECT_DIR$/src/FPU/Registers.java" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Bundled (Maven 3)" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState />
+  </component>
+  <component name="NamedScopeManager">
+    <order />
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1382" />
+    <option name="height" value="744" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CoffeeMIPS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CoffeeMIPS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CoffeeMIPS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CoffeeMIPS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CoffeeMIPS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CoffeeMIPS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CoffeeMIPS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="memory" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CoffeeMIPS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CoffeeMIPS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="HBDMIPS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CoffeeMIPS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CoffeeMIPS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FPU" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CoffeeMIPS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CoffeeMIPS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Assembler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="recentsLimit" value="5" />
+    <property name="dynamic.classpath" value="false" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.splitter.proportion" value="0.2" />
+  </component>
+  <component name="RunManager" selected="Application.Main">
+    <configuration default="false" name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="GUI.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="MAIN_CLASS_NAME" value="GUI.Main" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="CoffeeMIPS" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+      <option name="PROGRAM_PARAMETERS" />
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
+      <module name="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="DEPLOY" value="true" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="USE_COMMAND_LINE" value="true" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
+      <module name="" />
+      <option name="TESTING_TYPE" value="0" />
+      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="USE_COMMAND_LINE" value="true" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <module />
+      <method />
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="myFilePath" />
+      <option name="GLUE" />
+      <option name="myNameFilter" />
+      <option name="myGeneratedName" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="FlashRunConfigurationType" factoryName="Flash App">
+      <option name="BCName" value="" />
+      <option name="IOSSimulatorSdkPath" value="" />
+      <option name="adlOptions" value="" />
+      <option name="airProgramParameters" value="" />
+      <option name="appDescriptorForEmulator" value="Android" />
+      <option name="debugTransport" value="USB" />
+      <option name="debuggerSdkRaw" value="BC SDK" />
+      <option name="emulator" value="NexusOne" />
+      <option name="emulatorAdlOptions" value="" />
+      <option name="fastPackaging" value="true" />
+      <option name="fullScreenHeight" value="0" />
+      <option name="fullScreenWidth" value="0" />
+      <option name="launchUrl" value="false" />
+      <option name="launcherParameters">
+        <LauncherParameters>
+          <option name="browser" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
+          <option name="launcherType" value="OSDefault" />
+          <option name="newPlayerInstance" value="false" />
+          <option name="playerPath" value="FlashPlayerDebugger.exe" />
+        </LauncherParameters>
+      </option>
+      <option name="mobileRunTarget" value="Emulator" />
+      <option name="moduleName" value="" />
+      <option name="overriddenMainClass" value="" />
+      <option name="overriddenOutputFileName" value="" />
+      <option name="overrideMainClass" value="false" />
+      <option name="runTrusted" value="true" />
+      <option name="screenDpi" value="0" />
+      <option name="screenHeight" value="0" />
+      <option name="screenWidth" value="0" />
+      <option name="url" value="http://" />
+      <option name="usbDebugPort" value="7936" />
+      <method />
+    </configuration>
+    <configuration default="true" type="FlexUnitRunConfigurationType" factoryName="FlexUnit" appDescriptorForEmulator="Android" class_name="" emulatorAdlOptions="" method_name="" package_name="" scope="Class">
+      <option name="BCName" value="" />
+      <option name="launcherParameters">
+        <LauncherParameters>
+          <option name="browser" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
+          <option name="launcherType" value="OSDefault" />
+          <option name="newPlayerInstance" value="false" />
+          <option name="playerPath" value="FlashPlayerDebugger.exe" />
+        </LauncherParameters>
+      </option>
+      <option name="moduleName" value="" />
+      <option name="trusted" value="true" />
+      <method />
+    </configuration>
+    <configuration default="true" type="GradleRunConfiguration" factoryName="Gradle">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list />
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <method />
+    </configuration>
+    <configuration default="true" type="GrailsRunConfigurationType" factoryName="Grails">
+      <module name="" />
+      <setting name="vmparams" value="" />
+      <setting name="cmdLine" value="run-app" />
+      <setting name="depsClasspath" value="false" />
+      <setting name="passParentEnv" value="true" />
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <setting name="launchBrowser" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="true" type="JarApplication" factoryName="JAR Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="JAR_PATH" value="$PROJECT_DIR$/Lib/commons-io-2.4-javadoc.jar" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+      <method />
+    </configuration>
+    <configuration default="true" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <method />
+    </configuration>
+    <configuration default="true" type="osgi.bnd.run" factoryName="Run Launcher">
+      <method />
+    </configuration>
+    <configuration default="true" type="osgi.bnd.run" factoryName="Test Launcher (JUnit)">
+      <method />
+    </configuration>
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="Application.Main" />
+    </list>
+    <recent_temporary>
+      <list size="1">
+        <item index="0" class="java.lang.String" itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8476d780-48c5-4374-9c3e-b81fe63a0431" name="Default" comment="" />
+      <created>1466905773953</created>
+      <option name="number" value="Default" />
+      <updated>1466905773953</updated>
+      <workItem from="1466905780529" duration="18328000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="18328000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32843137" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32930514" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32736155" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24962178" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24962178" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.4003268" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-field">
+          <url>file://$PROJECT_DIR$/src/GUI/Main.java</url>
+          <line>22</line>
+          <properties field="count" class="GUI.Main" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-field">
+          <url>file://$PROJECT_DIR$/src/Assembler/Assembler.java</url>
+          <line>11</line>
+          <properties field="file" class="Assembler.Assembler" />
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="4" />
+    </breakpoint-manager>
+    <watches-manager />
+  </component>
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/FileHandler/FileIO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Assembler/Instruction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="4" column="30" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/HBDMIPS/ID_EXE.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/HBDMIPS/EXE_MEM.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="39" column="32" selection-start-line="39" selection-start-column="18" selection-end-line="39" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/memory/AddressAllocator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/HBDMIPS/IF.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="61" column="0" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/HBDMIPS/CU.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.851852">
+          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/HBDMIPS/ID.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GUI/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.0">
+          <caret line="343" column="0" selection-start-line="343" selection-start-column="0" selection-end-line="343" selection-end-column="0" />
+          <folding>
+            <element signature="e#8591#8592#0" expanded="true" />
+            <element signature="e#8657#8658#0" expanded="true" />
+            <element signature="e#13550#13551#0" expanded="true" />
+            <element signature="e#17298#17299#0" expanded="true" />
+            <element signature="e#17360#17361#0" expanded="true" />
+            <element signature="e#26657#26744#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Assembler/Assembler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-38.0">
+          <caret line="348" column="16" selection-start-line="348" selection-start-column="16" selection-end-line="348" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#538#554#0" expanded="true" />
+            <element signature="e#631#658#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GUI/Computer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.5517242">
+          <caret line="98" column="27" selection-start-line="98" selection-start-column="21" selection-end-line="98" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#18548#18549#0" expanded="true" />
+            <element signature="e#18586#18587#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/HBDMIPS/CP0.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+          <folding>
+            <element signature="e#369#370#0" expanded="true" />
+            <element signature="e#390#391#0" expanded="true" />
+            <element signature="e#427#428#0" expanded="true" />
+            <element signature="e#456#457#0" expanded="true" />
+            <element signature="e#570#571#0" expanded="true" />
+            <element signature="e#600#601#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://MODULES/mdl-CoffeeMIPS">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>MODULES</ID>
+          <OriginalElement>mdl-CoffeeMIPS</OriginalElement>
+          <nodes />
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="1.0" x="72.0" y="14.5" />
+          <SelectedNodes />
+          <Categories />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/HBDMIPS/EXE.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.3103447">
+          <caret line="11" column="59" selection-start-line="11" selection-start-column="59" selection-end-line="11" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://JAVA/">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement />
+          <nodes>
+            <node x="150.0" y="521.201171875">com</node>
+            <node x="179.0" y="447.201171875">netscape</node>
+            <node x="40.0" y="125.201171875">memory</node>
+            <node x="350.0" y="447.201171875">oracle</node>
+            <node x="0.0" y="595.201171875">org</node>
+            <node x="214.0" y="125.201171875">HBDMIPS</node>
+            <node x="104.83593073593076" y="244.201171875">SyscallAPI</node>
+            <node x="443.0" y="521.201171875">sun</node>
+            <node x="425.5" y="0.0">FileHandler</node>
+            <node x="0.0" y="447.201171875">META-INF</node>
+            <node x="142.0" y="595.201171875">jdk</node>
+            <node x="298.0" y="521.201171875">java</node>
+            <node x="0.0" y="521.201171875">javax</node>
+            <node x="144.71850649350648" y="343.201171875">GUI</node>
+            <node x="176.07164502164503" y="6.201171875">Assembler</node>
+            <node x="506.0" y="447.201171875">javafx</node>
+          </nodes>
+          <notes />
+          <edges>
+            <edge source="GUI" target="GUI">
+              <point x="24.5" y="14.5" />
+              <point x="218.21850649350648" y="402.201171875" />
+              <point x="114.7185064935065" y="402.201171875" />
+              <point x="114.7185064935065" y="350.451171875" />
+              <point x="-49.0" y="-7.25" />
+            </edge>
+            <edge source="GUI" target="memory">
+              <point x="-30.625" y="-14.5" />
+              <point x="163.09350649350648" y="313.201171875" />
+              <point x="94.33593073593076" y="313.201171875" />
+              <point x="94.33593073593076" y="224.201171875" />
+              <point x="109.75" y="224.201171875" />
+              <point x="7.75" y="14.5" />
+            </edge>
+            <edge source="HBDMIPS" target="Assembler">
+              <point x="-32.5" y="-14.5" />
+              <point x="246.5" y="105.201171875" />
+              <point x="262.21450216450216" y="105.201171875" />
+              <point x="19.14285714285714" y="14.5" />
+            </edge>
+            <edge source="GUI" target="HBDMIPS">
+              <point x="18.375" y="-14.5" />
+              <point x="212.09350649350648" y="303.201171875" />
+              <point x="316.83333333333337" y="303.201171875" />
+              <point x="316.83333333333337" y="224.201171875" />
+              <point x="311.5" y="224.201171875" />
+              <point x="32.500000000000014" y="14.5" />
+            </edge>
+            <edge source="memory" target="Assembler">
+              <point x="0.0" y="-14.5" />
+              <point x="102.0" y="95.201171875" />
+              <point x="243.07164502164503" y="95.201171875" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="SyscallAPI" target="HBDMIPS">
+              <point x="52.80000000000001" y="-14.5" />
+              <point x="223.63593073593077" y="224.201171875" />
+              <point x="289.83333333333337" y="224.201171875" />
+              <point x="10.833333333333343" y="14.5" />
+            </edge>
+            <edge source="Assembler" target="Assembler">
+              <point x="-57.42857142857143" y="14.5" />
+              <point x="185.6430735930736" y="55.201171875" />
+              <point x="156.07164502164503" y="55.201171875" />
+              <point x="156.07164502164503" y="30.367838541666686" />
+              <point x="-67.0" y="9.666666666666686" />
+            </edge>
+            <edge source="GUI" target="SyscallAPI">
+              <point x="6.125" y="-14.5" />
+              <point x="199.84350649350648" y="293.201171875" />
+              <point x="214.83593073593076" y="293.201171875" />
+              <point x="44.0" y="14.5" />
+            </edge>
+            <edge source="memory" target="memory">
+              <point x="-54.25" y="14.5" />
+              <point x="47.75" y="174.201171875" />
+              <point x="20.0" y="174.201171875" />
+              <point x="20.0" y="149.36783854166666" />
+              <point x="-62.0" y="9.666666666666657" />
+            </edge>
+            <edge source="GUI" target="Assembler">
+              <point x="42.875" y="-14.5" />
+              <point x="236.59350649350648" y="323.201171875" />
+              <point x="354.5" y="323.201171875" />
+              <point x="354.5" y="95.201171875" />
+              <point x="300.50021645021644" y="95.201171875" />
+              <point x="57.428571428571416" y="14.5" />
+            </edge>
+            <edge source="memory" target="SyscallAPI">
+              <point x="54.25" y="14.5" />
+              <point x="156.25" y="224.201171875" />
+              <point x="170.83593073593076" y="224.201171875" />
+              <point x="0.0" y="-14.5" />
+            </edge>
+            <edge source="HBDMIPS" target="HBDMIPS">
+              <point x="-32.5" y="14.5" />
+              <point x="246.5" y="184.201171875" />
+              <point x="184.0" y="184.201171875" />
+              <point x="184.0" y="132.451171875" />
+              <point x="-65.0" y="-7.25" />
+            </edge>
+            <edge source="SyscallAPI" target="memory">
+              <point x="-26.400000000000006" y="-14.5" />
+              <point x="144.43593073593075" y="224.201171875" />
+              <point x="140.75" y="224.201171875" />
+              <point x="38.75" y="14.5" />
+            </edge>
+          </edges>
+          <settings layout="Hierarchic Group" zoom="1.3328600405679516" x="171.06391721199205" y="152.06391721199205" />
+          <SelectedNodes>
+            <node>memory</node>
+          </SelectedNodes>
+          <Categories />
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://JAVA/HBDMIPS">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement>HBDMIPS</OriginalElement>
+          <nodes>
+            <node x="449.6573660714286" y="79.0">HBDMIPS.ID_EXE</node>
+            <node x="136.25" y="178.0">HBDMIPS.EXE_MEM</node>
+            <node x="108.0" y="371.0">HBDMIPS.CP0</node>
+            <node x="3.0" y="297.0">HBDMIPS.MEM</node>
+            <node x="171.82552083333337" y="297.0">HBDMIPS.WB</node>
+            <node x="266.65736607142856" y="79.0">HBDMIPS.CU</node>
+            <node x="197.03459821428572" y="0.0">HBDMIPS.IF_ID</node>
+            <node x="0.0" y="371.0">HBDMIPS.Timer</node>
+            <node x="304.0323660714286" y="297.0">HBDMIPS.EXE</node>
+            <node x="33.25" y="178.0">HBDMIPS.MEM_WB</node>
+            <node x="334.6573660714286" y="79.0">HBDMIPS.Register_file</node>
+            <node x="188.28459821428572" y="79.0">HBDMIPS.IF</node>
+            <node x="281.15736607142856" y="178.0">HBDMIPS.ID</node>
+          </nodes>
+          <notes />
+          <edges>
+            <edge source="HBDMIPS.EXE" target="HBDMIPS.ID">
+              <point x="4.25" y="-14.5" />
+              <point x="333.7823660714286" y="227.0" />
+              <point x="313.40736607142856" y="227.0" />
+              <point x="10.75" y="14.5" />
+            </edge>
+            <edge source="HBDMIPS.ID" target="HBDMIPS.CU">
+              <point x="-6.14285714285711" y="-14.5" />
+              <point x="296.51450892857144" y="128.0" />
+              <point x="278.65736607142856" y="128.0" />
+              <point x="-12.0" y="14.5" />
+            </edge>
+            <edge source="HBDMIPS.MEM" target="HBDMIPS.IF">
+              <point x="-20.0" y="-14.5" />
+              <point x="13.0" y="277.0" />
+              <point x="17.875" y="277.0" />
+              <point x="17.875" y="158.0" />
+              <point x="195.11793154761907" y="158.0" />
+              <point x="-13.666666666666664" y="14.5" />
+            </edge>
+            <edge source="HBDMIPS.EXE" target="HBDMIPS.IF">
+              <point x="-4.25" y="-14.5" />
+              <point x="325.2823660714286" y="237.0" />
+              <point x="230.75" y="237.0" />
+              <point x="230.75" y="158.0" />
+              <point x="208.78459821428572" y="158.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="HBDMIPS.WB" target="HBDMIPS.ID">
+              <point x="12.5" y="-14.5" />
+              <point x="209.32552083333337" y="277.0" />
+              <point x="291.90736607142856" y="277.0" />
+              <point x="-10.75" y="14.5" />
+            </edge>
+            <edge source="HBDMIPS.MEM" target="HBDMIPS.MEM_WB">
+              <point x="0.0" y="-14.5" />
+              <point x="33.0" y="267.0" />
+              <point x="54.0" y="267.0" />
+              <point x="-20.75" y="14.5" />
+            </edge>
+            <edge source="HBDMIPS.WB" target="HBDMIPS.MEM_WB">
+              <point x="-12.5" y="-14.5" />
+              <point x="184.32552083333337" y="267.0" />
+              <point x="95.5" y="267.0" />
+              <point x="20.75" y="14.5" />
+            </edge>
+            <edge source="HBDMIPS.EXE" target="HBDMIPS.ID_EXE">
+              <point x="21.25" y="-14.5" />
+              <point x="350.7823660714286" y="277.0" />
+              <point x="497.57552083333337" y="277.0" />
+              <point x="497.57552083333337" y="158.0" />
+              <point x="505.4906994047619" y="158.0" />
+              <point x="22.333333333333314" y="14.5" />
+            </edge>
+            <edge source="HBDMIPS.EXE" target="HBDMIPS.EXE_MEM">
+              <point x="-12.75" y="-14.5" />
+              <point x="316.7823660714286" y="247.0" />
+              <point x="206.25" y="247.0" />
+              <point x="28.0" y="14.5" />
+            </edge>
+            <edge source="HBDMIPS.MEM" target="HBDMIPS.EXE_MEM">
+              <point x="20.0" y="-14.5" />
+              <point x="53.0" y="277.0" />
+              <point x="150.25" y="277.0" />
+              <point x="-28.0" y="14.5" />
+            </edge>
+            <edge source="HBDMIPS.IF" target="HBDMIPS.IF_ID">
+              <point x="0.0" y="-14.5" />
+              <point x="208.78459821428572" y="54.0" />
+              <point x="211.28459821428572" y="54.0" />
+              <point x="-14.25" y="14.5" />
+            </edge>
+            <edge source="HBDMIPS.ID" target="HBDMIPS.Register_file">
+              <point x="6.142857142857167" y="-14.5" />
+              <point x="308.8002232142858" y="138.0" />
+              <point x="358.4073660714286" y="138.0" />
+              <point x="-23.75" y="14.5" />
+            </edge>
+            <edge source="HBDMIPS.ID" target="HBDMIPS.IF">
+              <point x="-18.428571428571445" y="-14.5" />
+              <point x="284.2287946428571" y="148.0" />
+              <point x="222.45126488095238" y="148.0" />
+              <point x="13.666666666666664" y="14.5" />
+            </edge>
+            <edge source="HBDMIPS.ID" target="HBDMIPS.IF_ID">
+              <point x="-12.285714285714278" y="-14.5" />
+              <point x="290.37165178571433" y="138.0" />
+              <point x="239.78459821428572" y="138.0" />
+              <point x="14.25" y="14.5" />
+            </edge>
+            <edge source="HBDMIPS.ID" target="HBDMIPS.ID_EXE">
+              <point x="18.428571428571445" y="-14.5" />
+              <point x="321.0859375" y="158.0" />
+              <point x="460.8240327380953" y="158.0" />
+              <point x="-22.333333333333343" y="14.5" />
+            </edge>
+          </edges>
+          <settings layout="Hierarchic Group" zoom="1.4043478260869569" x="101.89783281733742" y="299.8978328173374" />
+          <SelectedNodes />
+          <Categories />
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/HBDMIPS/MEM.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="3" column="7" selection-start-line="3" selection-start-column="7" selection-end-line="3" selection-end-column="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FPU/Add.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="6" column="1" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/HBDMIPS/Register_file.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="86" column="5" selection-start-line="12" selection-start-column="4" selection-end-line="86" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FPU/Registers.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.79941005">
+          <caret line="44" column="27" selection-start-line="44" selection-start-column="27" selection-end-line="44" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
