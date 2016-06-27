@@ -39,6 +39,9 @@ public class Assembler {
         //R-type instructions for floating point instructions
         instructionCodes.put("add.s", "010001");
 
+        //I-type instruction for floating point instruciton
+        instructionCodes.put("lwc1", "110001");
+        instructionCodes.put("swc1", "111001");
 
         // I-Type Instructions
         instructionCodes.put("addi", "001000");
@@ -69,8 +72,12 @@ public class Assembler {
         instructions.put("srl", instructionR_shift);
         instructions.put("jr", instructionR_jr);
 
-        //R-type instructions for floating point
-        instructions.put("add.s", instructionR_float);
+        //R-type instructions for floating point single precision
+        instructions.put("add.s", instructionR_float_sp);
+
+        //I-type instructions for floating point single precision
+        instructions.put("lwc1", instructionI_float_lw);
+        instructions.put("swc1", instructionI_float_sw);
 
         // I-Type Instructions
         instructions.put("addi", instructionI_std);
@@ -262,8 +269,8 @@ public class Assembler {
         }
     };
 
-    //instruction: add.s => for floating points
-    private instructionParser instructionR_float = new instructionParser() {
+    //instruction: add.s => for floating points single precision
+    private instructionParser instructionR_float_sp = new instructionParser() {
         @Override
         public String parse(String[] parts) {
             String opcode = "010001";
@@ -308,6 +315,30 @@ public class Assembler {
             String rs = getRegister(parts[1]);
             String rt = getRegister(parts[2]);
             String immediate = parseSigned16BitBin(labels.get(parts[3]) - lineNumber - 1);
+            return opcode + rs + rt + immediate;
+        }
+    };
+
+    //Instruction: lwc1
+    private instructionParser instructionI_float_lw = new instructionParser() {
+        @Override
+        public String parse(String[] parts) {
+            String opcode = instructionCodes.get(parts[0]);
+            String rs = cp1.getFloatRegisters().getRegister(parts[1]);
+            String rt = cp1.getFloatRegisters().getRegister(parts[2]);
+            String immediate = parseSigned16BitBin(Integer.parseInt(parts[3]));
+            return opcode + rs + rt + immediate;
+        }
+    };
+
+    //Instruction: swc1
+    private instructionParser instructionI_float_sw = new instructionParser() {
+        @Override
+        public String parse(String[] parts) {
+            String opcode = instructionCodes.get(parts[0]);
+            String rs = cp1.getFloatRegisters().getRegister(parts[1]);
+            String rt = cp1.getFloatRegisters().getRegister(parts[2]);
+            String immediate = parseSigned16BitBin(Integer.parseInt(parts[3]));
             return opcode + rs + rt + immediate;
         }
     };
