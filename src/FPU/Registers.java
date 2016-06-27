@@ -1,69 +1,61 @@
 package FPU;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 /**
  * Created by mohammad on 6/27/2016.
  */
 public class Registers {
-    float[] Regfile = new float[32];
+    private HashMap<String, String> floatRegisters = new HashMap<String, String>();
 
-    /**
-     * Get whole of current registerFile of floating points operations.
-     * @return Regfile - float[32]
-     */
-    public float[] getRegfile() {
-        return Regfile;
+    public Registers(){
+
+        initRegisterCodes();
     }
 
-
-    /**
-     * Get specified register content.
-     * @param regNum - number of register
-     * @return Regfile[regNum] - Register content.
-     */
-    public float getRegfile(int regNum) {
-        return Regfile[regNum];
+    public String getRegister(String reg){
+        return floatRegisters.get(reg);
     }
 
+    private void initRegisterCodes() {
+        floatRegisters.put("$f0", "00000");
+        floatRegisters.put("$f1", "00001");
 
-    /**
-     * Set whole of RegisterFile represented in an float[].
-     * @param regfile - float[32].
-     */
-    public void setRegfile(float[] regfile) {
-        Regfile = regfile;
+        floatRegisters.put("$f2", "00010");
+        floatRegisters.put("$f3", "00011");
+
+        floatRegisters.put("$f4", "00100");
+        floatRegisters.put("$f5", "00101");
+        floatRegisters.put("$f6", "00110");
+        floatRegisters.put("$f7", "00111");
+
+        floatRegisters.put("$f8", "01000");
+        floatRegisters.put("$f9", "01001");
+        floatRegisters.put("$f10", "01010");
+        floatRegisters.put("$f11", "01011");
+        floatRegisters.put("$f12", "01100");
+        floatRegisters.put("$f13", "01101");
+        floatRegisters.put("$f14", "01110");
+        floatRegisters.put("$f15", "01111");
+
+        floatRegisters.put("$f16", "10000");
+        floatRegisters.put("$f17", "10001");
+        floatRegisters.put("$f18", "10010");
+        floatRegisters.put("$f19", "10011");
+        floatRegisters.put("$f20", "10100");
+        floatRegisters.put("$f21", "10101");
+        floatRegisters.put("$f22", "10110");
+        floatRegisters.put("$f23", "10111");
+
+        floatRegisters.put("$f24", "11000");
+        floatRegisters.put("$f25", "11001");
+
+        floatRegisters.put("$f26", "11010");
+        floatRegisters.put("$f27", "11011");
+
+        floatRegisters.put("$f28", "11100");
+        floatRegisters.put("$f29", "11101");
+        floatRegisters.put("$f30", "11110");
+        floatRegisters.put("$f31", "11111");
     }
-
-
-    /**
-     * Set the content of specified register.
-     * @param regNum - number of specified register.
-     * @param Value - content to be saved to that register.
-     */
-    public void setReg(int regNum,float Value) {
-        Regfile[regNum] = Value;
-    }
-
-
-    /**
-     * get RegisterFile in a customized String format.
-     * @return Print - representation of current
-     * RegisterFile in a String.
-     */
-    public String print() {
-        String print="";
-        for (int i = 0; i < 32; i++) {
-            if (i < 10) {
-                print+="  $" + i + " : " + Regfile[i] + " \t ";
-            } else
-                print+="$" + i + " : " + Regfile[i] + " \t ";
-            if ((i + 1) % 4 == 0) {
-                print+="\n";
-            }
-        }
-        return print;
-    }
-
 }

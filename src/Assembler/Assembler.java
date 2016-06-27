@@ -1,5 +1,5 @@
 package Assembler;
-
+import FPU.Controller;
 //Alireza Hafez 3/28/2015
 //new MIPS assembler
 import java.io.File;
@@ -21,6 +21,9 @@ public class Assembler {
     private HashMap<String, Integer> labels = new HashMap<String, Integer>();
     private HashMap<Integer, Instruction> assembled = new HashMap<Integer, Instruction>();
 
+    //CP1 (floating point FPU management CLass) controller
+    private Controller cp1 = null;
+
     private void initInstructionCodes() {
         // R-Type Instructions
         instructionCodes.put("add", "100000");
@@ -32,6 +35,10 @@ public class Assembler {
         instructionCodes.put("sll", "000000");
         instructionCodes.put("srl", "000010");
         instructionCodes.put("jr", "001000");
+
+        //R-type instructions for floating point instructions
+        instructionCodes.put("add.s", "010001");
+
 
         // I-Type Instructions
         instructionCodes.put("addi", "001000");
@@ -61,6 +68,9 @@ public class Assembler {
         instructions.put("sll", instructionR_shift);
         instructions.put("srl", instructionR_shift);
         instructions.put("jr", instructionR_jr);
+
+        //R-type instructions for floating point
+        instructions.put("add.s", instructionR_float);
 
         // I-Type Instructions
         instructions.put("addi", instructionI_std);
@@ -134,7 +144,7 @@ public class Assembler {
     }
 
     /**
-     * @param bitMode the bitMode to set
+     * @param modeBit the bitMode to set
      */
     public void setModeBit(boolean modeBit) {
         this.modeBit = modeBit;
@@ -209,6 +219,12 @@ public class Assembler {
         return hex;
     }
 
+    //returns the floating point register address as a string
+    private String getFloatRegister(String reg){
+        // Standard reference, e.g. $f{x}
+        return cp1.getFloatRegisters().getRegister(reg);
+    }
+
     // Returns the register address as a String
     private String getRegister(String reg) {
         // Numeral address reference, e.g. $8
@@ -243,6 +259,20 @@ public class Assembler {
             String funct = instructionCodes.get(parts[0]);
             return opcode + rs + rt + rd + shamt + funct;
 
+        }
+    };
+
+    //instruction: add.s => for floating points
+    private instructionParser instructionR_float = new instructionParser() {
+        @Override
+        public String parse(String[] parts) {
+            String opcode = "010001";
+            String ft = getFloatRegister(parts[1]);
+            String fs = getFloatRegister(parts[2]);
+            String fd = getFloatRegister(parts[3]);
+            String format = "10000";
+            String funct = instructionCodes.get(parts[0]);
+            return opcode + format + fs + ft + fd  + funct;
         }
     };
 
@@ -335,13 +365,17 @@ public class Assembler {
         debugMode = mode;
     }
 
+    private void initCP1(){
+        cp1 = new Controller();
+    }
+
     // Run assembly process on file with given filename
     public HashMap<Integer, Instruction> assembleFile(String filename) {
         // Initialize HashMaps
         initInstructionCodes();
         initInstructions();
         initRegisterCodes();
-
+        initCP1();
         file = new File(filename);
 
         getLabels();
