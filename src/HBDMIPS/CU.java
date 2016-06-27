@@ -36,13 +36,14 @@ public class CU {
          * @param op - 5bits opcode represented in String.
          * @return out - 13bits of CotrolBits represented in String.
          */
-	public String decode(int op,String ins) { // regwrite aluop(2) alusrc memread
-                                       // memwrite branch regdest mem2reg
-                                       // this bit added optionaly not compatible with book :
-                                       // notbits
-                                       // jump
-                                       // second aluop (2)
-                                       // jr bit
+	public String decode(int op,String ins) {
+	// regwrite aluop(2) alusrc memread
+	   // memwrite branch regdest mem2reg
+	   // this bit added optionaly not compatible with book :
+	   // notbits
+	   // jump
+	   // second aluop (2)
+	   // jr bit
 		switch (op) {
 		case 0:
                         if("001000".equals(ins.substring(26,32)))
